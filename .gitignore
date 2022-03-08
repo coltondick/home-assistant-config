@@ -4,6 +4,7 @@ __pycache__
 .homekit.state
 .storage
 .uuid
+.vscode
 *.conf
 *.crt
 *.csr
