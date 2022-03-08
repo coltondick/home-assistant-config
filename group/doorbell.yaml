@@ -1,0 +1,6 @@
+doorbell:
+  name: Doorbell Alert
+  entities:
+    - light.dining_room_light
+    - light.dining_room_light_2
+    - light.light_strip

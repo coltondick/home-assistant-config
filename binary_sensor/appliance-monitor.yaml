@@ -1,0 +1,6 @@
+- platform: mqtt
+  name: "Dryer"
+  state_topic: "home/appliance-monitor/dryer"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"

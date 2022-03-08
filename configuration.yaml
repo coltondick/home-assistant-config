@@ -1,0 +1,132 @@
+automation: !include_dir_merge_list automations
+binary_sensor: !include_dir_merge_list binary_sensor
+group: !include_dir_merge_named group
+google_assistant: !include google_assistant.yaml
+influxdb: !include influxdb.yaml
+light: !include lights.yaml
+panel_iframe: !include panel_iframe.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list sensor
+shell_command: !include_dir_merge_named shell_command
+switch: !include switches.yaml
+
+climate:
+  - platform: climate_group
+    name: "Living Room Thermostats"
+    temperature_unit: C
+    entities:
+      - climate.dining_room_thermostat
+      - climate.living_room_thermostat
+
+emulated_hue:
+  expose_by_default: true
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+history:
+  include:
+    domains:
+      - sensor
+      - switch
+
+homeassistant:
+  name: Home
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  elevation: !secret homeassistant_elevation
+  unit_system: metric
+  time_zone: America/Vancouver
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  customize: !include customize.yaml
+  customize_domain: !include customize_domain.yaml
+  # packages: !include_dir_named packages
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/24
+        - 10.0.0.0/8
+      allow_bypass_login: true
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.0.0/24
+    - 10.0.0.0/8
+
+input_boolean:
+  override_home:
+    name: Home override
+    icon: mdi:home
+  vacation_mode:
+    name: Vacation Mode
+    icon: mdi:beach
+  sleep_mode:
+    name: Sleep Mode
+    icon: mdi:moon-waning-crescent
+  occupancy_colton:
+    name: Occupancy Colton
+    icon: mdi:account
+  occupancy_miranda:
+    name: Occupancy Miranda
+    icon: mdi:account
+
+logger:
+  default: info
+  logs:
+    custom_components.bchydro: debug
+
+notify:
+  - name: ALL_DEVICES
+    platform: group
+    services:
+      - service: mobile_app_sm_g986w
+      - service: mobile_app_miranda
+  - name: TELEGRAM_BOT
+    platform: telegram
+    chat_id: !secret telegram_chat_id
+
+pi_hole:
+  - host: "localhost:1080"
+    api_key: !secret pihole_api_key
+
+recorder:
+  purge_keep_days: 15
+  include:
+    domains:
+      - sensor
+      - switch
+
+sun:
+
+system_health:
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_token
+    allowed_chat_ids: !secret telegram_chat_id
+
+tplink:
+  discovery: true
+  switch:
+    - host: !secret kasa_cage_ip
+    - host: !secret kasa_sidetable_livingroom_ip
+    - host: !secret kasa_tvlamp_livingroom_ip
+    - host: !secret kasa_scentsy_diningroom_ip
+    - host: !secret kasa_vanity_master_ip
+
+tts:
+  - platform: amazon_polly
+    aws_access_key_id: !secret aws_access_key_id
+    aws_secret_access_key: !secret aws_secret_access_key
+    engine: neural
+    voice: Joey
+
+weather:
+  - platform: environment_canada
+    latitude: !secret homeassistant_latitude
+    longitude: !secret homeassistant_longitude
+    station: !secret weather_station

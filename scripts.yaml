@@ -1,0 +1,75 @@
+announce:
+  alias: "Announce to all Google Homes"
+  sequence:
+    - service: media_player.volume_mute # The first part gets rid of the default Google Home bloop-bloop sound. First mutes the speaker...
+      data:
+        entity_id: group.media_players
+        is_volume_muted: true
+    - service: media_player.play_media # then plays a random 1 second silent track ...
+      data:
+        entity_id: group.media_players
+        media_content_type: music
+        media_content_id: !secret 1_sec_audio_url
+    - delay:
+        seconds: 1
+    - service: media_player.volume_set # then sets the desired volume ...
+      data:
+        entity_id: group.media_players
+        volume_level: 1
+    - service: media_player.volume_mute # only then unmutes, so you don't hear the volume changing sounds
+      data:
+        entity_id: group.media_players
+        is_volume_muted: false
+    - service: media_player.play_media # then it plays a nice ding-dong sound
+      data:
+        entity_id: group.media_players
+        media_content_type: music
+        media_content_id: !secret notification_audio_url
+    - delay:
+        seconds: 2
+        # milliseconds: 800
+    - service: tts.amazon_polly_say # then finally here's your TTS message :-)
+      data:
+        entity_id: group.media_players
+        message: "Gate Opened"
+    - service: notify.TELEGRAM_BOT
+      data:
+        message: "Gate Opened"
+
+announce_bedroom_exclude:
+  alias: "Announce to all Google Homes, but the bedroom"
+  sequence:
+    - service: media_player.volume_mute # The first part gets rid of the default Google Home bloop-bloop sound. First mutes the speaker...
+      data:
+        entity_id: group.media_players_bedroom_exclude
+        is_volume_muted: true
+    - service: media_player.play_media # then plays a random 1 second silent track ...
+      data:
+        entity_id: group.media_players_bedroom_exclude
+        media_content_type: music
+        media_content_id: !secret 1_sec_audio_url
+    - delay:
+        seconds: 1
+    - service: media_player.volume_set # then sets the desired volume ...
+      data:
+        entity_id: group.media_players_bedroom_exclude
+        volume_level: 1
+    - service: media_player.volume_mute # only then unmutes, so you don't hear the volume changing sounds
+      data:
+        entity_id: group.media_players_bedroom_exclude
+        is_volume_muted: false
+    - service: media_player.play_media # then it plays a nice ding-dong sound
+      data:
+        entity_id: group.media_players_bedroom_exclude
+        media_content_type: music
+        media_content_id: !secret notification_audio_url
+    - delay:
+        seconds: 2
+        # milliseconds: 800
+    - service: tts.amazon_polly_say # then finally here's your TTS message :-)
+      data:
+        entity_id: group.media_players_bedroom_exclude
+        message: "Gate Opened"
+    - service: notify.TELEGRAM_BOT
+      data:
+        message: "Gate Opened"

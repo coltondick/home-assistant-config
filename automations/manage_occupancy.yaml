@@ -1,0 +1,39 @@
+- alias: Colton Occupancy On
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_colton
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_colton
+
+- alias: Colton Occupancy Off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_colton
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_colton
+
+- alias: Miranda Occupancy On
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_miranda
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_miranda
+
+- alias: Miranda Occupancy Off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_miranda
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_miranda

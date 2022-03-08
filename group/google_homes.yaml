@@ -1,0 +1,10 @@
+media_players:
+  name: Media Players
+  icon: mdi:music
+  entities:
+    - media_player.gh_bedroom_pair
+    - media_player.gh_colton_side_table
+    - media_player.gh_kitchen_speaker
+    - media_player.gh_living_room_speaker
+    - media_player.gh_miranda_side_table
+    - media_player.gh_office_speaker

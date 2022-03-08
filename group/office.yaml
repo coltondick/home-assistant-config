@@ -1,0 +1,4 @@
+office:
+  name: Office Lights
+  entities:
+    - light.office_ceiling_group

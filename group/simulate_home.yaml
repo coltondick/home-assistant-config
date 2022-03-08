@@ -1,0 +1,8 @@
+simulate_home:
+    name: Simulate Home
+    entities:
+      - group.livingroom
+      - group.office
+      - group.entryway
+      - group.bedroom
+      - switch.side_table_lamp

@@ -1,0 +1,9 @@
+- platform: mqtt
+  name: "Doorbell"
+  state_topic: "rfbridge/doorbell"
+  availability_topic: "tele/rfbridge/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"

@@ -1,0 +1,5 @@
+dining:
+  name: Dining Room Lights
+  entities:
+    - light.dining_room_ceiling
+    - light.hue_light_strip

@@ -1,0 +1,4 @@
+entryway:
+  name: Entryway Lights
+  entities:
+    - light.entryway_ceiling
