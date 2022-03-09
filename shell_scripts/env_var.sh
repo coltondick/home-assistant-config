@@ -3,6 +3,10 @@
 #!/bin/bash
 secrets=/config/secrets.yaml
 
+api_domain=$(grep 'api_domain' $secrets | awk '{print $2}')
+api_hash=$(grep 'api_hash' $secrets | awk '{print $2}')
+api_password=$(grep 'api_password' $secrets | awk '{print $2}')
+api_username=$(grep 'api_username' $secrets | awk '{print $2}')
 docker_api_port=$(grep 'docker_api_port' $secrets | awk '{print $2}')
 docker_ip=$(grep 'docker_ip' $secrets | awk '{print $2}')
 gh_bedroom=$(grep 'gh_bedroom' $secrets | awk '{print $2}')
