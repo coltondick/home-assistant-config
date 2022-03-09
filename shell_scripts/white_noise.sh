@@ -1,7 +1,7 @@
 #!/bin/sh
 ### Script that plays rain white noise on Google Home through Logitech
-### Media Server using the Chromecast Birdge Plugin and
-### Being called by the webhook docker container.
+### Media Server using the Chromecast Bridge Plugin and
+### Being called by the nodered webhook.
 
 source /config/shell_scripts/env_var.sh
 ###  removing any trailing \r if they exist
