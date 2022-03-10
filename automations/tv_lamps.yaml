@@ -1,0 +1,26 @@
+- alias: Turn on|off all TV lamp when side table switch state changes.
+  description: ""
+  trigger:
+    - entity_id: switch.side_table_lamp
+      platform: state
+      to: "on"
+    - platform: state
+      entity_id: switch.side_table_lamp
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'on' }}"
+          sequence:
+            - entity_id: "switch.tv_lamp"
+              service: switch.turn_on
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'off' }}"
+          sequence:
+            - entity_id: "switch.tv_lamp"
+              service: switch.turn_off
+      default: []
+  mode: single

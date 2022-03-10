@@ -1,0 +1,26 @@
+- alias: Turn on|off all TV backlight when TV state changes.
+  description: ""
+  trigger:
+    - entity_id: remote.tv
+      platform: state
+      to: "on"
+    - platform: state
+      entity_id: remote.tv
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'on' }}"
+          sequence:
+            - entity_id: "light.tv_leds"
+              service: light.turn_on
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'off' }}"
+          sequence:
+            - entity_id: "light.tv_leds"
+              service: light.turn_off
+      default: []
+  mode: single
