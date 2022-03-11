@@ -2,7 +2,7 @@
 - alias: "Turn Patio Lights On at 7 PM"
   trigger:
     platform: time
-    at: "19:00:00"
+    at: "17:00:00"
   action:
     service: switch.turn_on
     entity_id: switch.patio_lights
