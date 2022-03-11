@@ -135,7 +135,6 @@
   value_template: "{{ value_json.rhum }}"
   unit_of_measurement: "%"
   name: "AirGradient Humidity"
-
-- platform: bchydro
-  username: !secret bchydro_username
-  password: !secret bchydro_password
+# - platform: bchydro
+#   username: !secret bchydro_username
+#   password: !secret bchydro_password
