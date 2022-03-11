@@ -1,4 +1,8 @@
 # Theme based on Google app dark theme
+# Creator: Juan - @juanmtech
+# Website: https://www.juanmtech.com
+# YouTube Channel: https://youtube.com/juanmtech
+# My Home Assistant Config files: https://github.com/JuanMTech/Home_Assistant_files
 #
 #
 Google Dark Theme:
@@ -80,3 +84,10 @@ Google Dark Theme:
   mdc-select-idle-line-color: var(--primary-text-color)
   mdc-select-dropdown-icon-color: var(--secondary-text-color)
   mdc-select-hover-line-color: var(--accent-color)
+  # Input
+  input-fill-color: var(--secondary-background-color)
+  input-dropdown-icon-color: var(--secondary-text-color)
+  input-ink-color: var(--primary-text-color)
+  input-label-ink-color: var(--secondary-text-color)
+  input-idle-line-color: var(--primary-text-color)
+  input-hover-line-color: var(--accent-color)

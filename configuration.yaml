@@ -78,6 +78,7 @@ logger:
   default: info
   logs:
     custom_components.bchydro: debug
+    homeassistant.components.recorder.migration: info
 
 notify:
   - name: ALL_DEVICES
@@ -88,10 +89,6 @@ notify:
   - name: TELEGRAM_BOT
     platform: telegram
     chat_id: !secret telegram_chat_id
-
-pi_hole:
-  - host: "localhost:1080"
-    api_key: !secret pihole_api_key
 
 recorder:
   purge_keep_days: 15
@@ -124,9 +121,3 @@ tts:
     aws_secret_access_key: !secret aws_secret_access_key
     engine: neural
     voice: Joey
-
-weather:
-  - platform: environment_canada
-    latitude: !secret homeassistant_latitude
-    longitude: !secret homeassistant_longitude
-    station: !secret weather_station
