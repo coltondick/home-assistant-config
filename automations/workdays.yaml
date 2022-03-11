@@ -1,0 +1,46 @@
+# # Automatically turn on|off all lights and switches, but the office if Miranda is away
+# # and Colton is home. Do not trigger if the home override is on.
+- id: workdays
+  alias: workdays
+  trigger:
+    platform: time_pattern
+    minutes: /5
+  condition:
+    - condition: time
+      after: "08:30:00"
+      before: "16:00:00"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: person.miranda
+          state: not_home
+        - condition: state
+          entity_id: person.colton
+          state: home
+        - condition: state
+          entity_id: input_boolean.override_home
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: "on"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: group.workdays
+    - service: remote.turn_off
+      target:
+        entity_id: remote.tv
+
+- id: reset_home_override
+  alias: "Reset home override everyday at 5 PM"
+  trigger:
+    platform: time
+    at: "17:00:00"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: "on"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.override_home

@@ -8,7 +8,6 @@
   brightness_state_topic: "tele/tasmota_kitchen_lights/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{value_json.Dimmer}}"
   payload_on: "ON"
   payload_off: "OFF"
   payload_available: "Online"
@@ -26,7 +25,6 @@
   brightness_state_topic: "tele/tasmota_stove/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{value_json.Dimmer}}"
   payload_on: "ON"
   payload_off: "OFF"
   payload_available: "Online"
@@ -44,7 +42,6 @@
   brightness_state_topic: "tele/tasmota_laundry_room_lights/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{value_json.Dimmer}}"
   payload_on: "ON"
   payload_off: "OFF"
   payload_available: "Online"
@@ -62,7 +59,6 @@
   brightness_state_topic: "tele/tasmota_entryway_lights/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{value_json.Dimmer}}"
   payload_on: "ON"
   payload_off: "OFF"
   payload_available: "Online"
@@ -80,7 +76,6 @@
   brightness_state_topic: "tele/tasmota_livingroom_lights/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{value_json.Dimmer}}"
   payload_on: "ON"
   payload_off: "OFF"
   payload_available: "Online"
@@ -98,7 +93,6 @@
   brightness_state_topic: "tele/tasmota_dining_room/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{value_json.Dimmer}}"
   payload_on: "ON"
   payload_off: "OFF"
   payload_available: "Online"
@@ -116,7 +110,6 @@
   brightness_state_topic: "tele/tasmota_tv_lights/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{ value_json.Dimmer }}"
   white_value_state_topic: "tele/tasmota_tv_lights/STATE"
   white_value_command_topic: "cmnd/tasmota_tv_lights/White"
   white_value_scale: 100
@@ -142,7 +135,6 @@
   brightness_state_topic: "tele/tasmota_dining_room/STATE"
   brightness_scale: 100
   on_command_type: "brightness"
-  brightness_value_template: "{{ value_json.Dimmer }}"
   white_value_state_topic: "tele/tasmota_dining_room/STATE"
   white_value_command_topic: "cmnd/tasmota_dining_room/White"
   white_value_scale: 100
