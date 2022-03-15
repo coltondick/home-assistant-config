@@ -1,0 +1,93 @@
+neon:
+  # Text
+  text-color: "rgba(255, 255, 255, 0.8)"
+  primary-text-color: "var(--text-color)"
+  text-primary-color: "var(--text-color)"
+  secondary-text-color: "#74e5f2"
+  primary-color: "var(--accent-color)"
+  text-medium-light-color: "#A0A2A8"
+  text-medium-color: "#80828A"
+  disabled-text-color: "#626569"
+
+  # Main Colors
+  app-header-background-color: black
+  accent-color: "#74e5f2"
+
+  # Background
+  primary-background-color: radial-gradient(circle, hsla(231, 49%, 68%, 1) 0%, hsla(231, 76%, 59%, 1) 100%)
+  background-color: "#404b5b"
+  background-color-2: "var(--background-color)"
+  secondary-background-color: "var(--background-color)"
+  markdown-code-background-color: "#465d72"
+
+  # Card
+  card-background-color: "var(--background-color)"
+  paper-card-background-color: rgb(32, 33, 36)
+  ha-card-background: "var(--background-color)"
+  ha-card-box-shadow: none
+  ha-card-border-radius: "10px"
+  border-color: none
+
+  # Icons
+  paper-item-icon-color: "rgba(255, 255, 255, 0.8)"
+  paper-item-icon-active-color: "var(--accent-color)"
+
+  # Sidebar
+  sidebar-background-color: "#132c41"
+  sidebar-icon-color: "#98a7b9"
+  sidebar-selected-icon-color: "var(--accent-color)"
+  sidebar-selected-text-color: "var(--text-color)"
+  paper-listbox-background-color: "var(--sidebar-background-color)"
+  divider-color: "var(--background-color)"
+  light-primary-color: "var(--ha-card-background)"
+
+  # Sliders
+  paper-slider-knob-color: "var(--accent-color)"
+  paper-slider-pin-color: "var(--background-color-2)"
+  paper-slider-active-color: "var(--accent-color)"
+  paper-slider-container-color: "var(--background-color-2)"
+
+  # Toggle:
+  paper-toggle-button-checked-bar-color: "var(--accent-color)"
+  mdc-theme-primary: "var(--accent-color)"
+
+  # Switch
+  switch-unchecked-color: "#70889e"
+  switch-checked-button-color: "var(--accent-color)"
+  switch-unchecked-track-color: "var(--background-color-2)"
+  switch-checked-track-color: "var(--background-color-2)"
+
+  # Radio Button
+  paper-radio-button-checked-color: "var(--accent-color)"
+
+  # Popups
+  more-info-header-background: "var(--background-color)"
+  paper-dialog-background-color: "var(--background-color)"
+
+  # Tables
+  table-row-background-color: "var(--background-color)"
+  table-row-alternative-background-color: "var(--background-color)"
+
+  paper-input-container-focus-color: "var(--accent-color)"
+
+  # Mini Mediaplayer
+  mini-media-player-base-color: "var(--text-color)"
+  mini-media-player-accent-color: "var(--accent-color)"
+
+  card-mod-theme: neon
+  card-mod-more-info-yaml: |
+    $: |
+      .mdc-dialog .mdc-dialog__scrim {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background: rgba(0,0,0,0.1);
+      } 
+      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+        box-shadow: none !important;
+        background: none;
+        border-radius: var(--ha-card-border-radius);
+      }
+    .: |
+      :host {
+        --ha-card-box-shadow: none;
+      }
