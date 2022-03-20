@@ -10,6 +10,7 @@ script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
 shell_command: !include_dir_merge_named shell_command
 switch: !include switches.yaml
+browser_mod:
 
 climate:
   - platform: climate_group
@@ -24,6 +25,9 @@ emulated_hue:
 
 frontend:
   themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+    - /hacsfiles/hass-bha-icons/hass-bha-icons.js
 
 history:
   include:

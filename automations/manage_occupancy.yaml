@@ -37,3 +37,23 @@
     - service: input_boolean.turn_off
       data:
         entity_id: input_boolean.occupancy_miranda
+
+- alias: Tim Occupancy On
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_tim
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_tim
+
+- alias: Tim Occupancy Off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_tim
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_tim

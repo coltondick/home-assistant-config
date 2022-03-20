@@ -2,7 +2,7 @@
   alias: Disable the Alarm at 7 AM on workdays if everyone is home
   trigger:
     platform: time
-    at: "09:00:00"
+    at: "07:00:00"
   condition:
     - condition: state
       entity_id: binary_sensor.workday_sensor

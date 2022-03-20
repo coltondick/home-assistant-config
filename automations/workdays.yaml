@@ -17,6 +17,9 @@
         - condition: state
           entity_id: person.colton
           state: home
+        - condition: numeric_state
+          entity_id: sensor.home_occupancy_confidence_of_tim
+          below: 50
         - condition: state
           entity_id: input_boolean.override_home
           state: "off"
