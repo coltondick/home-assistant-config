@@ -77,6 +77,12 @@ input_boolean:
   occupancy_miranda:
     name: Occupancy Miranda
     icon: mdi:account
+  occupancy_tim:
+    name: Occupancy Tim
+    icon: mdi:account
+  guestmode:
+    name: Guest Mode
+    icon: ios:house-fill
 
 logger:
   default: info

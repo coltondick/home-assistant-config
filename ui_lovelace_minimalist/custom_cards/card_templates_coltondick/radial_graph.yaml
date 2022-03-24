@@ -4,14 +4,26 @@ radial_icon_info:
     entity_1_name: ""
     entity_1_color: ""
     entity_1_icon: ""
+    entity_1_min: ""
+    entity_1_max: ""
     entity_2: ""
     entity_2_name: ""
     entity_2_color: ""
     entity_2_icon: ""
+    entity_2_min: ""
+    entity_2_max: ""
     entity_3: ""
     entity_3_name: ""
     entity_3_color: ""
     entity_3_icon: ""
+    entity_3_min: ""
+    entity_3_max: ""
+    entity_4: ""
+    entity_4_name: ""
+    entity_4_color: ""
+    entity_4_icon: ""
+    entity_4_min: ""
+    entity_4_max: ""
   triggers_update: all
   color: auto
   variable: spin
@@ -27,9 +39,9 @@ radial_icon_info:
   aspect_ratio: 2/1
   styles:
     grid:
-      - grid-template-areas: '"entity_1_card radial" "entity_2_card radial" "entity_3_card radial"'
+      - grid-template-areas: '"entity_1_card radial" "entity_2_card radial" "entity_3_card radial" "entity_4_card radial"'
       - grid-template-columns: 40% 60%
-      - grid-template-rows: 1fr 1fr 1fr
+      - grid-template-rows: 1fr 1fr 1fr 1fr
     card:
       - border-radius: var(--border-radius)
       - box-shadow: var(--box-shadow)
@@ -63,13 +75,24 @@ radial_icon_info:
         series:
           - entity: "[[[ return variables.entity_1 ]]]"
             name: "[[[ return variables.entity_1_name ]]]"
-            color: var(--aurora-green)
+            color: "[[[ return 'var(--aurora-' + variables.entity_1_color + ')' ]]]"
+            max: "[[[ return variables.entity_1_max ]]]"
+            min: "[[[ return variables.entity_1_min ]]]"
           - entity: "[[[ return variables.entity_2 ]]]"
             name: "[[[ return variables.entity_2_name ]]]"
-            color: var(--aurora-red)
+            color: "[[[ return 'var(--aurora-' + variables.entity_2_color + ')' ]]]"
+            max: "[[[ return variables.entity_2_max ]]]"
+            min: "[[[ return variables.entity_2_min ]]]"
           - entity: "[[[ return variables.entity_3 ]]]"
             name: "[[[ return variables.entity_3_name ]]]"
-            color: var(--aurora-orange)
+            color: "[[[ return 'var(--aurora-' + variables.entity_3_color + ')' ]]]"
+            max: "[[[ return variables.entity_3_max ]]]"
+            min: "[[[ return variables.entity_3_min ]]]"
+          - entity: "[[[ return variables.entity_4 ]]]"
+            name: "[[[ return variables.entity_4_name ]]]"
+            color: "[[[ return 'var(--aurora-' + variables.entity_4_color + ')' ]]]"
+            max: "[[[ return variables.entity_4_max ]]]"
+            min: "[[[ return variables.entity_4_min ]]]"
     entity_1_card:
       card:
         type: custom:button-card
@@ -81,6 +104,7 @@ radial_icon_info:
             - padding-bottom: 1px
         template:
           - card_generic_swap
+          - "[[[ return variables.entity_1_color + '_no_state' ]]]"
         entity: "[[[ return variables.entity_1 ]]]"
         name: "[[[ return variables.entity_1_name ]]]"
         icon: "[[[ return variables.entity_1_icon ]]]"
@@ -95,6 +119,7 @@ radial_icon_info:
             - padding-bottom: 1px
         template:
           - card_generic_swap
+          - "[[[ return variables.entity_2_color + '_no_state' ]]]"
         entity: "[[[ return variables.entity_2 ]]]"
         name: "[[[ return variables.entity_2_name ]]]"
         icon: "[[[ return variables.entity_2_icon ]]]"
@@ -109,6 +134,22 @@ radial_icon_info:
             - padding-bottom: 1px
         template:
           - card_generic_swap
+          - "[[[ return variables.entity_3_color + '_no_state' ]]]"
         entity: "[[[ return variables.entity_3 ]]]"
         name: "[[[ return variables.entity_3_name ]]]"
         icon: "[[[ return variables.entity_3_icon]]]"
+    entity_4_card:
+      card:
+        type: custom:button-card
+        styles:
+          card:
+            - box-shadow: none
+            - border-radius: none
+            - padding-top: 1px
+            - padding-bottom: 1px
+        template:
+          - card_generic_swap
+          - "[[[ return variables.entity_4_color + '_no_state' ]]]"
+        entity: "[[[ return variables.entity_4 ]]]"
+        name: "[[[ return variables.entity_4_name ]]]"
+        icon: "[[[ return variables.entity_4_icon]]]"

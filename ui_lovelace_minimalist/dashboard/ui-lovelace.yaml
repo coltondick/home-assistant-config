@@ -11,8 +11,7 @@ swipe_nav:
   skip_tabs: 2,3
 
 views:
-  - theme: Nordic
-    icon: mdi:home-assistant
+  - icon: mdi:home-assistant
     path: new
     title: Home
     badges: []
@@ -32,7 +31,7 @@ views:
               - arm_home
               - arm_away
             type: alarm-panel
-            theme: Nordic
+            # theme: minimalist-desktop-nord
           - type: horizontal-stack
             cards:
               - type: custom:decluttering-card
@@ -176,8 +175,7 @@ views:
             title: Laundry Room
             type: entities
         type: vertical-stack
-  - theme: Nordic
-    icon: mdi:tablet-dashboard
+  - icon: mdi:tablet-dashboard
     panel: false
     title: ""
     badges: []
@@ -427,8 +425,7 @@ views:
                 layout:
                   mode:
                     icons: true
-  - theme: Nordic
-    icon: mdi:thermometer
+  - icon: mdi:thermometer
     title: Thermostats
     badges: []
     cards:
@@ -477,8 +474,7 @@ views:
         name: Living Room
         step_layout: row
         type: custom:simple-thermostat
-  - theme: Nordic
-    icon: mdi:server
+  - icon: mdi:server
     path: server
     title: Server
     badges: []
@@ -521,32 +517,41 @@ views:
           - entity: sensor.speedtest_upload
           - entity: sensor.speedtest_ping
         title: Speedtest
-  - theme: Nordic
-    title: Screen Shots
-    path: screen-shots
+  ## BEGIN TABLET HOME ###
+  - title: Tablet Home
+    path: tablet-home
     icon: mdi:picture-in-picture-bottom-right
     badges: []
     cards:
-      - cards:
-          - entity_id:
-              "1": null
-            matches: ^toggle (.+\..+)
-            max_results: 10
-            name: Toggle {1}
-            service: homeassistant.toggle
-            service_data: null
-            type: custom:search-card
-          - entity: alarm_control_panel.panel
-            name: Alarm
-            states:
-              - arm_home
-              - arm_away
-            type: alarm-panel
-            theme: Nordic
+      - type: vertical-stack
+        cards:
           - type: horizontal-stack
             cards:
-              - type: custom:decluttering-card
-                template: person_card_new
+              ## Chips Row ##
+              - type: custom:button-card
+                template: chip_temperature
+                tap_action:
+                  action: navigate
+                  navigation_path: /ui-lovelace-minimalist/weather
+                variables:
+                  ulm_chip_temperature_inside: sensor.average_indoor_temperature
+                  ulm_chip_temperature_outside: sensor.temperature
+                  ulm_chip_temperature_weather: weather.kamloops
+              - type: custom:button-card
+                entity: alarm_control_panel.panel
+                template: chip_alarm
+                tap_action:
+                  action: navigate
+                  navigation_path: /ui-lovelace-minimalist/security
+              - type: custom:button-card
+                template: chip_presence_detection
+                variables:
+                  ulm_chip_presence_counter_residents: sensor.presence_detection
+          ## Persons Card ##
+          - type: horizontal-stack
+            cards:
+              - template: person_card_new
+                type: custom:decluttering-card
                 variables:
                   - entity: person.colton
                   - name: Colton
@@ -557,10 +562,19 @@ views:
                   - entity_picture: /local/colton.jpg
                   - show_entity_picture: true
                   - tap_action:
-                      action: more-info
-                      haptic: light
-              - type: custom:decluttering-card
-                template: person_card_new
+                      action: fire-dom-event
+                      browser_mod:
+                        card:
+                          aspect_ratio: "16:9"
+                          default_zoom: 18
+                          entities:
+                            - device_tracker.life360_colton
+                          type: map
+                        command: popup
+                        hide_header: true
+                        large: false
+              - template: person_card_new
+                type: custom:decluttering-card
                 variables:
                   - entity: person.miranda
                   - name: Miranda
@@ -573,153 +587,72 @@ views:
                   - tap_action:
                       action: more-info
                       haptic: light
-          - cards:
-              - show_name: true
-                show_icon: true
-                entity: input_boolean.override_home
-                hold_action:
-                  action: more-info
-                icon_height: 50px
-                show_state: true
-                tap_action:
-                  action: toggle
-                type: button
-                icon: ios:house-fill
-                name: Override
-              - show_name: true
-                show_icon: true
-                hold_action:
-                  action: call-service
-                  service: media_player.media_stop
-                  service_data:
-                    entity_id: media_player.bedroom_pair
-                icon: ios:bed-double
-                icon_height: 50px
-                name: Sleep
-                show_state: false
-                tap_action:
-                  action: call-service
-                  service: shell_command.white_noise
-                type: button
-                card_mod:
-                  style: |
-                    span {
-                    margin-bottom: 20px
-                    }
-              - show_name: true
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: switch.party_switch
-                icon: ios:theatermasks-fill
-                show_state: true
-                icon_height: 50px
-                name: Party
-              - show_name: true
-                show_icon: true
-                type: button
-                tap_action:
-                  action: toggle
-                entity: input_boolean.vacation_mode
-                show_state: true
-                icon: ios:globe-americas-fill
-                icon_height: 50px
-                name: Vacation
-            type: horizontal-stack
-        type: vertical-stack
+          ## Buttons ##
+          - type: horizontal-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: "custom:button-card"
+                    template:
+                      - card_input_boolean
+                      - green_on
+                    entity: input_boolean.override_home
+                    name: Override
+                  - type: "custom:button-card"
+                    template:
+                      - card_generic
+                      - green_on
+                    name: Sleep
+                    entity: input_boolean.sleep_mode
+                    tap_action:
+                      action: call-service
+                      service: shell_command.white_noise
+              - type: vertical-stack
+                cards:
+                  - type: "custom:button-card"
+                    template:
+                      - card_input_boolean
+                      - green_on
+                    entity: switch.party_switch
+                    name: Party
+                  - type: "custom:button-card"
+                    template:
+                      - card_input_boolean
+                      - green_on
+                    entity: input_boolean.vacation_mode
+                    name: Vacation Mode
+              # - entity: switch.party_switch
+              #   icon: ios:theatermasks-fill
+              #   icon_height: 50px
+              #   name: Party
+              #   show_icon: true
+              #   show_name: true
+              #   show_state: true
+              #   tap_action:
+              #     action: toggle
+              #   type: button
+              # - entity: input_boolean.vacation_mode
+              #   icon: ios:globe-americas-fill
+              #   icon_height: 50px
+              #   name: Vacation
+              #   show_icon: true
+              #   show_name: true
+              #   show_state: true
+              #   tap_action:
+              #     action: toggle
+              #   type: button
+      ## Thermostat ##
       - type: vertical-stack
         cards:
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.temperature
-                name: Weather
-                line_color: var(--aurora-red)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.humidity
-                name: Outdoor Humidity
-                line_color: var(--aurora-blue)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.cage_temperature
-                name: Indoor Temperature
-                icon: mdi:thermometer
-                line_color: var(--aurora-yellow)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.cage_humidity
-                name: Indoor Humidity
-                icon: mdi:water-percent
-                line_color: var(--aurora-green)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.wind_speed
-                name: Wind
-                icon: mdi:weather-windy
-                line_color: var(--aurora-orange)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.u_s_air_quality_index
-                name: Air Quality
-                icon: mdi:weather-windy
-                line_color: var(--aurora-pink)
-                line_width: 8
-                font_size: 75
-                hours_to_show: 168
-                points_per_hour: 0.25
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.airgradient_pm2_5
-                name: Indoor PM2.5
-                icon: mdi:weather-windy
-                line_color: var(--aurora-red)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
-                tap_action:
-                  action: url
-                  url: >-
-                    http://192.168.1.3:3000/d/MbIr5N7nk/historical-stats?orgId=1&viewPanel=6
-              - type: custom:mini-graph-card
-                entities:
-                  - sensor.airgradient_c02
-                name: Indoor C02
-                icon: mdi:weather-windy
-                line_color: var(--aurora-blue)
-                line_width: 8
-                font_size: 100
-                hours_to_show: 168
-                points_per_hour: 0.25
+          - type: "custom:button-card"
+            template: custom_card_coltondick_thermostat
+            entity: climate.living_room_thermostats
+            variables:
+              ulm_card_thermostat_enable_collapse: false
+              ulm_card_thermostat_enable_controls: true
+              ulm_card_thermostat_enable_background_color: false
+              ulm_card_thermostat_enable_hvac_modes: false
+              ulm_card_thermostat_enable_popup: false
       - type: vertical-stack
         cards:
           - type: horizontal-stack
@@ -832,34 +765,333 @@ views:
                     styles:
                       name:
                         - padding-top: 10px
-          - type: horizontal-stack
-            cards:
-              - type: custom:simple-thermostat
-                entity: climate.living_room_thermostats
-                icon: false
-                name: Living Room
-                step_layout: row
-                header: true
-                control: false
-                layout:
-                  mode:
-                    icons: true
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template:
+              - custom_card_coltondick_room
+              - grey_off
+              - blue_on
+            name: Living Room
+            entity: group.livingroom
+            icon: mdi:sofa-single-outline
+            templates:
+              - yellow_on
+            tap_action:
+              action: toggle
+            variables:
+              label_use_temperature: true
+              label_use_brightness: false
+              room_temperature: sensor.average_indoor_temperature
+              entity_1:
+                entity_id: switch.cage
+                templates:
+                  - blue_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_2:
+                entity_id: switch.side_table_lamp
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_3:
+                entity_id: remote.tv
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_4:
+                entity_id: climate.living_room_thermostats
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+          - type: "custom:button-card"
+            template:
+              - card_room
+              - grey_off
+              - blue_on
+            name: Living Room
+            entity: sensor.average_indoor_temperature
+            icon: mdi:sofa-single-outline
+            templates:
+              - yellow_on
+            tap_action:
+              action: navigate
+              navigation_path: "/ui-lovelace-minimalist/living-room"
+            variables:
+              label_use_temperature: true
+              label_use_brightness: false
+              entity_1:
+                entity_id: switch.cage
+                templates:
+                  - blue_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_2:
+                entity_id: switch.side_table_lamp
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_3:
+                entity_id: remote.tv
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+  - title: Living Room
+    path: living-room
+    icon: mdi:sofa-outline
+    badges: []
+    cards:
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
       - type: vertical-stack
         cards:
           - type: horizontal-stack
             cards:
               - type: "custom:button-card"
-                template: radial_icon_info
+                template: card_power_outlet
+                entity: group.livingroom
+                name: Living Room Lights
+              - type: "custom:button-card"
+                template: card_power_outlet
+                entity: switch.cage
+                name: Cage
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template: card_power_outlet
+                entity: switch.side_table_lamp
+                name: Lamp
+              - type: "custom:button-card"
+                template: card_generic
+                entity: remote.tv
+                name: TV
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template: custom_card_coltondick_thermostat
+                entity: climate.living_room_thermostats
                 variables:
-                  entity_1: sensor.u_s_air_quality_index
-                  entity_1_name: "Air Quality"
-                  entity_1_color: var(--aurora-pink)
-                  entity_1_icon: mdi:thermometer
-                  entity_2: sensor.airgradient_c02
-                  entity_2_name: "Indoor C02"
-                  entity_2_color: var(--aurora-blue)
-                  entity_2_icon: mdi:weather-windy
-                  entity_3: sensor.airgradient_pm2_5
-                  entity_3_name: "Indoor PM2.5"
-                  entity_3_color: var(--aurora-red)
-                  entity_3_icon: mdi:weather-windy
+                  ulm_card_thermostat_enable_collapse: false
+                  ulm_card_thermostat_enable_controls: true
+                  ulm_card_thermostat_enable_background_color: false
+                  ulm_card_thermostat_enable_hvac_modes: false
+                  ulm_card_thermostat_enable_popup: false
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "var(--aurora-green)"
+                  ulm_card_graph_name: Living Room Temperature
+                  ulm_card_graph_entity: sensor.living_room_temperature
+  - title: Weather
+    path: weather
+    icon: mdi:sun-thermometer
+    badges: []
+    cards:
+      ## Chip Back ##
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+      ## Sensor Graphs ##
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "var(--aurora-green)"
+                  ulm_card_graph_name: Outdoor Temperature
+                  ulm_card_graph_entity: sensor.temperature
+              - type: "custom:button-card"
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "var(--aurora-blue)"
+                  ulm_card_graph_name: Outdoor Humidity
+                  ulm_card_graph_entity: sensor.humidity
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "var(--aurora-red)"
+                  ulm_card_graph_name: Temperature Inside
+                  ulm_card_graph_entity: sensor.average_indoor_temperature
+              - type: "custom:button-card"
+                template: card_graph
+                variables:
+                  ulm_card_graph_color: "var(--aurora-green)"
+                  ulm_card_graph_name: Humidity Inside
+                  ulm_card_graph_entity: sensor.cage_humidity
+          ## Radial Graph ##
+          - type: "custom:button-card"
+            template: radial_icon_info
+            variables:
+              entity_1: sensor.airgradient_c02
+              entity_1_name: "Indoor C02"
+              entity_1_color: red
+              entity_1_icon: mdi:weather-windy
+              entity_1_min: 0
+              entity_1_max: 2000
+              entity_2: sensor.u_s_air_quality_index
+              entity_2_name: "Air Quality"
+              entity_2_color: green
+              entity_2_icon: mdi:thermometer
+              entity_2_min: 0
+              entity_2_max: 100
+              entity_3: sensor.airgradient_pm2_5
+              entity_3_name: "Indoor PM2.5"
+              entity_3_color: yellow
+              entity_3_icon: mdi:weather-windy
+              entity_3_min: 0
+              entity_3_max: 500
+              entity_4: sensor.wind_speed
+              entity_4_name: "Wind Speed"
+              entity_4_color: pink
+              entity_4_icon: mdi:weather-windy
+              entity_4_min: 0
+              entity_4_max: 200
+
+  - title: Security
+    path: security
+    icon: mdi:lock
+    badges: []
+    cards:
+      ## Chip Back ##
+      - type: "custom:button-card"
+        template: chip_back
+        variables:
+          ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+        ## Alarm Panel ##
+      - type: vertical-stack
+        cards:
+          - card:
+              entity: alarm_control_panel.panel
+              states:
+                - arm_home
+              style:
+                "#armActions":
+                  mwc-button:
+                    $: |
+                      #button > span.slot-container{
+                        color: transparent;
+                        position: absolute;
+
+                      }
+                      #button{
+                        width: 150px;
+                        border-radius: 21px;
+                      }
+                      #button > span.slot-container::before{
+                        color: var(--mdc-theme-primary, #6200ee);
+                        content: "Arm";
+                        margin: 0 0 0 50%;
+                      }
+                .: |
+                  ha-card > ha-label-badge{
+                    --alarm-state-color: var(--aurora-green) !important;
+                  }
+                  ha-card{
+                    padding-top: 16px;
+                    padding-bottom: 12px !important;
+                    border-radius: 21px;
+                  }
+                  ha-card > h1{
+                    padding-top: 0;
+                    color: transparent;
+                  }
+                  ha-card > h1::before{
+                    content: "Disarmed";
+                    color: var(--aurora-green);
+                    position: absolute;
+                    font-variant: small-caps;
+                  }
+                  #alarmCode{
+                    display: none;
+                  }
+                  #keypad{
+                    display: none !important;
+                  }
+              title: Alarm
+              type: alarm-panel
+            conditions:
+              - entity: alarm_control_panel.panel
+                state: disarmed
+            type: conditional
+          - card:
+              entity: alarm_control_panel.panel
+              states:
+                - arm_home
+              style:
+                "#armActions":
+                  mwc-button:
+                    $: |
+                      #button > span.slot-container{
+                        color: transparent;
+                        position: absolute;
+                      }
+                      #button{
+                        width: 150px;
+                        border-radius: 21px;
+                      }
+                      #button > span.slot-container::before{
+                        color: var(--mdc-theme-primary, #6200ee);
+                        content: "Disarm";
+                        margin: 0 0 0 50%;
+                      }
+                "#keypad":
+                  mwc-button:
+                    $: |
+                      #button{
+                        border-radius: 12px
+                      }
+                .: |
+                  ha-card > ha-label-badge{
+                    --alarm-state-color: var(--aurora-red) !important;
+                  }
+                  ha-card{
+                    padding-top: 16px;
+                    padding-bottom: 12px !important;
+                    border-radius: 21px;
+                  }
+                  ha-card > h1{
+                    padding-top: 0;
+                    color: transparent;
+                  }
+                  ha-card > h1::before{
+                    content: "Armed";
+                    color: var(--aurora-red);
+                    position: absolute;
+                    font-variant: small-caps;
+                  }
+              title: Alarm
+              type: alarm-panel
+            conditions:
+              - entity: alarm_control_panel.panel
+                state_not: disarmed
+            type: conditional
+            ## Door Lock ##
+          - entity: lock.front_door
+            name: Door Lock
+            template: custom_card_eraycetinay_lock
+            type: custom:button-card
+            variables:
+              ulm_custom_card_eraycetinay_lock_tap_control: true

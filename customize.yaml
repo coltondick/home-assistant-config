@@ -1,0 +1,16 @@
+sensor.average_indoor_temperature:
+  icon: ios:thermometer
+sensor.airgradient_c02:
+  icon: ios:wind
+sensor.u_s_air_quality_index:
+  icon: ios:wind
+sensor.airgradient_pm2_5:
+  icon: ios:wind
+remote.tv:
+  icon: ios:tv
+light.tv_leds:
+  icon: hue:lightstrip-tv
+switch.side_table_lamp:
+  icon: mdi:lamp
+switch.cage:
+  icon: ios:pawprint-fill

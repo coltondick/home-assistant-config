@@ -182,3 +182,15 @@
     - sensor.cage_temperature
   type: mean
   name: average_indoor_temperature
+
+- platform: template
+  sensors:
+    presence_detection:
+      friendly_name: "Presence Detection"
+      value_template: >
+        {% set count = [states.person.colton, states.person.miranda] | selectattr('state', '==', 'home') | list | count %}
+        {% if is_state('input_boolean.guestmode', 'on') %}
+          {{ count + 1 }} 
+        {% else %}
+          {{ count }}
+        {% endif %}
