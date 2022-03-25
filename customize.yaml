@@ -1,16 +1,30 @@
-sensor.average_indoor_temperature:
-  icon: ios:thermometer
+light.hue_light_strip:
+  icon: hue:lightstrip
+light.laundry_room_ceiling:
+  icon: mdi:washing-machine
+light.tv_leds:
+  icon: hue:lightstrip
+remote.tv:
+  icon: ios:tv
 sensor.airgradient_c02:
-  icon: ios:wind
-sensor.u_s_air_quality_index:
   icon: ios:wind
 sensor.airgradient_pm2_5:
   icon: ios:wind
-remote.tv:
-  icon: ios:tv
-light.tv_leds:
-  icon: hue:lightstrip-tv
-switch.side_table_lamp:
-  icon: mdi:lamp
+sensor.average_indoor_temperature:
+  icon: ios:thermometer
+sensor.u_s_air_quality_index:
+  icon: ios:wind
 switch.cage:
   icon: ios:pawprint-fill
+switch.patio_lights:
+  icon: mdi:string-lights
+switch.side_table_lamp:
+  icon: mdi:lamp
+switch.white_noise_onoff:
+  icon: ios:bed-double
+switch.scentsy:
+  icon: mdi:scent
+switch.kitchen_leds:
+  icon: hue:lightstrip
+light.kitchen_stove:
+  icon: mdi:stove

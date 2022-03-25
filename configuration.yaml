@@ -83,6 +83,10 @@ input_boolean:
   guestmode:
     name: Guest Mode
     icon: ios:house-fill
+  white_noise:
+    name: White Noise
+    icon: mdi:music-note
+    initial: off
 
 logger:
   default: info
@@ -106,6 +110,10 @@ recorder:
     domains:
       - sensor
       - switch
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
 
 sun:
 
