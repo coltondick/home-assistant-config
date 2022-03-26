@@ -562,17 +562,8 @@ views:
                   - entity_picture: /local/colton.jpg
                   - show_entity_picture: true
                   - tap_action:
-                      action: fire-dom-event
-                      browser_mod:
-                        card:
-                          aspect_ratio: "16:9"
-                          default_zoom: 18
-                          entities:
-                            - device_tracker.life360_colton
-                          type: map
-                        command: popup
-                        hide_header: true
-                        large: false
+                      action: more-info
+                      haptic: light
               - template: person_card_new
                 type: custom:decluttering-card
                 variables:
@@ -1117,17 +1108,8 @@ views:
                   - entity_picture: /local/colton.jpg
                   - show_entity_picture: true
                   - tap_action:
-                      action: fire-dom-event
-                      browser_mod:
-                        card:
-                          aspect_ratio: "16:9"
-                          default_zoom: 18
-                          entities:
-                            - device_tracker.life360_colton
-                          type: map
-                        command: popup
-                        hide_header: true
-                        large: false
+                      action: more-info
+                      haptic: light
               - template: person_card_new
                 type: custom:decluttering-card
                 variables:
@@ -1394,17 +1376,8 @@ views:
                   - entity_picture: /local/colton.jpg
                   - show_entity_picture: true
                   - tap_action:
-                      action: fire-dom-event
-                      browser_mod:
-                        card:
-                          aspect_ratio: "16:9"
-                          default_zoom: 18
-                          entities:
-                            - device_tracker.life360_colton
-                          type: map
-                        command: popup
-                        hide_header: true
-                        large: false
+                      action: more-info
+                      haptic: light
               - template: person_card_new
                 type: custom:decluttering-card
                 variables:
@@ -1555,6 +1528,91 @@ views:
                       - grey_off
                     tap_action:
                       action: toggle
+              ## Living Room ##
+              - type: "custom:button-card"
+                template:
+                  - custom_card_coltondick_room
+                  - grey_off
+                  - blue_on
+                name: Living Room
+                entity: light.living_room_ceiling
+                icon: hue:room-living
+                templates:
+                  - yellow_on
+                tap_action:
+                  action: toggle
+                variables:
+                  label_use_temperature: true
+                  label_use_brightness: false
+                  room_temperature: sensor.living_room_temperature
+                  entity_1:
+                    entity_id: remote.tv
+                    templates:
+                      - green_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
+                  entity_2:
+                    entity_id: switch.side_table_lamp
+                    templates:
+                      - yellow_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
+                  entity_3:
+                    entity_id: switch.cage
+                    templates:
+                      - yellow_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
+                  entity_4:
+                    entity_id: light.tv_leds
+                    templates:
+                      - yellow_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
+          - type: horizontal-stack
+            cards:
+              ## Master ##
+              - type: "custom:button-card"
+                template:
+                  - custom_card_coltondick_room
+                  - grey_off
+                  - blue_on
+                name: Master Bedroom
+                entity: group.bedroom
+                icon: hue:room-bedroom
+                templates:
+                  - yellow_on
+                tap_action:
+                  action: toggle
+                variables:
+                  label_use_temperature: true
+                  label_use_brightness: false
+                  room_temperature: sensor.bedroom_thermostat_temperature
+                  entity_1:
+                    entity_id: remote.bedroom
+                    templates:
+                      - green_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
+                  entity_2:
+                    entity_id: switch.vanity
+                    templates:
+                      - yellow_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
+                  entity_3:
+                    entity_id: switch.bedroom_sidetable_lamp
+                    templates:
+                      - yellow_on
+                      - grey_off
+                    tap_action:
+                      action: toggle
               ## Office ##
               - type: "custom:button-card"
                 template:
@@ -1579,4 +1637,6 @@ views:
                       - custom_coltondick_media_off
                     tap_action:
                       action: call-service
-                      service: media_player.media_play_pause
+                      service: script.play_pause_spotify
+                      service_data:
+                        entity_id: media_player.spotify_colt_dick

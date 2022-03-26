@@ -73,3 +73,24 @@ announce_bedroom_exclude:
     - service: notify.TELEGRAM_BOT
       data:
         message: "Gate Opened"
+
+spotcast_play:
+  sequence:
+    service: spotcast.start
+    data:
+      device_name: COLTON
+      force_playback: true
+play_pause:
+  sequence:
+    service: media_player.media_play_pause
+    data:
+      entity_id: media_player.spotify_colt_dick
+play_pause_spotify:
+  alias: play_pause_spotify
+  sequence:
+    service_template: >
+      {% if states("media_player.spotify_colt_dick") in ["off","on"] %}
+      script.spotcast_play
+      {% else %}
+      script.play_pause
+      {% endif %}

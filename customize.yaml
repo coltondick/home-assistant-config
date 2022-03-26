@@ -6,6 +6,8 @@ light.tv_leds:
   icon: hue:lightstrip
 remote.tv:
   icon: ios:tv
+remote.bedroom:
+  icon: ios:tv
 sensor.airgradient_c02:
   icon: ios:wind
 sensor.airgradient_pm2_5:
@@ -20,8 +22,12 @@ switch.patio_lights:
   icon: mdi:string-lights
 switch.side_table_lamp:
   icon: mdi:lamp
+switch.bedroom_sidetable_lamp:
+  icon: mdi:lamp
 switch.white_noise_onoff:
   icon: ios:bed-double
+switch.vanity:
+  icon: mdi:mirror-rectangle
 switch.scentsy:
   icon: mdi:scent
 switch.kitchen_leds:
