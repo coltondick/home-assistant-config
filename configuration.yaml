@@ -10,6 +10,7 @@ script: !include scripts.yaml
 sensor: !include_dir_merge_list sensor
 shell_command: !include_dir_merge_named shell_command
 switch: !include switches.yaml
+browser_mod:
 
 climate:
   - platform: climate_group
@@ -24,6 +25,9 @@ emulated_hue:
 
 frontend:
   themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+    - /hacsfiles/hass-bha-icons/hass-bha-icons.js
 
 history:
   include:
@@ -73,12 +77,33 @@ input_boolean:
   occupancy_miranda:
     name: Occupancy Miranda
     icon: mdi:account
+  occupancy_tim:
+    name: Occupancy Tim
+    icon: mdi:account
+  guestmode:
+    name: Guest Mode
+    icon: ios:house-fill
+  white_noise:
+    name: White Noise
+    icon: mdi:music-note
+    initial: off
 
 logger:
   default: info
   logs:
     custom_components.bchydro: debug
     homeassistant.components.recorder.migration: info
+
+lovelace:
+  mode: storage
+  dashboards:
+    test-bed: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: views/test-bed.yaml
+      title: Test Bed
+      icon: mdi:test-tube
+      show_in_sidebar: true
+      require_admin: true
 
 notify:
   - name: ALL_DEVICES
@@ -97,6 +122,13 @@ recorder:
       - sensor
       - switch
 
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
 sun:
 
 system_health:

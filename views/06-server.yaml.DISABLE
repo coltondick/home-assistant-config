@@ -1,0 +1,43 @@
+icon: mdi:server
+path: server
+title: Server
+badges: []
+cards:
+  - entities:
+      - entity: switch.pi_hole
+      - entity: sensor.pihole_status
+      - entity: sensor.pi_hole_ads_blocked_today
+      - entity: sensor.pi_hole_ads_percentage_blocked_today
+      - entity: sensor.pi_hole_dns_queries_forwarded
+      - entity: sensor.pi_hole_dns_queries_today
+      - entity: sensor.pi_hole_dns_unique_clients
+      - entity: sensor.pi_hole_dns_unique_domains
+      - entity: sensor.pi_hole_domains_blocked
+      - entity: sensor.pi_hole_seen_clients
+    title: PIhole Status
+    type: entities
+  - entities:
+      - entity: sensor.disk_use_percent_share
+      - entity: sensor.memory_free
+      - entity: sensor.processor_use_percent
+    title: Server Status
+    type: entities
+  - entities:
+      - entity: sensor.radarr_movies
+      - entity: sensor.radarr_disk_space
+      - entity: sensor.radarr_upcoming
+    title: Radarr
+    type: entities
+  - type: entities
+    entities:
+      - entity: switch.logitech_media_server
+        icon: mdi:music
+      - entity: switch.update_youtube_on_shield
+        icon: mdi:youtube
+    title: Restart
+  - type: entities
+    entities:
+      - entity: sensor.speedtest_download
+      - entity: sensor.speedtest_upload
+      - entity: sensor.speedtest_ping
+    title: Speedtest
