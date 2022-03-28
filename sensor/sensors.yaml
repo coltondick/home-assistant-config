@@ -188,8 +188,9 @@
     presence_detection:
       friendly_name: "Presence Detection"
       value_template: >
+        {% set state = states('sensor.home_occupancy_confidence_of_tim') %}
         {% set count = [states.person.colton, states.person.miranda] | selectattr('state', '==', 'home') | list | count %}
-        {% if is_state('input_boolean.guestmode', 'on') %}
+        {% if is_number(state) and state | float > 50 %}
           {{ count + 1 }} 
         {% else %}
           {{ count }}

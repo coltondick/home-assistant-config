@@ -94,6 +94,17 @@ logger:
     custom_components.bchydro: debug
     homeassistant.components.recorder.migration: info
 
+lovelace:
+  mode: storage
+  dashboards:
+    test-bed: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: views/test-bed.yaml
+      title: Test Bed
+      icon: mdi:test-tube
+      show_in_sidebar: true
+      require_admin: true
+
 notify:
   - name: ALL_DEVICES
     platform: group

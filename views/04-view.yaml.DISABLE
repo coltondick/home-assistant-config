@@ -1,0 +1,250 @@
+icon: mdi:tablet-dashboard
+panel: false
+title: ""
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.temperature
+            name: Weather
+            line_color: var(--aurora-red)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.humidity
+            name: Outdoor Humidity
+            line_color: var(--aurora-blue)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.cage_temperature
+            name: Indoor Temperature
+            icon: mdi:thermometer
+            line_color: var(--aurora-yellow)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.cage_humidity
+            name: Indoor Humidity
+            icon: mdi:water-percent
+            line_color: var(--aurora-green)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.wind_speed
+            name: Wind
+            icon: mdi:weather-windy
+            line_color: var(--aurora-orange)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.u_s_air_quality_index
+            name: Air Quality
+            icon: mdi:weather-windy
+            line_color: var(--aurora-pink)
+            line_width: 8
+            font_size: 75
+            hours_to_show: 168
+            points_per_hour: 0.25
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.airgradient_pm2_5
+            name: Indoor PM2.5
+            icon: mdi:weather-windy
+            line_color: var(--aurora-red)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+            tap_action:
+              action: url
+              url: >-
+                http://192.168.1.3:3000/d/MbIr5N7nk/historical-stats?orgId=1&viewPanel=6
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.airgradient_c02
+            name: Indoor C02
+            icon: mdi:weather-windy
+            line_color: var(--aurora-blue)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+  - type: horizontal-stack
+    cards:
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.office_temperature
+        name: Office
+        line_color: var(--aurora-pink)
+        line_width: 8
+        font_size: 100
+        hours_to_show: 168
+        points_per_hour: 0.25
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.bedroom_thermostat_temperature
+        name: Master
+        line_color: var(--aurora-orange)
+        line_width: 8
+        font_size: 100
+        hours_to_show: 168
+        points_per_hour: 0.25
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.living_room_temperature
+        name: Living Room
+        line_color: var(--aurora-blue)
+        line_width: 8
+        font_size: 100
+        hours_to_show: 168
+        points_per_hour: 0.25
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            entity: switch.cage
+            show_state: true
+            show_entity_picture: true
+            state:
+              - icon: ios:pawprint
+                value: "off"
+                styles:
+                  name:
+                    - padding-top: 10px
+              - icon: ios:pawprint-fill
+                value: "on"
+                styles:
+                  name:
+                    - padding-top: 10px
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            name: Lamp
+            entity: switch.side_table_lamp
+            show_state: true
+            show_entity_picture: true
+            state:
+              - icon: hue:table-shade
+                value: "off"
+                styles:
+                  name:
+                    - padding-top: 10px
+              - icon: hue:table-shade
+                value: "on"
+                styles:
+                  name:
+                    - padding-top: 10px
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            name: TV
+            entity: remote.tv
+            show_state: true
+            show_entity_picture: true
+            state:
+              - icon: ios:tv
+                value: "off"
+                styles:
+                  name:
+                    - padding-top: 10px
+              - icon: ios:tv-inset-filled
+                value: "on"
+                styles:
+                  name:
+                    - padding-top: 10px
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            name: Kitchen
+            entity: group.kitchen
+            show_state: true
+            show_entity_picture: true
+            state:
+              - icon: ios:fork-knife
+                value: "off"
+                styles:
+                  name:
+                    - padding-top: 10px
+              - icon: ios:fork-knife
+                value: "on"
+                styles:
+                  name:
+                    - padding-top: 10px
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            name: Living Room
+            entity: group.livingroom
+            show_state: true
+            state:
+              - icon: mdi:sofa-single-outline
+                value: "off"
+                styles:
+                  name:
+                    - padding-top: 10px
+              - icon: mdi:sofa-single
+                value: "on"
+                styles:
+                  name:
+                    - padding-top: 10px
+          - type: custom:button-card
+            tap_action:
+              action: toggle
+            entity: group.dining
+            name: Dining Room
+            show_state: true
+            show_entity_picture: true
+            state:
+              - icon: bha:ceiling-lamp
+                value: "off"
+                styles:
+                  name:
+                    - padding-top: 10px
+              - icon: bha:ceiling-lamp
+                value: "on"
+                styles:
+                  name:
+                    - padding-top: 10px
+      - type: horizontal-stack
+        cards:
+          - type: custom:simple-thermostat
+            entity: climate.living_room_thermostats
+            icon: false
+            name: Living Room
+            step_layout: row
+            header: true
+            control: false
+            layout:
+              mode:
+                icons: true

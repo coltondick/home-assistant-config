@@ -1,1 +1,29 @@
-[]
+- id: '1648331598156'
+  alias: ZHA - Aqara Wireless Mini Switch
+  description: ''
+  use_blueprint:
+    path: homeassistant/aqara_button.yaml
+    input:
+      aqara_mini_switch: 657d3dc5eaeb4c11b19df5b38c794d8b
+      button_single_press:
+      - service: light.toggle
+        data: {}
+        target:
+          entity_id: light.office_ceiling_group
+- id: '1648331758441'
+  alias: ZHA - Aqara Wireless Mini Switch
+  description: ''
+  use_blueprint:
+    path: homeassistant/aqara_button.yaml
+    input:
+      aqara_mini_switch: 657d3dc5eaeb4c11b19df5b38c794d8b
+      button_single_press:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.office_ceiling_group
+      button_double_press:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.office_ceiling_group
