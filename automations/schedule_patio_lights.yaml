@@ -1,0 +1,16 @@
+# Automatically turn on|off the patio lights.
+- alias: "Turn Patio Lights On at 7 PM"
+  trigger:
+    platform: time
+    at: "17:00:00"
+  action:
+    service: switch.turn_on
+    entity_id: switch.patio_lights
+
+- alias: "Turn Patio Lights Off at 10 PM"
+  trigger:
+    platform: time
+    at: "22:00:00"
+  action:
+    service: switch.turn_off
+    entity_id: switch.patio_lights

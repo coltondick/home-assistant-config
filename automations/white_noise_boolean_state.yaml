@@ -1,0 +1,42 @@
+- id: "1231231231231123455"
+  alias: Rain stops playing
+  trigger:
+    - platform: state
+      entity_id: media_player.bedroom_pair_lms
+      to: "off"
+    - platform: state
+      entity_id: media_player.bedroom_pair_lms
+      to: "idle"
+  action:
+    service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.white_noise
+
+- id: "1231231231231123456"
+  alias: Rain stops playing
+  trigger:
+    - platform: state
+      entity_id: media_player.bedroom_pair
+      to: "off"
+    - platform: state
+      entity_id: media_player.bedroom_pair
+      to: "idle"
+  condition:
+    condition: state
+    entity_id: media_player.bedroom_pair_lms
+    state: "playing"
+  action:
+    service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.white_noise
+
+- id: "1231256731231123455"
+  alias: Rain starts playing
+  trigger:
+    - platform: state
+      entity_id: media_player.bedroom_pair_lms
+      to: "playing"
+  action:
+    service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.white_noise

@@ -1,0 +1,1164 @@
+title: Home
+swipe_nav:
+  wrap: true
+  animate: fade
+  prevent_default: true
+  swipe_amount: 15
+  skip_tabs: 2,3
+decluttering_templates:
+  person_card_new:
+    default:
+      - color: auto
+      - background_color: var(--primary-background-color)
+      - variable: spin
+      - spin: false
+      - show_name: true
+      - show_state: true
+      - show_label: false
+      - show_icon: true
+      - show_last_changed: false
+      - show_entity_picture: false
+      - tap_action:
+          action: more-info
+          haptic: light
+      - aspect_ratio: 1/1
+      - margin-right: 20px
+      - label: "&nbsp;"
+      - off_icon_color: gray
+      - off_name_color: gray
+      - off_state_color: gray
+    card:
+      type: custom:button-card
+      battery: "[[battery]]"
+      wifi: "[[wifi]]"
+      home_sensor: "[[home_sensor]]"
+      work_sensor: "[[work_sensor]]"
+      work_icon: "[[work_icon]]"
+      name: "[[name]]"
+      icon: mdi:[[icon]]
+      size: "[[size]]"
+      color: "[[color]]"
+      aspect_ratio: "[[aspect_ratio]]"
+      entity: "[[entity]]"
+      label: "[[label]]"
+      show_name: "[[show_name]]"
+      show_icon: "[[show_icon]]"
+      show_state: "[[show_state]]"
+      show_label: "[[show_label]]"
+      show_last_changed: "[[show_last_changed]]"
+      tap_action: "[[tap_action]]"
+      hold_action: "[[hold_action]]"
+      entity_picture: "[[entity_picture]]"
+      show_entity_picture: "[[show_entity_picture]]"
+      styles:
+        card:
+          - border-radius: 12px
+          - "--card-background-color": "[[background_color]]"
+        icon:
+          - grid-column: 1
+          - grid-row: 1 / 3
+        label:
+          - color: gray
+          - font-size: 11px
+          - padding: 0px 10px
+          - justify-self: start
+        state:
+          - font-size: 12px
+          - padding: 0px 10px
+          - justify-self: start
+          - text-transform: capitalize
+          - font-weight: bold
+          - padding-left: 10px
+          - color: var(--primary-text-color)
+        grid:
+          - grid-template-areas: '"i i i" "status wifi battery"'
+          - grid-template-columns: auto
+          - grid-template-rows: 9fr 1fr
+        img_cell:
+          - align-self: start
+          - text-align: start
+        name:
+          - justify-self: start
+          - padding-left: 10px
+          - font-weight: bold
+          - font-size: 13px
+        entity_picture:
+          - height: 135px
+          - width: 135px
+          - border-radius: 100%
+        custom_fields:
+          blank:
+            card:
+              type: custom:button-card
+              color_type: blank-card
+          status:
+            - align-self: start
+            - justify-self: start
+            - font-size: 12px
+            - color: var(--secondary-text-color)
+          wifi:
+            - align-self: start
+            - justify-self: start
+            - font-size: 12px
+            - color: var(--secondary-text-color)
+          battery:
+            - align-self: start
+            - justify-self: start
+            - font-size: 12px
+            - color: var(--secondary-text-color)
+      custom_fields:
+        battery: |
+          [[[
+            if (states["[[battery]]"].attributes.battery >= 75) {
+            if (states["[[battery]]"].attributes.battery_charging === false) {
+              return `<ha-icon
+                          icon="mdi:battery"
+                          style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--aurora-green); position: relative; bottom: 1px;">
+                          </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+            } else {
+              return `<ha-icon
+                        icon="mdi:battery-charging"
+                        style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--aurora-green); position: relative; bottom: 1px;">
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+            }
+          } else if (states["[[battery]]"].attributes.battery <= 35) {
+            if (states["[[battery]]"].attributes.battery_charging === false) {
+              return `<ha-icon
+                          icon="mdi:battery"
+                          style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(-aurora-red); position: relative; bottom: 1px;">
+                          </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+            } else {
+              return `<ha-icon
+                        icon="mdi:battery-charging"
+                        style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(-aurora-red); position: relative; bottom: 1px;">
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+            }
+          } else {
+            if (states["[[battery]]"].attributes.battery_charging === false) {
+              return `<ha-icon
+                          icon="mdi:battery"
+                          style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+                          </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+            } else {
+              return `<ha-icon
+                        icon="mdi:battery-charging"
+                        style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+            }
+          }
+          ]]]
+        wifi: |
+          [[[
+            if (states['[[wifi]]'].state =='<not connected>') { 
+              return `<ha-icon
+              icon="mdi:wifi-off"
+              style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+              </ha-icon> <span>N/A</span>`; 
+            } else {
+              return `<ha-icon
+              icon="mdi:wifi"
+              style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+              </ha-icon><span>${states['[[wifi]]'].state}</span>`;
+            }
+          ]]]
+        status: |
+          [[[
+            if (states['[[entity]]'].state =='not_home') { 
+            return `<ha-icon icon="mdi:home-export-outline"
+              style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+              </ha-icon><span>Away</span>`;
+            } 
+            if (states['[[entity]]'].state =='home') { 
+            return `<ha-icon 
+              icon="mdi:home"
+              style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+              </ha-icon><span>Home</span>`;
+            } else {
+            return `<ha-icon 
+              icon="mdi:map-marker-radius"
+              style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+              </ha-icon><span>${entity.state}</span>`;
+            }
+          ]]]
+      state:
+        - value: not_home
+          styles:
+            card:
+              - opacity: 0.6
+            entity_picture:
+              - border: 3px solid var(--aurora-red)
+        - value: Work
+          styles:
+            card:
+              - opacity: 0.6
+            entity_picture:
+              - border: 3px solid var(--aurora-blue)
+        - value: home
+          styles:
+            entity_picture:
+              - border: 3px solid var(--aurora-green)
+views:
+  - theme: Nordic
+    icon: mdi:home-assistant
+    path: new
+    title: Home
+    badges: []
+    cards:
+      - cards:
+          - entity_id:
+              "1": null
+            matches: ^toggle (.+\..+)
+            max_results: 10
+            name: Toggle {1}
+            service: homeassistant.toggle
+            service_data: null
+            type: custom:search-card
+          - entity: alarm_control_panel.panel
+            name: Alarm
+            states:
+              - arm_home
+              - arm_away
+            type: alarm-panel
+            theme: Nordic
+          - type: horizontal-stack
+            cards:
+              - type: custom:decluttering-card
+                template: person_card_new
+                variables:
+                  - entity: person.colton
+                  - name: Colton
+                  - show_name: false
+                  - show_state: false
+                  - battery: device_tracker.life360_colton
+                  - wifi: sensor.colton_s_samsung_wifi_connection
+                  - entity_picture: /local/colton.jpg
+                  - show_entity_picture: true
+                  - tap_action:
+                      action: more-info
+                      haptic: light
+              - type: custom:decluttering-card
+                template: person_card_new
+                variables:
+                  - entity: person.miranda
+                  - name: Miranda
+                  - show_name: false
+                  - show_state: false
+                  - battery: device_tracker.life360_miranda
+                  - wifi: sensor.miranda_wifi_connection
+                  - entity_picture: /local/miranda.jpg
+                  - show_entity_picture: true
+                  - tap_action:
+                      action: more-info
+                      haptic: light
+          - cards:
+              - show_name: true
+                show_icon: true
+                entity: input_boolean.override_home
+                hold_action:
+                  action: more-info
+                icon_height: 50px
+                show_state: true
+                tap_action:
+                  action: toggle
+                type: button
+                icon: ios:house-fill
+                name: Override
+              - show_name: true
+                show_icon: true
+                hold_action:
+                  action: call-service
+                  service: media_player.media_stop
+                  service_data:
+                    entity_id: media_player.bedroom_pair
+                icon: ios:bed-double
+                icon_height: 50px
+                name: Sleep
+                show_state: false
+                tap_action:
+                  action: call-service
+                  service: shell_command.white_noise
+                type: button
+                card_mod:
+                  style: |
+                    span {
+                    margin-bottom: 20px
+                    }
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: switch.party_switch
+                icon: ios:theatermasks-fill
+                show_state: true
+                icon_height: 50px
+                name: Party
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: input_boolean.vacation_mode
+                show_state: true
+                icon: ios:globe-americas-fill
+                icon_height: 50px
+                name: Vacation
+            type: horizontal-stack
+          - entities:
+              - entity: light.office_ceiling_group
+              - entity: binary_sensor.office_motion
+                name: Motion
+            title: Office
+            type: entities
+        type: vertical-stack
+      - entities:
+          - entity: remote.tv
+          - entity: light.tv_leds
+          - entity: switch.cage
+          - entity: light.living_room_ceiling
+          - entity: switch.side_table_lamp
+          - entity: binary_sensor.living_room_motion
+        title: Living Room
+        type: entities
+      - entities:
+          - entity: binary_sensor.front_door
+          - entity: lock.front_door
+          - entity: alarm_control_panel.panel
+          - entity: light.entryway_ceiling
+          - entity: switch.patio_lights
+            icon: mdi:string-lights
+        show_header_toggle: false
+        title: Entryway
+        type: entities
+      - entities:
+          - entity: group.bedroom
+          - entity: switch.vanity
+          - entity: remote.bedroom
+          - entity: binary_sensor.bedroom_door
+          - entity: binary_sensor.master_bedroom_motion
+          - entity: switch.bedroom_sidetable_lamp
+            name: Lamp
+            icon: mdi:lamp
+        title: Master Bedroom
+        type: entities
+      - entities:
+          - entity: switch.scentsy
+          - entity: light.dining_room_ceiling
+          - entity: light.hue_light_strip
+          - entity: binary_sensor.dining_room_motion
+            name: Motion
+          - entity: binary_sensor.smoke_detector
+          - entity: binary_sensor.hallway_co_detector
+        title: Dining Room
+        type: entities
+      - cards:
+          - entities:
+              - entity: light.kitchen_ceiling
+              - entity: switch.kitchen_leds
+              - entity: light.kitchen_stove
+            title: Kitchen
+            type: entities
+          - entities:
+              - entity: light.laundry_room_ceiling
+            title: Laundry Room
+            type: entities
+        type: vertical-stack
+  - theme: Nordic
+    icon: mdi:tablet-dashboard
+    panel: false
+    title: ""
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.temperature
+                name: Weather
+                line_color: var(--aurora-red)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.humidity
+                name: Outdoor Humidity
+                line_color: var(--aurora-blue)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.cage_temperature
+                name: Indoor Temperature
+                icon: mdi:thermometer
+                line_color: var(--aurora-yellow)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.cage_humidity
+                name: Indoor Humidity
+                icon: mdi:water-percent
+                line_color: var(--aurora-green)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.wind_speed
+                name: Wind
+                icon: mdi:weather-windy
+                line_color: var(--aurora-orange)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.u_s_air_quality_index
+                name: Air Quality
+                icon: mdi:weather-windy
+                line_color: var(--aurora-pink)
+                line_width: 8
+                font_size: 75
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.airgradient_pm2_5
+                name: Indoor PM2.5
+                icon: mdi:weather-windy
+                line_color: var(--aurora-red)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+                tap_action:
+                  action: url
+                  url: >-
+                    http://192.168.1.3:3000/d/MbIr5N7nk/historical-stats?orgId=1&viewPanel=6
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.airgradient_c02
+                name: Indoor C02
+                icon: mdi:weather-windy
+                line_color: var(--aurora-blue)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.office_temperature
+            name: Office
+            line_color: var(--aurora-pink)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.bedroom_thermostat_temperature
+            name: Master
+            line_color: var(--aurora-orange)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+          - type: custom:mini-graph-card
+            entities:
+              - sensor.living_room_temperature
+            name: Living Room
+            line_color: var(--aurora-blue)
+            line_width: 8
+            font_size: 100
+            hours_to_show: 168
+            points_per_hour: 0.25
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                entity: switch.cage
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: ios:pawprint
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: ios:pawprint-fill
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: Lamp
+                entity: switch.side_table_lamp
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: hue:table-shade
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: hue:table-shade
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: TV
+                entity: remote.tv
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: ios:tv
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: ios:tv-inset-filled
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: Kitchen
+                entity: group.kitchen
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: ios:fork-knife
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: ios:fork-knife
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: Living Room
+                entity: group.livingroom
+                show_state: true
+                state:
+                  - icon: mdi:sofa-single-outline
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: mdi:sofa-single
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                entity: group.dining
+                name: Dining Room
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: bha:ceiling-lamp
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: bha:ceiling-lamp
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+          - type: horizontal-stack
+            cards:
+              - type: custom:simple-thermostat
+                entity: climate.living_room_thermostats
+                icon: false
+                name: Living Room
+                step_layout: row
+                header: true
+                control: false
+                layout:
+                  mode:
+                    icons: true
+  - theme: Nordic
+    icon: mdi:thermometer
+    title: Thermostats
+    badges: []
+    cards:
+      - control: true
+        entity: climate.bathroom_thermostat
+        icon: true
+        name: Bathroom
+        step_layout: row
+        type: custom:simple-thermostat
+      - control: true
+        entity: climate.bedroom_thermostat
+        icon: true
+        name: Bedroom
+        step_layout: row
+        type: custom:simple-thermostat
+      - control: true
+        entity: climate.office_thermostat
+        icon: true
+        name: Office
+        step_layout: row
+        type: custom:simple-thermostat
+      - control: true
+        entity: climate.living_room_thermostats
+        icon: true
+        name: Living Room
+        step_layout: row
+        type: custom:simple-thermostat
+      - columns: 4
+        entities:
+          - entity: sensor.cage_temperature
+          - entity: sensor.cage_humidity
+          - entity: sensor.cage_pressure
+          - entity: sensor.cage_power
+        show_name: false
+        title: Cage
+        type: glance
+      - control: true
+        entity: climate.living_room_thermostat
+        icon: true
+        name: Living Room
+        step_layout: row
+        type: custom:simple-thermostat
+      - control: true
+        entity: climate.dining_room_thermostat
+        icon: true
+        name: Living Room
+        step_layout: row
+        type: custom:simple-thermostat
+  - theme: Nordic
+    icon: mdi:server
+    path: server
+    title: Server
+    badges: []
+    cards:
+      - entities:
+          - entity: switch.pi_hole
+          - entity: sensor.pihole_status
+          - entity: sensor.pi_hole_ads_blocked_today
+          - entity: sensor.pi_hole_ads_percentage_blocked_today
+          - entity: sensor.pi_hole_dns_queries_forwarded
+          - entity: sensor.pi_hole_dns_queries_today
+          - entity: sensor.pi_hole_dns_unique_clients
+          - entity: sensor.pi_hole_dns_unique_domains
+          - entity: sensor.pi_hole_domains_blocked
+          - entity: sensor.pi_hole_seen_clients
+        title: PIhole Status
+        type: entities
+      - entities:
+          - entity: sensor.disk_use_percent_share
+          - entity: sensor.memory_free
+          - entity: sensor.processor_use_percent
+        title: Server Status
+        type: entities
+      - entities:
+          - entity: sensor.radarr_movies
+          - entity: sensor.radarr_disk_space
+          - entity: sensor.radarr_upcoming
+        title: Radarr
+        type: entities
+      - type: entities
+        entities:
+          - entity: switch.logitech_media_server
+            icon: mdi:music
+          - entity: switch.update_youtube_on_shield
+            icon: mdi:youtube
+        title: Restart
+      - type: entities
+        entities:
+          - entity: sensor.speedtest_download
+          - entity: sensor.speedtest_upload
+          - entity: sensor.speedtest_ping
+        title: Speedtest
+  - theme: Nordic
+    title: Screen Shots
+    path: screen-shots
+    icon: mdi:picture-in-picture-bottom-right
+    badges: []
+    cards:
+      - cards:
+          - entity_id:
+              "1": null
+            matches: ^toggle (.+\..+)
+            max_results: 10
+            name: Toggle {1}
+            service: homeassistant.toggle
+            service_data: null
+            type: custom:search-card
+          - entity: alarm_control_panel.panel
+            name: Alarm
+            states:
+              - arm_home
+              - arm_away
+            type: alarm-panel
+            theme: Nordic
+          - type: horizontal-stack
+            cards:
+              - type: custom:decluttering-card
+                template: person_card_new
+                variables:
+                  - entity: person.colton
+                  - name: Colton
+                  - show_name: false
+                  - show_state: false
+                  - battery: device_tracker.life360_colton
+                  - wifi: sensor.colton_s_samsung_wifi_connection
+                  - entity_picture: /local/colton.jpg
+                  - show_entity_picture: true
+                  - tap_action:
+                      action: more-info
+                      haptic: light
+              - type: custom:decluttering-card
+                template: person_card_new
+                variables:
+                  - entity: person.miranda
+                  - name: Miranda
+                  - show_name: false
+                  - show_state: false
+                  - battery: device_tracker.life360_miranda
+                  - wifi: sensor.miranda_wifi_connection
+                  - entity_picture: /local/miranda.jpg
+                  - show_entity_picture: true
+                  - tap_action:
+                      action: more-info
+                      haptic: light
+          - cards:
+              - show_name: true
+                show_icon: true
+                entity: input_boolean.override_home
+                hold_action:
+                  action: more-info
+                icon_height: 50px
+                show_state: true
+                tap_action:
+                  action: toggle
+                type: button
+                icon: ios:house-fill
+                name: Override
+              - show_name: true
+                show_icon: true
+                hold_action:
+                  action: call-service
+                  service: media_player.media_stop
+                  service_data:
+                    entity_id: media_player.bedroom_pair
+                icon: ios:bed-double
+                icon_height: 50px
+                name: Sleep
+                show_state: false
+                tap_action:
+                  action: call-service
+                  service: shell_command.white_noise
+                type: button
+                card_mod:
+                  style: |
+                    span {
+                    margin-bottom: 20px
+                    }
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: switch.party_switch
+                icon: ios:theatermasks-fill
+                show_state: true
+                icon_height: 50px
+                name: Party
+              - show_name: true
+                show_icon: true
+                type: button
+                tap_action:
+                  action: toggle
+                entity: input_boolean.vacation_mode
+                show_state: true
+                icon: ios:globe-americas-fill
+                icon_height: 50px
+                name: Vacation
+            type: horizontal-stack
+        type: vertical-stack
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.temperature
+                name: Weather
+                line_color: var(--aurora-red)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.humidity
+                name: Outdoor Humidity
+                line_color: var(--aurora-blue)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.cage_temperature
+                name: Indoor Temperature
+                icon: mdi:thermometer
+                line_color: var(--aurora-yellow)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.cage_humidity
+                name: Indoor Humidity
+                icon: mdi:water-percent
+                line_color: var(--aurora-green)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.wind_speed
+                name: Wind
+                icon: mdi:weather-windy
+                line_color: var(--aurora-orange)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.u_s_air_quality_index
+                name: Air Quality
+                icon: mdi:weather-windy
+                line_color: var(--aurora-pink)
+                line_width: 8
+                font_size: 75
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.airgradient_pm2_5
+                name: Indoor PM2.5
+                icon: mdi:weather-windy
+                line_color: var(--aurora-red)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+                tap_action:
+                  action: url
+                  url: >-
+                    http://192.168.1.3:3000/d/MbIr5N7nk/historical-stats?orgId=1&viewPanel=6
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.airgradient_c02
+                name: Indoor C02
+                icon: mdi:weather-windy
+                line_color: var(--aurora-blue)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                entity: switch.cage
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: ios:pawprint
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: ios:pawprint-fill
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: Lamp
+                entity: switch.side_table_lamp
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: hue:table-shade
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: hue:table-shade
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: TV
+                entity: remote.tv
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: ios:tv
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: ios:tv-inset-filled
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: Kitchen
+                entity: group.kitchen
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: ios:fork-knife
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: ios:fork-knife
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                name: Living Room
+                entity: group.livingroom
+                show_state: true
+                state:
+                  - icon: mdi:sofa-single-outline
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: mdi:sofa-single
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+              - type: custom:button-card
+                tap_action:
+                  action: toggle
+                entity: group.dining
+                name: Dining Room
+                show_state: true
+                show_entity_picture: true
+                state:
+                  - icon: bha:ceiling-lamp
+                    value: "off"
+                    styles:
+                      name:
+                        - padding-top: 10px
+                  - icon: bha:ceiling-lamp
+                    value: "on"
+                    styles:
+                      name:
+                        - padding-top: 10px
+          - type: horizontal-stack
+            cards:
+              - type: custom:simple-thermostat
+                entity: climate.living_room_thermostats
+                icon: false
+                name: Living Room
+                step_layout: row
+                header: true
+                control: false
+                layout:
+                  mode:
+                    icons: true
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:apexcharts-card
+                graph_span: 5d
+                layout: minimal
+                header:
+                  title: Weather
+                  show: false
+                  show_states: false
+                  colorize_states: true
+                all_series_config:
+                  stroke_width: 5
+                  opacity: 0.3
+                  type: area
+                color_list:
+                  - var(--aurora-red)
+                  - var(--aurora-green)
+                  - var(--aurora-blue)
+                series:
+                  - entity: sensor.temperature
+                    name: Outside
+                    group_by:
+                      func: avg
+                      duration: 60min
+                  - entity: sensor.average_indoor_temperature
+                    name: Inside
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.humidity
+                name: Outdoor Humidity
+                line_color: var(--aurora-blue)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.cage_temperature
+                name: Indoor Temperature
+                icon: mdi:thermometer
+                line_color: var(--aurora-yellow)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.cage_humidity
+                name: Indoor Humidity
+                icon: mdi:water-percent
+                line_color: var(--aurora-green)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.wind_speed
+                name: Wind
+                icon: mdi:weather-windy
+                line_color: var(--aurora-orange)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.u_s_air_quality_index
+                name: Air Quality
+                icon: mdi:weather-windy
+                line_color: var(--aurora-pink)
+                line_width: 8
+                font_size: 75
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.airgradient_pm2_5
+                name: Indoor PM2.5
+                icon: mdi:weather-windy
+                line_color: var(--aurora-red)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+                tap_action:
+                  action: url
+                  url: >-
+                    http://192.168.1.3:3000/d/MbIr5N7nk/historical-stats?orgId=1&viewPanel=6
+              - type: custom:mini-graph-card
+                entities:
+                  - sensor.airgradient_c02
+                name: Indoor C02
+                icon: mdi:weather-windy
+                line_color: var(--aurora-blue)
+                line_width: 8
+                font_size: 100
+                hours_to_show: 168
+                points_per_hour: 0.25
+          - type: custom:apexcharts-card
+            graph_span: 5d
+            layout: minimal
+            header:
+              title: Weather
+              show: false
+              show_states: false
+              colorize_states: true
+            all_series_config:
+              stroke_width: 5
+              opacity: 0.3
+              type: area
+            color_list:
+              - var(--aurora-red)
+              - var(--aurora-green)
+              - var(--aurora-blue)
+            series:
+              - entity: sensor.temperature
+                name: Outside
+                group_by:
+                  func: avg
+                  duration: 60min
+              - entity: sensor.average_indoor_temperature
+                name: Inside

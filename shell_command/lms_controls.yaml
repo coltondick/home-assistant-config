@@ -1,0 +1,17 @@
+lms_add_playlist_bedroompair: >-
+  bash /config/shell_scripts/lms_add_playlist.sh 1
+
+lms_add_playlist_bedroom: >-
+  bash /config/shell_scripts/lms_add_playlist.sh 2
+
+lms_max_volume_bedroompair: >-
+  bash /config/shell_scripts/lms_max_volume.sh 1
+
+lms_max_volume_bedroom: >-
+  bash /config/shell_scripts/lms_max_volume.sh 2
+
+lms_restart_container: >-
+  bash /config/shell_scripts/restart_lms_container.sh
+
+lms_restart_nodered: >-
+  bash /config/shell_scripts/restart_nodered_container.sh

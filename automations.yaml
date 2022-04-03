@@ -1,0 +1,79 @@
+- id: '1648331598156'
+  alias: ZHA - Aqara Wireless Mini Switch
+  description: ''
+  use_blueprint:
+    path: homeassistant/aqara_button.yaml
+    input:
+      aqara_mini_switch: 657d3dc5eaeb4c11b19df5b38c794d8b
+      button_single_press:
+      - service: light.toggle
+        data: {}
+        target:
+          entity_id: light.office_ceiling_group
+- id: '1648331758441'
+  alias: ZHA - Aqara Wireless Mini Switch
+  description: ''
+  use_blueprint:
+    path: homeassistant/aqara_button.yaml
+    input:
+      aqara_mini_switch: 657d3dc5eaeb4c11b19df5b38c794d8b
+      button_single_press:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.office_ceiling_group
+      button_double_press:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.office_ceiling_group
+- id: '1648588658734'
+  alias: ZHA - Philips Hue Dimmer Switch
+  description: ''
+  use_blueprint:
+    path: homeassistant/hue_remotes.yaml
+    input:
+      remote: fd8b11daa2de4432b84fed5e1b29fdcb
+      light:
+        entity_id: light.office_ceiling_group
+      force_brightness: true
+- id: '1648590984589'
+  alias: ZHA - Philips Hue Dimmer Switch (individual buttons)
+  description: ''
+  use_blueprint:
+    path: homeassistant/hue_remotes.yaml
+    input:
+      remote: 0e5a4601ddd645d98c79bb41fd8eba50
+      button_1_single_press:
+      - service: light.turn_on
+        data:
+          brightness_pct: 100
+        target:
+          entity_id: light.office_ceiling_group
+      button_1_double_press:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.bedroom_sidetable_lamp
+      button_2_single_press:
+      - service: light.turn_on
+        data:
+          brightness_pct: 50
+        target:
+          entity_id: light.mbr_ceiling_group
+      button_3_single_press:
+      - service: light.turn_on
+        data:
+          brightness_pct: 25
+        target:
+          entity_id: light.mbr_ceiling_group
+      button_4_single_press:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.mbr_ceiling_group
+      button_4_double_press:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.bedroom_sidetable_lamp

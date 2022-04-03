@@ -1,0 +1,41 @@
+- id: alarm_disable_workday
+  alias: Disable the Alarm at 7 AM on workdays if everyone is home
+  trigger:
+    platform: time
+    at: "07:00:00"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: "on"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: person.miranda
+          state: home
+        - condition: state
+          entity_id: person.colton
+          state: home
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.panel
+
+- id: alarm_disable_weekend
+  alias: Disable the Alarm at 9 AM on weekends if everyone is home
+  trigger:
+    platform: time
+    at: "09:00:00"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: "off"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: person.miranda
+          state: home
+        - condition: state
+          entity_id: person.colton
+          state: home
+  action:
+    - service: alarm_control_panel.alarm_disarm
+      entity_id: alarm_control_panel.panel

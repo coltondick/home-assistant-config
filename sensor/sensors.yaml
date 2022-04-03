@@ -1,0 +1,284 @@
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /share
+    - type: memory_free
+    - type: processor_use
+    # - type: processor_temperature
+- platform: rest
+  name: Pihole Status
+  resource: http://localhost:1080/admin/api.php?status
+  headers:
+    auth: !secret pihole_api_key
+  value_template: "{{ value_json.status }}"
+
+- platform: environment_canada
+  scan_interval: 300
+
+- platform: radarr
+  api_key: !secret radarr_api_key
+  host: 10.0.0.9
+  monitored_conditions:
+    - movies
+    - upcoming
+    - commands
+    - diskspace
+    - status
+  days: 7
+  unit: TB
+
+- platform: mqtt
+  name: Outside Temperature
+  device_class: temperature
+  unit_of_measurement: "°C"
+  value_template: "{{ value_json.temperature_C }}"
+  state_topic: rtl_433/Oregon-THGR810/13
+  json_attributes_topic: rtl_433/Oregon-THGR810/13
+
+- platform: mqtt
+  name: Outside Humidity
+  device_class: humidity
+  unit_of_measurement: "%"
+  value_template: "{{ value_json.humidity }}"
+  state_topic: rtl_433/Oregon-THGR810/13
+  json_attributes_topic: rtl_433/Oregon-THGR810/13
+
+- platform: mqtt
+  name: Outside Wind
+  unit_of_measurement: "km/h"
+  value_template: "{{ (value_json.wind_avg_m_s * 3.6)  | round(1) }}"
+  state_topic: rtl_433/Oregon-WGR800/19
+  json_attributes_topic: rtl_433/Oregon-WGR800/19
+
+- platform: mqtt
+  name: "Bedroom Sidetable Watts"
+  state_topic: "bedroom_sidetable_lamp/tele/SENSOR"
+  value_template: "{{value_json['ENERGY'].Power }}"
+  unit_of_measurement: "W"
+  icon: mdi:flash-circle
+  json_attributes_topic: "bedroom_sidetable_lamp/tele/SENSOR"
+
+- platform: mqtt
+  state_topic: "monitor/laundry_room/colton"
+  value_template: "{{ value_json.confidence }}"
+  unit_of_measurement: "%"
+  name: "Laundry Room Colton"
+
+- platform: mqtt
+  state_topic: "monitor/office/colton"
+  value_template: "{{ value_json.confidence }}"
+  unit_of_measurement: "%"
+  name: "Office Colton"
+
+- platform: min_max
+  name: "Home Occupancy Confidence of Colton"
+  type: max
+  round_digits: 0
+  entity_ids:
+    - sensor.laundry_room_colton
+    - sensor.office_colton
+
+- platform: mqtt
+  state_topic: "monitor/laundry_room/miranda"
+  value_template: "{{ value_json.confidence }}"
+  unit_of_measurement: "%"
+  name: "Laundry Room Miranda"
+
+- platform: mqtt
+  state_topic: "monitor/office/miranda"
+  value_template: "{{ value_json.confidence }}"
+  unit_of_measurement: "%"
+  name: "Office Miranda"
+
+- platform: min_max
+  name: "Home Occupancy Confidence of Miranda"
+  type: max
+  round_digits: 0
+  entity_ids:
+    - sensor.laundry_room_miranda
+    - sensor.office_miranda
+
+- platform: mqtt
+  state_topic: "monitor/laundry_room/tim"
+  value_template: "{{ value_json.confidence }}"
+  unit_of_measurement: "%"
+  name: "Laundry Room Tim"
+
+- platform: mqtt
+  state_topic: "monitor/office/tim"
+  value_template: "{{ value_json.confidence }}"
+  unit_of_measurement: "%"
+  name: "Office Tim"
+
+- platform: min_max
+  name: "Home Occupancy Confidence of Tim"
+  type: max
+  round_digits: 0
+  entity_ids:
+    - sensor.laundry_room_tim
+    - sensor.office_tim
+
+- platform: mqtt
+  state_topic: "air-gradient"
+  value_template: "{{ value_json.pm02 }}"
+  unit_of_measurement: "μg/m³"
+  name: "AirGradient PM2.5"
+
+- platform: mqtt
+  state_topic: "air-gradient"
+  value_template: "{{ value_json.rco2 }}"
+  unit_of_measurement: "ppm"
+  name: "AirGradient C02"
+
+- platform: mqtt
+  state_topic: "air-gradient"
+  value_template: "{{ value_json.atmp }}"
+  unit_of_measurement: "c"
+  name: "AirGradient Temperature"
+
+- platform: mqtt
+  state_topic: "air-gradient"
+  value_template: "{{ value_json.rhum }}"
+  unit_of_measurement: "%"
+  name: "AirGradient Humidity"
+# - platform: bchydro
+#   username: !secret bchydro_username
+#   password: !secret bchydro_password
+
+- platform: emby_upcoming_media
+  api_key: !secret emby_api_key
+  user_id: !secret emby_user_id
+  host: !secret emby_host
+  port: !secret emby_port
+  ssl: True
+  max: 5
+  use_backdrop: true
+  group_libraries: true
+
+- platform: sonarr_upcoming_media
+  api_key: !secret sonarr_api_key
+  host: !secret sonarr_host
+  port: 8989
+  days: 7
+  ssl: false
+  max: 10
+
+- platform: radarr_upcoming_media
+  api_key: !secret radarr_api_key
+  host: !secret radarr_host
+  port: 7878
+  days: 14
+  ssl: false
+  theaters: false
+  max: 10
+
+- platform: min_max
+  entity_ids:
+    - sensor.bathroom_temperature
+    - sensor.bedroom_thermostat_temperature
+    - sensor.dining_room_temperature
+    - sensor.living_room_temperature
+    - sensor.office_temperature
+    - sensor.cage_temperature
+  type: mean
+  name: average_indoor_temperature
+
+- platform: template
+  sensors:
+    presence_detection:
+      friendly_name: "Presence Detection"
+      value_template: >
+        {% set state = states('sensor.home_occupancy_confidence_of_tim') %}
+        {% set count = [states.person.colton, states.person.miranda] | selectattr('state', '==', 'home') | list | count %}
+        {% if is_number(state) and state | float > 50 %}
+          {{ count + 1 }} 
+        {% else %}
+          {{ count }}
+        {% endif %}
+
+- platform: time_date
+  display_options:
+    - "time"
+    - "date"
+    - "date_time"
+    - "date_time_utc"
+    - "date_time_iso"
+    - "time_date"
+    - "time_utc"
+    - "beat"
+
+- platform: pirateweather
+  api_key: !secret pirateweather_api_key
+  scan_interval: "00:05:00"
+  forecast:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+  monitored_conditions:
+    - summary
+    - icon
+    - precip_type
+    - precip_intensity
+    - precip_probability
+    - precip_accumulation
+    - temperature
+    - apparent_temperature
+    - dew_point
+    - wind_speed
+    - wind_gust
+    - wind_bearing
+    - cloud_cover
+    - humidity
+    - pressure
+    - visibility
+    - ozone
+    - minutely_summary
+    - hourly_summary
+    - daily_summary
+    - temperature_high
+    - temperature_low
+    - apparent_temperature_high
+    - apparent_temperature_low
+    - precip_intensity_max
+    - uv_index
+    - moon_phase
+    - sunrise_time
+    - sunset_time
+    - nearest_storm_distance
+    - nearest_storm_bearing
+    - alerts
+
+- platform: template
+  sensors:
+    doors_open:
+      value_template: >-
+        {{ states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'door') | list | count }}
+    windows_open:
+      value_template: >-
+        {{ states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'window') | list | count }}
+    motion_sensors_open:
+      value_template: >-
+        {{ states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'motion') | list | count }}
+
+- platform: template
+  sensors:
+    doors_open_on_off:
+      value_template: >
+        {% set state = states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'door') | list | count %}
+        {% if state != 0 %}
+          on
+        {% else %}
+          off
+        {% endif %}
+
+- platform: template
+  sensors:
+    tim_presence_detection:
+      friendly_name: "Tim Presence Detection"
+      value_template: >
+        {{ states('sensor.home_occupancy_confidence_of_tim') | int }}

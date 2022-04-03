@@ -1,0 +1,167 @@
+automation: !include_dir_merge_list automations
+binary_sensor: !include_dir_merge_list binary_sensor
+group: !include_dir_merge_named group
+google_assistant: !include google_assistant.yaml
+influxdb: !include influxdb.yaml
+light: !include lights.yaml
+panel_iframe: !include panel_iframe.yaml
+scene: !include scenes.yaml
+script: !include_dir_merge_named scripts
+sensor: !include_dir_merge_list sensor
+shell_command: !include_dir_merge_named shell_command
+switch: !include switches.yaml
+browser_mod:
+
+climate:
+  - platform: climate_group
+    name: "Living Room Thermostats"
+    temperature_unit: C
+    entities:
+      - climate.dining_room_thermostat
+      - climate.living_room_thermostat
+# counter:
+#   zha_button_click:
+#     initial: 0
+#     step: 1
+
+emulated_hue:
+  expose_by_default: true
+
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+    - /hacsfiles/hass-bha-icons/hass-bha-icons.js
+
+history:
+  include:
+    domains:
+      - sensor
+      - switch
+
+homeassistant:
+  name: Home
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  elevation: !secret homeassistant_elevation
+  unit_system: metric
+  time_zone: America/Vancouver
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  customize: !include customize.yaml
+  customize_domain: !include customize_domain.yaml
+  # packages: !include_dir_named packages
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/24
+        - 10.0.0.0/8
+      allow_bypass_login: true
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.0.0/24
+    - 10.0.0.0/8
+
+input_boolean:
+  override_home:
+    name: Home override
+    icon: mdi:home
+  vacation_mode:
+    name: Vacation Mode
+    icon: mdi:beach
+  sleep_mode:
+    name: Sleep Mode
+    icon: mdi:moon-waning-crescent
+  occupancy_colton:
+    name: Occupancy Colton
+    icon: mdi:account
+  occupancy_miranda:
+    name: Occupancy Miranda
+    icon: mdi:account
+  occupancy_tim:
+    name: Occupancy Tim
+    icon: mdi:account
+  guestmode:
+    name: Guest Mode
+    icon: ios:house-fill
+  white_noise:
+    name: White Noise
+    icon: mdi:music-note
+    initial: off
+
+logger:
+  default: info
+  logs:
+    custom_components.bchydro: debug
+    homeassistant.components.recorder.migration: info
+
+lovelace:
+  mode: storage
+  dashboards:
+    test-bed: # Needs to contain a hyphen (-)
+      mode: yaml
+      filename: ui_lovelace_minimalist/dashboard/testing.yaml
+      title: Testing
+      icon: mdi:test-tube
+      show_in_sidebar: true
+      require_admin: true
+
+notify:
+  - name: ALL_DEVICES
+    platform: group
+    services:
+      - service: mobile_app_sm_g986w
+      - service: mobile_app_miranda
+  - name: TELEGRAM_BOT
+    platform: telegram
+    chat_id: !secret telegram_chat_id
+
+recorder:
+  purge_keep_days: 15
+  include:
+    domains:
+      - sensor
+      - switch
+
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
+sun:
+
+system_health:
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_token
+    allowed_chat_ids: !secret telegram_chat_id
+
+tplink:
+  discovery: true
+  switch:
+    - host: !secret kasa_cage_ip
+    - host: !secret kasa_sidetable_livingroom_ip
+    - host: !secret kasa_tvlamp_livingroom_ip
+    - host: !secret kasa_scentsy_diningroom_ip
+    - host: !secret kasa_vanity_master_ip
+
+tts:
+  - platform: amazon_polly
+    aws_access_key_id: !secret aws_access_key_id
+    aws_secret_access_key: !secret aws_secret_access_key
+    engine: neural
+    voice: Joey
+
+weather:
+  - platform: pirateweather
+    api_key: !secret pirateweather_api_key
+    latitude: !secret homeassistant_latitude
+    longitude: !secret homeassistant_longitude
+    mode: "hourly"
+    name: pirateweather

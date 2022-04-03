@@ -1,0 +1,87 @@
+- platform: mqtt
+  name: "Kitchen LEDs"
+  state_topic: "stat/tasmota_kitchen_leds/RESULT"
+  value_template: "{{ value_json.POWER }}"
+  command_topic: "cmnd/tasmota_kitchen_leds/POWER"
+  payload_on: "ON"
+  payload_off: "OFF"
+  availability_topic: "tele/tasmota_kitchen_leds/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  qos: 1
+  retain: false
+
+- platform: template
+  switches:
+    pihole_switch:
+      friendly_name: PiholeSwitch
+      value_template: "{{ is_state('sensor.pihole_status', 'enabled') }}"
+      turn_on:
+        - service: pihole.enable
+      turn_off:
+        - service: pihole.disable
+          data:
+            duration: "00.05"
+
+- platform: mqtt
+  name: "Dishwasher"
+  state_topic: "stat/DVES_B160F6_fb/RESULT"
+  value_template: "{{ value_json.POWER }}"
+  command_topic: "cmnd/DVES_B160F6_fb/POWER"
+  payload_on: "ON"
+  payload_off: "OFF"
+  availability_topic: "tele/DVES_B160F6_fb/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  qos: 1
+  retain: false
+
+# - platform: mqtt # Again, it's an MQTT device
+#   name: "Party Switch" # Choose an easy-to-recognize name
+#   state_topic: "home/party/switch/get" # Topic to read the current state
+#   command_topic: "home/party/switch/get" # Topic to publish commands
+#   qos: 1
+#   payload_on: 0 # or "on", depending on your MQTT device
+#   payload_off: 1 # or "off", depending on your MQTT device
+#   retain: true # or false if you want to wait for changes
+
+- platform: mqtt
+  name: "Party Switch"
+  command_topic: "home/party/switch"
+  payload_on: "on"
+  payload_off: "off"
+
+- platform: mqtt
+  name: "Update Youtube on Shield"
+  command_topic: "home/shield/update/youtube"
+  payload_on: "on"
+  payload_off: "off"
+
+- platform: rest
+  resource: http://127.0.0.1:8126/container/logitech-media-server
+  name: Logitech Media Server
+  body_on: '{"state": "start"}'
+  body_off: '{"state": "stop"}'
+  is_on_template: '{{ value_json is not none and value_json.state == "running" }}'
+
+- platform: template
+  switches:
+    white_noise_onoff:
+      value_template: '{{ states("input_boolean.white_noise") }}'
+      friendly_name: "White Noise"
+      turn_on:
+        - service: input_boolean.turn_on
+          data:
+            entity_id: input_boolean.white_noise
+        - service: shell_command.white_noise
+
+      turn_off:
+        - service: input_boolean.turn_off
+          data:
+            entity_id: input_boolean.white_noise
+        - service: media_player.media_stop
+          data:
+            entity_id: media_player.bedroom_pair
+        - service: media_player.media_stop
+          data:
+            entity_id: media_player.bedroom_pair_LMS

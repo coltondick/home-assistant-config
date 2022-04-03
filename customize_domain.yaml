@@ -1,0 +1,6 @@
+switch:
+  icon: mdi:power-plug
+group:
+  icon: mdi:lightbulb
+# light:
+#   assumed_state: false

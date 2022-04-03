@@ -1,0 +1,21 @@
+spotcast_play:
+  sequence:
+    service: spotcast.start
+    data:
+      device_name: COLTON
+      force_playback: true
+      entity_id: media_player.spotify_colt_dick
+play_pause:
+  sequence:
+    service: media_player.media_play_pause
+    data:
+      entity_id: media_player.spotify_colt_dick
+play_pause_spotify:
+  alias: play_pause_spotify
+  sequence:
+    service_template: >
+      {% if states("media_player.spotify_colt_dick") in ["off","idle"] %}
+      script.spotcast_play
+      {% else %}
+      script.play_pause
+      {% endif %}

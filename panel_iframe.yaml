@@ -1,0 +1,12 @@
+nodered:
+  title: "Node-Red"
+  url: "https://nodered.local"
+  icon: bha:node-red
+sonarr:
+  title: "Sonarr"
+  url: "https://sonarr.local"
+  icon: mdi:television-classic
+radarr:
+  title: "Radarr"
+  url: "https://radarr.local"
+  icon: mdi:movie-open
