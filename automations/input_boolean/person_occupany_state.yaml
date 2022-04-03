@@ -1,0 +1,59 @@
+- alias: "Input Boolean: Colton Occupancy On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_colton
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_colton
+
+- alias: "Input Boolean: Colton Occupancy Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_colton
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_colton
+
+- alias: "Input Boolean: Miranda Occupancy On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_miranda
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_miranda
+
+- alias: "Input Boolean: Miranda Occupancy Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_miranda
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_miranda
+
+- alias: "Input Boolean: Tim Occupancy On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_tim
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_tim
+
+- alias: "Input Boolean: Tim Occupancy Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_tim
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_tim

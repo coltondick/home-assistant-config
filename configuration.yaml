@@ -3,7 +3,7 @@ binary_sensor: !include_dir_merge_list binary_sensor
 group: !include_dir_merge_named group
 google_assistant: !include google_assistant.yaml
 influxdb: !include influxdb.yaml
-light: !include lights.yaml
+light: !include lights/lights.yaml
 panel_iframe: !include panel_iframe.yaml
 scene: !include scenes.yaml
 script: !include_dir_merge_named scripts

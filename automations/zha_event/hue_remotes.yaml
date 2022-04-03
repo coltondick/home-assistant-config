@@ -30,7 +30,7 @@
 # mbr_remote:
 #    device_id:657d3dc5eaeb4c11b19df5b38c794d8b
 - id: hueofficeremote
-  alias: "Office Hue Remote"
+  alias: "ZHA Event: Office Hue Remote"
   trigger:
     - platform: event
       event_type: zha_event
@@ -114,7 +114,7 @@
                 brightness_step_pct: -25
                 transition: 1
 - id: huembrremote
-  alias: "MBR Hue Remote"
+  alias: "ZHA Event: MBR Hue Remote"
   trigger:
     - platform: event
       event_type: zha_event
@@ -212,58 +212,3 @@
               data:
                 brightness_step_pct: -25
                 transition: 1
-# - alias: "MBR Hue Remote"
-#   trigger:
-#     - platform: event
-#       event_type: zha_event
-#       event_data:
-#         device_id: 0e5a4601ddd645d98c79bb41fd8eba50
-#   action:
-#     - variables:
-#         command: "{{ trigger.event.data.command }}"
-#     - choose:
-#         - conditions:
-#             - "{{ command == 'on_short_release' }}"
-#           sequence:
-#             - service: light.turn_on
-#               data:
-#                 brightness_pct: 100
-#               target:
-#                 entity_id: light.mbr_ceiling_group
-#         - conditions:
-#             - "{{ command == 'on_double_press' }}"
-#           sequence:
-#             - service: switch.turn_on
-#               data: {}
-#               target:
-#                 entity_id: switch.bedroom_sidetable_lamp
-#         - conditions:
-#             - "{{ command == 'up_short_release' }}"
-#           sequence:
-#             - service: light.turn_on
-#               data:
-#                 brightness_pct: 50
-#               target:
-#                 entity_id: light.mbr_ceiling_group
-#         - conditions:
-#             - "{{ command == 'down_short_release' }}"
-#           sequence:
-#             - service: light.turn_on
-#               data:
-#                 brightness_pct: 25
-#               target:
-#                 entity_id: light.mbr_ceiling_group
-#         - conditions:
-#             - "{{ command == 'off_short_release' }}"
-#           sequence:
-#             - service: light.turn_off
-#               data: {}
-#               target:
-#                 entity_id: light.mbr_ceiling_group
-#         - conditions:
-#             - "{{ command == 'off_double_press' }}"
-#           sequence:
-#             - service: switch.turn_off
-#               data: {}
-#               target:
-#                 entity_id: switch.bedroom_sidetable_lamp

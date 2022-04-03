@@ -1,0 +1,38 @@
+- alias: "ZHA Event: Office Button"
+  trigger:
+    - platform: event
+      event_type: zha_event
+      event_data:
+        device_id: 657d3dc5eaeb4c11b19df5b38c794d8b
+  action:
+    - variables:
+        command: "{{ trigger.event.data.command }}"
+    - choose:
+        - conditions:
+            - "{{ command == 'single' }}"
+          sequence:
+            - service: light.turn_on
+              data: {}
+              target:
+                entity_id: light.office_ceiling_group
+        - conditions:
+            - "{{ command == 'double' }}"
+          sequence:
+            - service: light.turn_off
+              data: {}
+              target:
+                entity_id: light.office_ceiling_group
+        # - conditions:
+        #     - "{{ command == 'hold' }}"
+        #   sequence:
+        #     - service: light.turn_on
+        #       data: {}
+        #       target:
+        #         entity_id: light.office_ceiling_group
+        # - conditions:
+        #     - "{{ command == 'release' }}"
+        #   sequence:
+        #     - service: light.turn_on
+        #       data: {}
+        #       target:
+        #         entity_id: light.office_ceiling_group

@@ -1,5 +1,5 @@
 - id: alarm_disable_workday
-  alias: Disable the Alarm at 7 AM on workdays if everyone is home
+  alias: "Time Triggered: Disable the Alarm at 7 AM on workdays if everyone is home"
   trigger:
     platform: time
     at: "07:00:00"
@@ -20,7 +20,7 @@
       entity_id: alarm_control_panel.panel
 
 - id: alarm_disable_weekend
-  alias: Disable the Alarm at 9 AM on weekends if everyone is home
+  alias: "Time Triggered: Disable the Alarm at 9 AM on weekends if everyone is home"
   trigger:
     platform: time
     at: "09:00:00"

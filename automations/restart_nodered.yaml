@@ -1,6 +1,0 @@
-- alias: Restart Nodered on Startup
-  trigger:
-    platform: homeassistant
-    event: start
-  action:
-    - service: shell_command.lms_restart_nodered
