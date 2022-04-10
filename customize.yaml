@@ -61,7 +61,39 @@ binary_sensor.master_bedroom_motion:
   device_class: motion
 binary_sensor.office_motion:
   device_class: motion
-# Window Sensors
 
+# Window Sensors
 binary_sensor.patio_window:
   device_class: window
+
+# Battery sensors
+sensor.aqara_front_door_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.bedroom_door_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_door_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.button_colton:
+  device_class: battery
+  icon: mdi:battery
+sensor.button_miranda:
+  device_class: battery
+  icon: mdi:battery
+sensor.cage_power:
+  device_class: battery
+  icon: mdi:battery
+sensor.gate_power:
+  device_class: battery
+  icon: mdi:battery
+sensor.mbr_remote_power:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_button:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_remote_power:
+  device_class: battery
+  icon: mdi:battery
