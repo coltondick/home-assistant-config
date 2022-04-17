@@ -73,27 +73,27 @@ sensor.aqara_front_door_battery:
 sensor.bedroom_door_battery:
   device_class: battery
   icon: mdi:battery
+sensor.cage_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.gate_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.mbr_remote_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_button_battery:
+  device_class: battery
+  icon: mdi:battery
 sensor.office_door_battery:
   device_class: battery
   icon: mdi:battery
-sensor.button_colton:
+sensor.button_miranda_battery:
   device_class: battery
   icon: mdi:battery
-sensor.button_miranda:
+sensor.button_colton_battery:
   device_class: battery
   icon: mdi:battery
-sensor.cage_power:
-  device_class: battery
-  icon: mdi:battery
-sensor.gate_power:
-  device_class: battery
-  icon: mdi:battery
-sensor.mbr_remote_power:
-  device_class: battery
-  icon: mdi:battery
-sensor.office_button:
-  device_class: battery
-  icon: mdi:battery
-sensor.office_remote_power:
+sensor.office_remote_battery:
   device_class: battery
   icon: mdi:battery

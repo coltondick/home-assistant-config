@@ -17,3 +17,4 @@ views:
   - !include ../../ui_lovelace_minimalist/views/08-livingroom.yaml
   - !include ../../ui_lovelace_minimalist/views/09-weather.yaml
   - !include ../../ui_lovelace_minimalist/views/10-security.yaml
+  - !include ../../ui_lovelace_minimalist/views/11-batteries.yaml

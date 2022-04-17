@@ -1,0 +1,17 @@
+---
+### Chip Mdi Icon Only ###
+custom_chip_coltondick_battery:
+  template: "chips"
+  show_icon: true
+  icon: "[[[ return variables.ulm_chip_mdi_icon_only_icon ]]]"
+  styles:
+    grid:
+      - grid-template-areas: "'i'"
+    icon:
+      - color: |-
+          [[[
+            if (entity.state > 0)
+              return variables.ulm_chip_mdi_icon_only_icon_color_alert
+            else
+              return variables.ulm_chip_mdi_icon_only_icon_color
+          ]]]

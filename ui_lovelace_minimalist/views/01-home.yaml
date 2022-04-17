@@ -257,7 +257,7 @@ cards:
                 template:
                   - card_light
                   - green_on
-                entity: light.tv_leds
+                entity: light.living_room_tv_backlight
                 variables:
                   ulm_card_light_enable_slider: false
                   ulm_card_light_enable_color: false

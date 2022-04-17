@@ -25,5 +25,15 @@
   variables:
     ulm_chip_navigate_path: /ui-lovelace-minimalist/heating
     ulm_chip_navigate_icon: mdi:thermometer
+- type: custom:button-card
+  template: custom_chip_coltondick_battery
+  entity: sensor.battery_alert
+  tap_action:
+    action: navigate
+    navigation_path: /ui-lovelace-minimalist/batteries
+  variables:
+    ulm_chip_mdi_icon_only_icon: mdi:battery
+    ulm_chip_mdi_icon_only_icon_color: var(--google-green)
+    ulm_chip_mdi_icon_only_icon_color_alert: var(--google-red)
 - type: "custom:button-card"
   color_type: blank-card

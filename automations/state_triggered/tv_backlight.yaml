@@ -14,13 +14,46 @@
             - condition: template
               value_template: "{{ trigger.to_state.state == 'on' }}"
           sequence:
-            - entity_id: "light.tv_leds"
+            - entity_id: "light.living_room_tv_backlight"
               service: light.turn_on
         - conditions:
             - condition: template
               value_template: "{{ trigger.to_state.state == 'off' }}"
           sequence:
-            - entity_id: "light.tv_leds"
+            - entity_id: "light.living_room_tv_backlight"
               service: light.turn_off
       default: []
   mode: single
+
+- alias: "Set hyperion effect after playback"
+  trigger:
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "off"
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "standby"
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "paused"
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "idle"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.living_room_tv_backlight
+      data:
+        effect: "Candle"
+
+- alias: "Set hyperion to USB Capture for playback"
+  trigger:
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "playing"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.living_room_tv_backlight
+      data:
+        effect: "USB Capture"

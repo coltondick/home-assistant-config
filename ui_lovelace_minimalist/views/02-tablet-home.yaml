@@ -194,7 +194,7 @@ cards:
                 tap_action:
                   action: toggle
               entity_4:
-                entity_id: light.tv_leds
+                entity_id: light.living_room_tv_backlight
                 templates:
                   - yellow_on
                   - grey_off

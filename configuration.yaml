@@ -19,10 +19,6 @@ climate:
     entities:
       - climate.dining_room_thermostat
       - climate.living_room_thermostat
-# counter:
-#   zha_button_click:
-#     initial: 0
-#     step: 1
 
 emulated_hue:
   expose_by_default: true
@@ -101,13 +97,70 @@ logger:
 lovelace:
   mode: storage
   dashboards:
-    test-bed: # Needs to contain a hyphen (-)
+    test-bed:
       mode: yaml
       filename: ui_lovelace_minimalist/dashboard/testing.yaml
       title: Testing
       icon: mdi:test-tube
       show_in_sidebar: true
       require_admin: true
+
+media_player:
+  - platform: androidtv
+    name: Fire TV
+    host: !secret shield_android_tv_ip
+    adb_server_ip: !secret docker_adb_server_ip
+    adb_server_port: !secret docker_adb_server_port
+  - platform: universal
+    name: Nvidia Shield
+    children:
+      - media_player.adb_shield_tv
+    attributes:
+      state: media_player.adb_shield_tv
+      source_list: media_player.adb_shield_tv|source_list
+      source: media_player.adb_shield_tv|source
+      app_id: media_player.adb_shield_tv|app_id
+      entity_picture: media_player.adb_shield_tv|entity_picture
+      is_volume_muted: media_player.denon_avr_s720w|is_volume_muted
+      volume_level: media_player.denon_avr_s720w|volume_level
+    commands:
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.tv
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.tv
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.denon_avr_s720w
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.denon_avr_s720w
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          entity_id: media_player.denon_avr_s720w
+      media_play:
+        service: media_player.media_play_pause
+        data:
+          entity_id: media_player.shield_android_tv
+      media_pause:
+        service: media_player.media_play_pause
+        data:
+          entity_id: media_player.shield_android_tv
+      media_previous_track:
+        service: media_player.media_previous_track
+        data:
+          entity_id: media_player.shield_android_tv
+      media_next_track:
+        service: media_player.media_next_track
+        data:
+          entity_id: media_player.shield_android_tv
+    device_class: tv
 
 notify:
   - name: ALL_DEVICES

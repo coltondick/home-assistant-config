@@ -267,14 +267,18 @@
 
 - platform: template
   sensors:
-    doors_open_on_off:
-      value_template: >
-        {% set state = states.binary_sensor | selectattr('state', 'eq', 'on') | selectattr('attributes.device_class', 'eq', 'door') | list | count %}
-        {% if state != 0 %}
-          on
-        {% else %}
-          off
+    battery_health:
+      value_template: >-
+        {% set batteries = states.sensor  | selectattr('attributes.device_class', 'eq', 'battery') %}
+        {% for state in batteries %}
+          {% set batteryLevel = state.state %}
+          {% if batteryLevel == "unavailable" %} {{ state.entity_id }}: unavailable
+          {% elif int(batteryLevel) <= 5 %} {{ state.entity_id }}: replace immediately
+          {% elif int(batteryLevel) > 5 and int(batteryLevel) <= 10 %} {{ state.entity_id }}: replace soon
+          {% elif int(batteryLevel) > 10 and int(batteryLevel) <= 25 %} {{ state.entity_id }}: good
+          {% elif int(batteryLevel) > 25 %} {{ state.entity_id }}: healthy
         {% endif %}
+        {% endfor %}
 
 - platform: template
   sensors:
@@ -282,3 +286,25 @@
       friendly_name: "Tim Presence Detection"
       value_template: >
         {{ states('sensor.home_occupancy_confidence_of_tim') | int }}
+
+- platform: template
+  sensors:
+    battery_alert:
+      entity_id: sensor.date
+      value_template: >
+        {% set ns = namespace(below=[]) %}
+        {% set batteries = states.sensor  | selectattr('attributes.device_class', 'eq', 'battery') %}
+        {% for s in batteries 
+              if s.state != 'unavailable' and s.state|int < 25 %}
+          {% set ns.below = ns.below + [ s ] %}
+        {% endfor %}
+        {{ ns.below | count }}
+      attribute_templates:
+        battery_low: >
+          {% set ns = namespace(below=[]) %}
+          {% set batteries = states.sensor  | selectattr('attributes.device_class', 'eq', 'battery') %}
+          {% for s in batteries 
+                if s.state != 'unavailable' and s.state|int < 25 %}
+              {% set ns.below = ns.below + [ s.name ~ ' (' ~ s.state ~ '%)'] %}
+            {% endfor %}
+            {{ ns.below | join(', ') }}

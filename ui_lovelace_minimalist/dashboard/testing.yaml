@@ -16,18 +16,51 @@ views:
     icon: mdi:picture-in-picture-bottom-right
     badges: []
     cards:
+      - type: custom:battery-state-card
+        title:
+        sort_by_level: asc
+        entities:
+          - sensor.bedroom_door_battery
+          - sensor.cage_battery
+          - sensor.gate_battery
+          - sensor.mbr_remote_battery
+          - sensor.office_button_battery
+          - sensor.office_door_battery
+          - sensor.button_miranda_battery
+          - sensor.button_colton_battery
+          - sensor.aqara_front_door_battery
+          - sensor.office_remote_battery
+        filter:
+          exclude: # filters for removing
+            - name: state # exclude entities above 99% of battery level
+              value: Unavailable
+              operator: "="
+      - type: custom:auto-entities
+        card:
+          type: custom:battery-state-card
+          title:
+          secondary_info: last_updated
+          sort_by_level: "asc"
+        filter:
+          exclude:
+            - state: "unavailable"
+          include:
+            - entity_id: sensor.*_battery_level
+            - entity_id: sensor.*_battery
       - type: "custom:button-card"
-        template: radial_icon_info
+        template: card_media_player
+        entity: media_player.adb_shield_tv
+        name: Nvidia Shield
         variables:
-          entity_1: sensor.processor_use_percent
-          entity_1_name: "CPU Usage"
-          entity_1_color: red
-          entity_1_icon: mdi:cpu-64-bit
-          entity_1_min: 0
-          entity_1_max: 100
-          entity_2: sensor.disk_use_percent_share
-          entity_2_name: "/share/"
-          entity_2_color: green
-          entity_2_icon: mdi:harddisk
-          entity_2_min: 0
-          entity_2_max: 100
+          ulm_card_media_player_enable_art: true
+          ulm_card_media_player_enable_controls: true
+          ulm_card_media_player_enable_popup: true
+      - type: "custom:button-card"
+        template: card_media_player
+        entity: media_player.nvidia_shield
+        name: Nvidia Shield
+        variables:
+          ulm_card_media_player_enable_art: true
+          ulm_card_media_player_enable_controls: true
+          ulm_card_media_player_enable_popup: true
+          ulm_card_media_player_enable_volume_slider: true
