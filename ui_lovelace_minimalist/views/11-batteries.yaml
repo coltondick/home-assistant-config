@@ -11,23 +11,14 @@ cards:
     ## Alarm Panel ##
   - type: vertical-stack
     cards:
-      - type: custom:battery-state-card
-        title:
-        sort_by_level: asc
-        min: 1
-        entities:
-          - sensor.bedroom_door_battery
-          - sensor.cage_battery
-          - sensor.gate_battery
-          - sensor.mbr_remote_battery
-          - sensor.office_button_battery
-          - sensor.office_door_battery
-          - sensor.button_miranda_battery
-          - sensor.button_colton_battery
-          - sensor.aqara_front_door_battery
-          - sensor.office_remote_battery
+      - type: custom:auto-entities
+        card:
+          type: custom:battery-state-card
+          title:
+          secondary_info: last_updated
+          sort_by_level: "asc"
         filter:
-          exclude: # filters for removing
-            - name: state # exclude entities above 99% of battery level
-              value: Unavailable
-              operator: "="
+          exclude:
+            - state: "unavailable"
+          include:
+            - entity_id: sensor.*_battery
