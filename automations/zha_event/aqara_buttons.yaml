@@ -1,27 +1,29 @@
-- alias: "ZHA Event: Office Button"
+- id: "342342346464564"
+  alias: "ZHA Event: Office Button"
+  mode: restart
   trigger:
     - platform: event
-      event_type: zha_event
+      event_type: state_changed
       event_data:
-        device_id: 657d3dc5eaeb4c11b19df5b38c794d8b
+        entity_id: sensor.office_button_action
   action:
     - variables:
-        command: "{{ trigger.event.data.command }}"
+        command: "{{ trigger.event.data.new_state.state }}"
     - choose:
         - conditions:
-            - "{{ command == 'single' }}"
+            - "{{ trigger.event.data.new_state.state == 'single' }}"
           sequence:
             - service: light.turn_on
               data: {}
               target:
-                entity_id: light.office_ceiling_group
+                entity_id: light.office_ceiling_lights
         - conditions:
-            - "{{ command == 'double' }}"
+            - "{{ trigger.event.data.new_state.state == 'double' }}"
           sequence:
             - service: light.turn_off
               data: {}
               target:
-                entity_id: light.office_ceiling_group
+                entity_id: light.office_ceiling_lights
         # - conditions:
         #     - "{{ command == 'hold' }}"
         #   sequence:
