@@ -45,7 +45,6 @@ views:
           exclude:
             - state: "unavailable"
           include:
-            - entity_id: sensor.*_battery_level
             - entity_id: sensor.*_battery
       - type: "custom:button-card"
         template: card_media_player
@@ -64,3 +63,35 @@ views:
           ulm_card_media_player_enable_controls: true
           ulm_card_media_player_enable_popup: true
           ulm_card_media_player_enable_volume_slider: true
+      ## Office ##
+      - type: "custom:button-card"
+        template:
+          - custom_card_coltondick_room
+          - grey_off
+          - blue_on
+        name: Office
+        entity: light.office_ceiling_lights
+        icon: hue:room-office
+        templates:
+          - yellow_on
+        tap_action:
+          action: toggle
+        variables:
+          label_use_temperature: true
+          label_use_brightness: false
+          room_temperature: sensor.office_temperature
+          entity_1:
+            entity_id: media_player.spotify_colt_dick
+            templates:
+              - custom_coltondick_media_on
+              - custom_coltondick_media_off
+            tap_action:
+              action: call-service
+              service: script.play_pause_spotify
+              service_data:
+                entity_id: media_player.spotify_colt_dick
+          entity_2:
+            entity_id: binary_sensor.office_door
+            templates:
+              - red_on
+              - green_off

@@ -88,6 +88,12 @@ input_boolean:
     icon: mdi:music-note
     initial: off
 
+input_text:
+  office_helper_last_controller_event:
+    name: Office Helper Last Controller Event
+  mbr_helper_last_controller_event:
+    name: MBR Helper Last Controller Event
+
 logger:
   default: info
   logs:
@@ -106,11 +112,11 @@ lovelace:
       require_admin: true
 
 media_player:
-  - platform: androidtv
-    name: Fire TV
-    host: !secret shield_android_tv_ip
-    adb_server_ip: !secret docker_adb_server_ip
-    adb_server_port: !secret docker_adb_server_port
+  # - platform: androidtv
+  #   name: Fire TV
+  #   host: !secret shield_android_tv_ip
+  #   adb_server_ip: !secret docker_adb_server_ip
+  #   adb_server_port: !secret docker_adb_server_port
   - platform: universal
     name: Nvidia Shield
     children:

@@ -11,7 +11,7 @@ cards:
   - type: horizontal-stack
     cards:
       - type: "custom:button-card"
-        template: custom_card_coltondick_thermostat
+        template: card_thermostat
         entity: climate.living_room_thermostats
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -22,7 +22,7 @@ cards:
   - type: horizontal-stack
     cards:
       - type: "custom:button-card"
-        template: custom_card_coltondick_thermostat
+        template: card_thermostat
         entity: climate.living_room_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -33,7 +33,7 @@ cards:
   - type: horizontal-stack
     cards:
       - type: "custom:button-card"
-        template: custom_card_coltondick_thermostat
+        template: card_thermostat
         entity: climate.dining_room_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -44,7 +44,7 @@ cards:
   - type: horizontal-stack
     cards:
       - type: "custom:button-card"
-        template: custom_card_coltondick_thermostat
+        template: card_thermostat
         entity: climate.bedroom_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -55,7 +55,7 @@ cards:
   - type: horizontal-stack
     cards:
       - type: "custom:button-card"
-        template: custom_card_coltondick_thermostat
+        template: card_thermostat
         entity: climate.bathroom_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -66,7 +66,7 @@ cards:
   - type: horizontal-stack
     cards:
       - type: "custom:button-card"
-        template: custom_card_coltondick_thermostat
+        template: card_thermostat
         entity: climate.office_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false

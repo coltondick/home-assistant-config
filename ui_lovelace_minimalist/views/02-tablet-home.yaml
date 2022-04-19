@@ -29,7 +29,7 @@ cards:
       - type: horizontal-stack
         cards:
           - type: "custom:button-card"
-            template: custom_card_coltondick_thermostat
+            template: card_thermostat
             entity: climate.living_room_thermostats
             variables:
               ulm_card_thermostat_enable_collapse: false
@@ -218,7 +218,7 @@ cards:
             variables:
               label_use_temperature: true
               label_use_brightness: false
-              room_temperature: sensor.bedroom_thermostat_temperature
+              room_temperature: sensor.bedroom_temperature
               entity_1:
                 entity_id: remote.bedroom
                 templates:
@@ -252,7 +252,7 @@ cards:
               - grey_off
               - blue_on
             name: Office
-            entity: light.office_ceiling_group
+            entity: light.office_ceiling_lights
             icon: hue:room-office
             templates:
               - yellow_on
