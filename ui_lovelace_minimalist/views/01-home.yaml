@@ -155,7 +155,7 @@ cards:
         cards:
           - type: "custom:button-card"
             template: card_light
-            entity: light.office_ceiling_group
+            entity: light.office_ceiling_lights
             variables:
               ulm_card_light_enable_slider: false
               ulm_card_light_enable_color: false

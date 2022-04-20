@@ -175,7 +175,7 @@
 - platform: min_max
   entity_ids:
     - sensor.bathroom_temperature
-    - sensor.bedroom_thermostat_temperature
+    - sensor.bedroom_temperature
     - sensor.dining_room_temperature
     - sensor.living_room_temperature
     - sensor.office_temperature
@@ -285,12 +285,11 @@
     tim_presence_detection:
       friendly_name: "Tim Presence Detection"
       value_template: >
-        {{ states('sensor.home_occupancy_confidence_of_tim') | int }}
+        {{ states('sensor.home_occupancy_confidence_of_tim') | int(0) }}
 
 - platform: template
   sensors:
     battery_alert:
-      entity_id: sensor.date
       value_template: >
         {% set ns = namespace(below=[]) %}
         {% set batteries = states.sensor  | selectattr('attributes.device_class', 'eq', 'battery') %}

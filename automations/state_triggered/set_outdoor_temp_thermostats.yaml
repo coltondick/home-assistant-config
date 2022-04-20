@@ -1,0 +1,12 @@
+# - id: 'Auto_Publish_Outdoor_Temprature'
+#   alias: Auto_Publish_Outdoor_Temprature
+#   description: Automatically Publish the outdoor temperature to thermostats
+#   trigger:
+#   - entity_id: sensor.outdoor_temprature_sensor
+#     platform: state
+#   condition: []
+#   action:
+#   - data:
+#       payload_template: '{{ states(''sensor.outdoor_temprature_sensor'') | string }}'
+#       topic: 'zigbee2mqtt/Office Thermostat/set/thermostat_outdoor_temperature'
+#     service: mqtt.publish
