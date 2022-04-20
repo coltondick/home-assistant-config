@@ -54,3 +54,38 @@
         target:
           entity_id: switch.bedroom_sidetable_lamp
       button_on_long_loop: true
+- id: '1650394776545'
+  alias: Aqara Buttons All-In-One [Zigbee2MQTT]
+  description: ''
+  use_blueprint:
+    path: Drafted/aqara-buttons-all-in-one-zigbee2mqtt.yaml
+    input:
+      action_sensor: sensor.office_button_action
+      single_action:
+      - service: media_player.clear_playlist
+        data: {}
+        target:
+          entity_id: media_player.bedroom_pair_lms
+      - service: shell_command.lms_add_playlist_bedroompair
+        data: {}
+      - service: shell_command.lms_max_volume_bedroompair
+        data: {}
+      - service: media_player.media_play
+        data: {}
+        target:
+          entity_id: media_player.bedroom_pair
+      hold_action:
+      - service: shell_command.lms_restart_container
+        data: {}
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 3
+          milliseconds: 0
+      - device_id: ''
+        domain: ''
+        entity_id: ''
+      - service: media_player.clear_playlist
+        data: {}
+        target:
+          entity_id: media_player.bedroom_pair_lms
