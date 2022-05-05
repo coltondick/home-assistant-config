@@ -95,3 +95,9 @@ views:
             templates:
               - red_on
               - green_off
+      - type: "custom:button-card"
+        template: card_flower
+        variables:
+          ulm_card_flower_entity: plant.madagascar_jewel
+          ulm_card_flower_name: Madagascar Jewel
+          ulm_card_flower_species: "Euphorbia leuconeura"

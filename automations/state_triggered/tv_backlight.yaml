@@ -39,6 +39,10 @@
     - platform: state
       entity_id: media_player.nvidia_shield
       to: "idle"
+  condition:
+    - condition: state
+      entity_id: light.living_room_tv_backlight
+      state: "on"
   action:
     - service: light.turn_on
       target:
@@ -51,6 +55,10 @@
     - platform: state
       entity_id: media_player.nvidia_shield
       to: "playing"
+  condition:
+    - condition: state
+      entity_id: light.living_room_tv_backlight
+      state: "on"
   action:
     - service: light.turn_on
       target:

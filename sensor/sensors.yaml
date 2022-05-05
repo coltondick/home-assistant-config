@@ -294,7 +294,7 @@
         {% set ns = namespace(below=[]) %}
         {% set batteries = states.sensor  | selectattr('attributes.device_class', 'eq', 'battery') %}
         {% for s in batteries 
-              if s.state != 'unavailable' and s.state|int < 25 %}
+              if s.state != 'None' and s.state != 'unavailable' and s.state != 'unknown' and s.state|int < 25  %}
           {% set ns.below = ns.below + [ s ] %}
         {% endfor %}
         {{ ns.below | count }}
@@ -303,7 +303,7 @@
           {% set ns = namespace(below=[]) %}
           {% set batteries = states.sensor  | selectattr('attributes.device_class', 'eq', 'battery') %}
           {% for s in batteries 
-                if s.state != 'unavailable' and s.state|int < 25 %}
+                if s.state != 'None' and s.state != 'unavailable' and s.state != 'unknown' and s.state|int < 25  %}
               {% set ns.below = ns.below + [ s.name ~ ' (' ~ s.state ~ '%)'] %}
             {% endfor %}
             {{ ns.below | join(', ') }}

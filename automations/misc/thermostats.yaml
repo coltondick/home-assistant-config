@@ -1,3 +1,9 @@
+#################################################################
+## Thermostat Automations
+#################################################################
+
+## Synchronize Thermostat
+
 - id: "1613419540106"
   alias: "Misc: Synchronize thermostats"
   trigger:
@@ -9,6 +15,7 @@
   variables:
     thermostats: *thermostats
   action:
+    - delay: "00:00:01"
     - service: climate.set_temperature
       target:
         entity_id: "{{ thermostats|reject('eq', trigger.entity_id)|list }}"

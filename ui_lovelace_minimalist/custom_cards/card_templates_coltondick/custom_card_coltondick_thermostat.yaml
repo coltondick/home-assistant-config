@@ -18,13 +18,13 @@ custom_card_coltondick_thermostat:
   show_label: false
   hold_action:
     action: |
-      [[[
-          if (variables.ulm_card_thermostat_enable_popup){
-            return 'fire-dom-event'
-          }
-          else{
-            return 'more-info'
-          }
+      [[[            
+          if (variables.ulm_card_thermostat_enable_popup){           
+            return 'fire-dom-event'            
+          }            
+          else{            
+            return 'more-info'           
+          }            
       ]]]
     browser_mod:
       command: popup
@@ -38,24 +38,24 @@ custom_card_coltondick_thermostat:
   state:
     - operator: template
       value: |
-        [[[
-          return (entity.attributes.hvac_action == 'heating' && variables.ulm_card_thermostat_enable_background_color)
+        [[[            
+          return (entity.attributes.hvac_action == 'heating' && variables.ulm_card_thermostat_enable_background_color)           
         ]]]
       styles:
         card:
           - background-color: rgba(var(--color-yellow),0.75)
     - operator: template
       value: |
-        [[[
-          return (entity.attributes.hvac_action == 'cooling' && variables.ulm_card_thermostat_enable_background_color)
+        [[[            
+          return (entity.attributes.hvac_action == 'cooling' && variables.ulm_card_thermostat_enable_background_color)           
         ]]]
       styles:
         card:
           - background-color: rgba(var(--color-blue),0.75)
     - operator: template
       value: |
-        [[[
-          return entity.state != 'off'
+        [[[            
+          return entity.state != 'off'           
         ]]]
       styles:
         card:
@@ -63,46 +63,46 @@ custom_card_coltondick_thermostat:
   styles:
     grid:
       - grid-template-areas: |
-          [[[
-                var areas = [];
-                if (variables.ulm_card_thermostat_enable_horizontal) {
-                  return "\"item1 item2\"";
-                }
-                if (variables.ulm_card_thermostat_enable_display_temperature) {
-                    areas.push("item1 item4");
-                } else {
-                  areas.push("item1 item1");
-                }
-                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_controls) {
-                    areas.push("item2 item2");
-                }
-                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_hvac_modes) {
-                    areas.push("item3 item3");
-                }
-                return "\"" + areas.join("\" \"") + "\"";
+          [[[            
+                var areas = [];            
+                if (variables.ulm_card_thermostat_enable_horizontal) {           
+                  return "\"item1 item2\"";            
+                }            
+                if (variables.ulm_card_thermostat_enable_display_temperature) {            
+                    areas.push("item1 item4");           
+                } else {           
+                  areas.push("item1 item1");           
+                }            
+                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_controls) {            
+                    areas.push("item2 item2");           
+                }            
+                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_hvac_modes) {            
+                    areas.push("item3 item3");           
+                }            
+                return "\"" + areas.join("\" \"") + "\"";            
           ]]]
       - grid-template-columns: |
-          [[[
-                if (variables.ulm_card_thermostat_enable_horizontal) {
-                  return "1fr 1fr";
-                } else {
-                  return "2fr 1fr";
-                }
+          [[[            
+                if (variables.ulm_card_thermostat_enable_horizontal) {           
+                  return "1fr 1fr";            
+                } else {           
+                  return "2fr 1fr";            
+                }            
           ]]]
       - grid-template-rows: |
-          [[[
-                var rows = [];
-                rows.push("min-content");
-                if (variables.ulm_card_thermostat_enable_horizontal) {
-                  return "min-content";
-                }
-                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_controls) {
-                    rows.push("min-content");
-                }
-                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_hvac_modes) {
-                    rows.push("min-content");
-                }
-                return rows.join(" ");
+          [[[            
+                var rows = [];           
+                rows.push("min-content");            
+                if (variables.ulm_card_thermostat_enable_horizontal) {           
+                  return "min-content";            
+                }            
+                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_controls) {            
+                    rows.push("min-content");            
+                }            
+                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_hvac_modes) {            
+                    rows.push("min-content");            
+                }            
+                return rows.join(" ");           
           ]]]
       - row-gap: 12px
     card:
@@ -113,36 +113,36 @@ custom_card_coltondick_thermostat:
     custom_fields:
       item2:
         - display: |
-            [[[
-                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_controls) {
-                      return "block";
-                  } else {
-                      return "none";
-                  }
+            [[[            
+                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_controls) {            
+                      return "block";            
+                  } else {           
+                      return "none";           
+                  }            
             ]]]
       item3:
         - display: |
-            [[[
-                if (variables.ulm_card_thermostat_enable_horizontal) {
-                  return "none";
-                }
-                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_hvac_modes) {
-                  return "block";
-                } else {
-                  return "none";
-                }
+            [[[            
+                if (variables.ulm_card_thermostat_enable_horizontal) {           
+                  return "none";           
+                }            
+                if ( !(variables.ulm_card_thermostat_enable_collapse && entity.state == "off") &&  variables.ulm_card_thermostat_enable_hvac_modes) {            
+                  return "block";            
+                } else {           
+                  return "none";           
+                }            
             ]]]
       item4:
         - display: |
-            [[[
-                if (variables.ulm_card_thermostat_enable_horizontal) {
-                  return "none";
-                }
-                if (variables.ulm_card_thermostat_enable_display_temperature) {
-                  return "block";
-                } else {
-                  return "none";
-                }
+            [[[            
+                if (variables.ulm_card_thermostat_enable_horizontal) {           
+                  return "none";           
+                }            
+                if (variables.ulm_card_thermostat_enable_display_temperature) {            
+                  return "block";            
+                } else {           
+                  return "none";           
+                }            
             ]]]
   custom_fields:
     item1:
@@ -158,13 +158,13 @@ custom_card_coltondick_thermostat:
               icon: "[[[ return variables.ulm_card_thermostat_icon ]]]"
               hold_action:
                 action: |
-                  [[[
-                      if (variables.ulm_card_thermostat_enable_popup){
-                        return 'fire-dom-event'
-                      }
-                      else{
-                        return 'more-info'
-                      }
+                  [[[            
+                      if (variables.ulm_card_thermostat_enable_popup){           
+                        return 'fire-dom-event'            
+                      }            
+                      else{            
+                        return 'more-info'           
+                      }            
                   ]]]
                 browser_mod:
                   command: popup
@@ -178,8 +178,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating')
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating')            
                     ]]]
                   styles:
                     icon:
@@ -194,24 +194,24 @@ custom_card_coltondick_thermostat:
               tap_action:
                 action: call-service
                 service: |
-                  [[[
-                        if (entity.state =='off'){
-                            return "climate.turn_on";
-                        } else {
-                            return "climate.turn_off";
-                        }
+                  [[[            
+                        if (entity.state =='off'){           
+                            return "climate.turn_on";            
+                        } else {           
+                            return "climate.turn_off";           
+                        }            
                   ]]]
                 service_data:
                   entity_id: "[[[ return entity.entity_id ]]]"
               hold_action:
                 action: |
-                  [[[
-                      if (variables.ulm_card_thermostat_enable_popup){
-                        return 'fire-dom-event'
-                      }
-                      else{
-                        return 'more-info'
-                      }
+                  [[[            
+                      if (variables.ulm_card_thermostat_enable_popup){           
+                        return 'fire-dom-event'            
+                      }            
+                      else{            
+                        return 'more-info'           
+                      }            
                   ]]]
                 browser_mod:
                   command: popup
@@ -223,40 +223,40 @@ custom_card_coltondick_thermostat:
                     variables:
                       ulm_popup_thermostat_entity: "[[[ return entity.entity_id ]]]"
               label: |-
-                [[[
-                    var label = variables.ulm_off ;
-                    if (entity.state =='off'){
-                      label = variables.ulm_off ;
-                    }else if (entity.state == 'auto'){
-                      label = variables.ulm_auto ;
-                    }else if (entity.state == 'heat'){
-                      label = variables.ulm_heat ;
-                    }else if (entity.state == 'cool'){
-                      label = variables.ulm_cool ;
-                    }else if (entity.state == 'dry'){
-                      label = variables.ulm_dry ;
-                    }else if (entity.state == 'fan_only'){
-                      label = variables.ulm_fan_only ;
-                    }else if (entity.state == 'heat_cool'){
-                      label = variables.ulm_heat_cool ;
-                    }else{
-                      label = variables.ulm_idle;
-                    }
+                [[[            
+                    var label = variables.ulm_off ;            
+                    if (entity.state =='off'){           
+                      label = variables.ulm_off ;            
+                    }else if (entity.state == 'auto'){           
+                      label = variables.ulm_auto ;           
+                    }else if (entity.state == 'heat'){           
+                      label = variables.ulm_heat ;           
+                    }else if (entity.state == 'cool'){           
+                      label = variables.ulm_cool ;           
+                    }else if (entity.state == 'dry'){            
+                      label = variables.ulm_dry ;            
+                    }else if (entity.state == 'fan_only'){           
+                      label = variables.ulm_fan_only ;           
+                    }else if (entity.state == 'heat_cool'){            
+                      label = variables.ulm_heat_cool ;            
+                    }else{           
+                      label = variables.ulm_idle;            
+                    }            
 
-                    if (entity.attributes.hvac_action == 'heating'){
-                      var mode = variables.ulm_heating ;
-                    }else if (entity.attributes.hvac_action == 'cooling'){
-                      var mode = variables.ulm_cooling ;
-                    }else if (entity.attributes.hvac_action == 'idle'){
-                      var mode = variables.ulm_idle ;
-                    }else{
-                      var mode = variables.ulm_unavailable;
-                    }
+                    if (entity.attributes.hvac_action == 'heating'){           
+                      var mode = variables.ulm_heating ;           
+                    }else if (entity.attributes.hvac_action == 'cooling'){           
+                      var mode = variables.ulm_cooling ;           
+                    }else if (entity.attributes.hvac_action == 'idle'){            
+                      var mode = variables.ulm_idle ;            
+                    }else{           
+                      var mode = variables.ulm_unavailable;            
+                    }            
 
-                    if(entity.attributes.temperature && !variables.ulm_card_thermostat_enable_display_temperature){
-                      return (entity.attributes.current_temperature ) + '°' + ' • ' + label + (entity.state !='off' ? ' (' + mode + ')' : '');
-                    }
-                    return label;
+                    if(entity.attributes.temperature && !variables.ulm_card_thermostat_enable_display_temperature){            
+                      return (entity.attributes.current_temperature ) + '°' + ' • ' + label + (entity.state !='off' ? ' (' + mode + ')' : '');         
+                    }            
+                    return label;            
                 ]]]
     item2:
       card:
@@ -277,16 +277,16 @@ custom_card_coltondick_thermostat:
                 service: climate.set_temperature
                 service_data:
                   temperature: |
-                    [[[
-                      const step = entity.attributes.target_temp_step || 0.5
-                      return (parseFloat(states[entity.entity_id].attributes.temperature) - step)
+                    [[[            
+                      const step = entity.attributes.target_temp_step || 0.5           
+                      return (parseFloat(states[entity.entity_id].attributes.temperature) - step)            
                     ]]]
                   entity_id: "[[[ return entity.entity_id ]]]"
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -299,23 +299,23 @@ custom_card_coltondick_thermostat:
               show_label: true
               entity: "[[[ return entity.entity_id ]]]"
               label: |-
-                [[[
-                    const roundNumber = (int) => {
-                      var converted = int;
-                      var decimal = (converted - parseInt(converted, 10));
-                      decimal = Math.round(decimal * 10);
-                      if (decimal == 5) { return (parseInt(converted, 10)+0.5); }
-                      if ( (decimal < 3) || (decimal > 7) ) {
-                          return Math.round(converted);
-                      } else {
-                          return (parseInt(converted, 10)+0.5);
-                      } 
-                    }
-                    var temperature = entity.attributes.temperature;
-                    if (temperature == null) {
-                      return '-' + hass.config.unit_system.temperature;
-                    }
-                    return roundNumber(temperature) + hass.config.unit_system.temperature;
+                [[[            
+                    const roundNumber = (int) => {           
+                      var converted = int;           
+                      var decimal = (converted - parseInt(converted, 10));           
+                      decimal = Math.round(decimal * 10);            
+                      if (decimal == 5) { return (parseInt(converted, 10)+0.5); }            
+                      if ( (decimal < 3) || (decimal > 7) ) {            
+                          return Math.round(converted);            
+                      } else {           
+                          return (parseInt(converted, 10)+0.5);            
+                      }            
+                    }            
+                    var temperature = entity.attributes.temperature;           
+                    if (temperature == null) {           
+                      return '-' + hass.config.unit_system.temperature;            
+                    }            
+                    return roundNumber(temperature) + hass.config.unit_system.temperature;           
                 ]]]
               styles:
                 card:
@@ -332,24 +332,24 @@ custom_card_coltondick_thermostat:
                 service: climate.set_temperature
                 service_data:
                   temperature: |
-                    [[[
-                      const step = entity.attributes.target_temp_step || 0.5
-                      var converted = parseFloat(states[entity.entity_id].attributes.temperature) + step;
-                      var decimal = (converted - parseInt(converted, 10));
-                      decimal = Math.round(decimal * 10);
-                      if (decimal == 5) { return (parseInt(converted, 10)+0.5); }
-                      if ( (decimal < 3) || (decimal > 7) ) {
-                          return Math.round(converted);
-                      } else {
-                          return (parseInt(converted, 10)+0.5);
-                      } 
+                    [[[            
+                      const step = entity.attributes.target_temp_step || 0.5           
+                      var converted = parseFloat(states[entity.entity_id].attributes.temperature) + step;            
+                      var decimal = (converted - parseInt(converted, 10));           
+                      decimal = Math.round(decimal * 10);            
+                      if (decimal == 5) { return (parseInt(converted, 10)+0.5); }            
+                      if ( (decimal < 3) || (decimal > 7) ) {            
+                          return Math.round(converted);            
+                      } else {           
+                          return (parseInt(converted, 10)+0.5);            
+                      }            
                     ]]]
                   entity_id: "[[[ return entity.entity_id ]]]"
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -360,50 +360,50 @@ custom_card_coltondick_thermostat:
         styles:
           grid:
             - grid-template-areas: |
-                [[[
-                      var areas = [];
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("auto")) {
-                          areas.push("auto");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat")) {
-                          areas.push("heat");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("cool")) {
-                          areas.push("cool");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("dry")) {
-                          areas.push("dry");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("fan_only")) {
-                          areas.push("fan_only");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat_cool")) {
-                          areas.push("heat_cool");
-                      }
-                      return "\"" + areas.join(" ") + "\"";
+                [[[            
+                      var areas = [];            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("auto")) {           
+                          areas.push("auto");            
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat")) {           
+                          areas.push("heat");            
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("cool")) {           
+                          areas.push("cool");            
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("dry")) {            
+                          areas.push("dry");           
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("fan_only")) {           
+                          areas.push("fan_only");            
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat_cool")) {            
+                          areas.push("heat_cool");           
+                      }            
+                      return "\"" + areas.join(" ") + "\"";            
                 ]]]
             - grid-template-columns: |
-                [[[
-                      var columns = [];
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("auto")) {
-                          columns.push("1fr");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat")) {
-                          columns.push("1fr");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("cool")) {
-                          columns.push("1fr");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("dry")) {
-                          columns.push("1fr");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("fan_only")) {
-                          columns.push("1fr");
-                      }
-                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat_cool")) {
-                          columns.push("1fr");
-                      }
-                      return columns.join(" ");
+                [[[            
+                      var columns = [];            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("auto")) {           
+                          columns.push("1fr");           
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat")) {           
+                          columns.push("1fr");           
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("cool")) {           
+                          columns.push("1fr");           
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("dry")) {            
+                          columns.push("1fr");           
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("fan_only")) {           
+                          columns.push("1fr");           
+                      }            
+                      if (states[entity.entity_id].attributes.hvac_modes.includes("heat_cool")) {            
+                          columns.push("1fr");           
+                      }            
+                      return columns.join(" ");            
                 ]]]
             - grid-template-rows: min-content
             - column-gap: 7px
@@ -414,57 +414,57 @@ custom_card_coltondick_thermostat:
           custom_fields:
             auto:
               - display: |
-                  [[[
-                    if (states[entity.entity_id].attributes.hvac_modes.includes("auto")) {
-                        return "block";
-                    } else {
-                        return "none";
-                    }
+                  [[[            
+                    if (states[entity.entity_id].attributes.hvac_modes.includes("auto")) {           
+                        return "block";            
+                    } else {           
+                        return "none";           
+                    }            
                   ]]]
             heat:
               - display: |
-                  [[[
-                    if (states[entity.entity_id].attributes.hvac_modes.includes("heat")) {
-                        return "block";
-                    } else {
-                        return "none";
-                    }
+                  [[[            
+                    if (states[entity.entity_id].attributes.hvac_modes.includes("heat")) {           
+                        return "block";            
+                    } else {           
+                        return "none";           
+                    }            
                   ]]]
             cool:
               - display: |
-                  [[[
-                    if (states[entity.entity_id].attributes.hvac_modes.includes("cool")) {
-                        return "block";
-                    } else {
-                        return "none";
-                    }
+                  [[[            
+                    if (states[entity.entity_id].attributes.hvac_modes.includes("cool")) {           
+                        return "block";            
+                    } else {           
+                        return "none";           
+                    }            
                   ]]]
             dry:
               - display: |
-                  [[[
-                    if (states[entity.entity_id].attributes.hvac_modes.includes("dry")) {
-                        return "block";
-                    } else {
-                        return "none";
-                    }
+                  [[[            
+                    if (states[entity.entity_id].attributes.hvac_modes.includes("dry")) {            
+                        return "block";            
+                    } else {           
+                        return "none";           
+                    }            
                   ]]]
             fan_only:
               - display: |
-                  [[[
-                    if (states[entity.entity_id].attributes.hvac_modes.includes("fan_only")) {
-                        return "block";
-                    } else {
-                        return "none";
-                    }
+                  [[[            
+                    if (states[entity.entity_id].attributes.hvac_modes.includes("fan_only")) {           
+                        return "block";            
+                    } else {           
+                        return "none";           
+                    }            
                   ]]]
             heat_cool:
               - display: |
-                  [[[
-                    if (states[entity.entity_id].attributes.hvac_modes.includes("heat_cool")) {
-                        return "block";
-                    } else {
-                        return "none";
-                    }
+                  [[[            
+                    if (states[entity.entity_id].attributes.hvac_modes.includes("heat_cool")) {            
+                        return "block";            
+                    } else {           
+                        return "none";           
+                    }            
                   ]]]
         custom_fields:
           auto:
@@ -481,8 +481,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return entity.state == "auto"
+                    [[[            
+                      return entity.state == "auto"            
                     ]]]
                   styles:
                     card:
@@ -491,8 +491,8 @@ custom_card_coltondick_thermostat:
                       - color: rgba(var(--color-green),1)
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -511,8 +511,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return entity.state == "heat"
+                    [[[            
+                      return entity.state == "heat"            
                     ]]]
                   styles:
                     card:
@@ -521,8 +521,8 @@ custom_card_coltondick_thermostat:
                       - color: rgba(var(--color-red),1)
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -541,8 +541,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return entity.state == "cool"
+                    [[[            
+                      return entity.state == "cool"            
                     ]]]
                   styles:
                     card:
@@ -551,8 +551,8 @@ custom_card_coltondick_thermostat:
                       - color: rgba(var(--color-blue),1)
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -571,8 +571,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return entity.state == "dry"
+                    [[[            
+                      return entity.state == "dry"           
                     ]]]
                   styles:
                     card:
@@ -581,8 +581,8 @@ custom_card_coltondick_thermostat:
                       - color: rgba(var(--color-yellow),1)
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -601,8 +601,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return entity.state == "fan_only"
+                    [[[            
+                      return entity.state == "fan_only"            
                     ]]]
                   styles:
                     card:
@@ -611,8 +611,8 @@ custom_card_coltondick_thermostat:
                       - color: rgba(var(--color-theme),1)
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -631,8 +631,8 @@ custom_card_coltondick_thermostat:
               state:
                 - operator: template
                   value: |
-                    [[[
-                      return entity.state == "heat_cool"
+                    [[[            
+                      return entity.state == "heat_cool"           
                     ]]]
                   styles:
                     card:
@@ -641,8 +641,8 @@ custom_card_coltondick_thermostat:
                       - color: rgba(var(--color-purple),1)
                 - operator: template
                   value: |
-                    [[[
-                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color
+                    [[[            
+                      return (entity.attributes.hvac_action == 'cooling' || entity.attributes.hvac_action == 'heating') && variables.ulm_card_thermostat_enable_background_color           
                     ]]]
                   styles:
                     card:
@@ -655,12 +655,12 @@ custom_card_coltondick_thermostat:
         show_label: true
         entity: "[[[ return entity.entity_id ]]]"
         label: |-
-          [[[
-              var temperature = entity.attributes.current_temperature;
-              if (temperature == null) {
-                var temperature = '-';
-              }
-              return temperature + hass.config.unit_system.temperature;
+          [[[            
+              var temperature = entity.attributes.current_temperature;           
+              if (temperature == null) {           
+                var temperature = '-';           
+              }            
+              return temperature + hass.config.unit_system.temperature;            
           ]]]
         styles:
           card:

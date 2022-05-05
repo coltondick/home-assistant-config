@@ -11,7 +11,7 @@ cards:
   - type: vertical-stack
     cards:
       - type: "custom:button-card"
-        template: card_thermostat
+        template: custom_card_coltondick_thermostat
         entity: climate.living_room_thermostats
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -20,7 +20,7 @@ cards:
           ulm_card_thermostat_enable_hvac_modes: false
           ulm_card_thermostat_enable_popup: false
       # - type: "custom:button-card"
-      #   template: card_thermostat
+      #   template: custom_card_coltondick_thermostat
       #   entity: climate.living_room_thermostat
       #   variables:
       #     ulm_card_thermostat_enable_collapse: false
@@ -29,7 +29,7 @@ cards:
       #     ulm_card_thermostat_enable_hvac_modes: false
       #     ulm_card_thermostat_enable_popup: false
       # - type: "custom:button-card"
-      #   template: card_thermostat
+      #   template: custom_card_coltondick_thermostat
       #   entity: climate.dining_room_thermostat
       #   variables:
       #     ulm_card_thermostat_enable_collapse: false
@@ -38,7 +38,7 @@ cards:
       #     ulm_card_thermostat_enable_hvac_modes: false
       #     ulm_card_thermostat_enable_popup: false
       - type: "custom:button-card"
-        template: card_thermostat
+        template: custom_card_coltondick_thermostat
         entity: climate.bedroom_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -47,7 +47,7 @@ cards:
           ulm_card_thermostat_enable_hvac_modes: false
           ulm_card_thermostat_enable_popup: false
       - type: "custom:button-card"
-        template: card_thermostat
+        template: custom_card_coltondick_thermostat
         entity: climate.bathroom_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false
@@ -56,7 +56,7 @@ cards:
           ulm_card_thermostat_enable_hvac_modes: false
           ulm_card_thermostat_enable_popup: false
       - type: "custom:button-card"
-        template: card_thermostat
+        template: custom_card_coltondick_thermostat
         entity: climate.office_thermostat
         variables:
           ulm_card_thermostat_enable_collapse: false

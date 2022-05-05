@@ -178,6 +178,19 @@ notify:
     platform: telegram
     chat_id: !secret telegram_chat_id
 
+plant:
+  openplantbook:
+    client_id: !secret plantbook_client_id
+    secret: !secret plantbook_secret
+  madagascar_jewel:
+    species: euphorbia leuconeura
+    sensors:
+      moisture: sensor.miflora_madagascar_jewel_moisture
+      battery: sensor.miflora_madagascar_jewel_battery
+      temperature: sensor.miflora_madagascar_jewel_temperature
+      conductivity: sensor.miflora_madagascar_jewel_conductivity
+      brightness: sensor.miflora_madagascar_jewel_light
+
 recorder:
   purge_keep_days: 15
   include:
