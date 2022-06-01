@@ -1,4 +1,5 @@
-- alias: "State Triggered: Turn on|off all dining room lights when light switch state changes."
+- id: "c79184b0-93ad-43f1-9300-e2a880b8d3a2"
+  alias: "State Triggered: Turn on|off all dining room lights when light switch state changes."
   description: ""
   trigger:
     - entity_id: light.dining_room_ceiling

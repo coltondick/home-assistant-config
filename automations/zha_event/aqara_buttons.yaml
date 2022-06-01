@@ -1,4 +1,4 @@
-- id: "342342346464564"
+- id: "2c6d3588-8a11-437d-9d21-41bf450be27e"
   alias: "ZHA Event: Office Button"
   description: ""
   max_exceeded: silent
@@ -13,10 +13,7 @@
     - choose:
         - conditions: "{{ command == 'single' }}"
           sequence:
-            - service: light.turn_on
-              data: {}
-              target:
-                entity_id: light.office_ceiling_lights
+            - service: script.white_noise
         - conditions: "{{ command == 'hold' }}"
           sequence:
             - service: light.turn_off
@@ -74,7 +71,7 @@
       # - conditions: '{{ command == ''release_both'' }}'
       #   sequence: !input 'release_both_action'
 
-- id: "342342346464565"
+- id: "2ae28ef1-46eb-4d92-a3df-08cbddea5a75"
   alias: "ZHA Event: Bedroom Button"
   description: ""
   max_exceeded: silent
@@ -93,36 +90,25 @@
     - choose:
         - conditions: "{{ command == 'single' }}"
           sequence:
-            - service: media_player.clear_playlist
-              data: {}
-              target:
-                entity_id: media_player.bedroom_pair_lms
-            - service: shell_command.lms_add_playlist_bedroompair
-              data: {}
-            - service: shell_command.lms_max_volume_bedroompair
-              data: {}
-            - service: media_player.media_play
-              data: {}
-              target:
-                entity_id: media_player.bedroom_pair
-        - conditions: "{{ command == 'hold' }}"
-          sequence:
-            - service: shell_command.lms_restart_container
-              data: {}
-            - delay:
-                hours: 0
-                minutes: 0
-                seconds: 3
-                milliseconds: 0
-            - service: media_player.clear_playlist
-              data: {}
-              target:
-                entity_id: media_player.bedroom_pair_lms
-            - service: shell_command.lms_add_playlist_bedroompair
-              data: {}
-            - service: shell_command.lms_max_volume_bedroompair
-              data: {}
-            - service: media_player.media_play
-              data: {}
-              target:
-                entity_id: media_player.bedroom_pair
+            - service: script.white_noise
+        # - conditions: "{{ command == 'hold' }}"
+        #   sequence:
+        #     - service: shell_command.lms_restart_container
+        #       data: {}
+        #     - delay:
+        #         hours: 0
+        #         minutes: 0
+        #         seconds: 3
+        #         milliseconds: 0
+        #     - service: media_player.clear_playlist
+        #       data: {}
+        #       target:
+        #         entity_id: media_player.bedroom_pair_lms
+        #     - service: shell_command.lms_add_playlist_bedroompair
+        #       data: {}
+        #     - service: shell_command.lms_max_volume_bedroompair
+        #       data: {}
+        #     - service: media_player.media_play
+        #       data: {}
+        #       target:
+        #         entity_id: media_player.bedroom_pair

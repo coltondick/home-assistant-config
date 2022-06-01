@@ -1,0 +1,37 @@
+## https://community.home-assistant.io/t/disable-google-home-casting-sound/304624
+
+# alias: Disable google cast sound
+# sequence:
+#   - choose:
+#       - conditions:
+#           - condition: state
+#             entity_id: media_player.$PLAYER
+#             state: 'off'
+#         sequence:
+#           - service: media_player.volume_set
+#             target:
+#               entity_id: media_player.$PLAYER
+#             data:
+#               volume_level: 0
+#           - service: media_player.turn_on
+#             target:
+#              entity_id: media_player.$PLAYER
+#           - wait_template: '{{ is_state(''media_player.$PLAYER'', ''idle'') }}'
+#       - conditions:
+#           - condition: state
+#             entity_id: media_player.$PLAYER
+#             state: idle
+#         sequence: []
+#     default: []
+#   - service: media_player.volume_set
+#     target:
+#       entity_id: media_player.$PLAYER
+#     data:
+#       volume_level: $VOLUME_LEVEL
+#   - service: media_player.play_media
+#     target:
+#       entity_id: media_player.$PLAYER
+#     data:
+#       media_content_id: '$AUDIO_URL'
+#       media_content_type: audio
+# mode: single

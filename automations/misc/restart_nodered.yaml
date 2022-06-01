@@ -1,4 +1,5 @@
-- alias: "Misc: Restart Nodered on Startup"
+- id: "e76256e8-a4c7-4475-9fd6-cd7307b5fc3e"
+  alias: "Misc: Restart Nodered on Startup"
   trigger:
     platform: homeassistant
     event: start

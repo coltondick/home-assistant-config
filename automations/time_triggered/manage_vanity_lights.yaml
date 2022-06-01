@@ -1,4 +1,5 @@
-- alias: "Time Triggered: Turn off the vanity lights after 45 minutes"
+- id: "3b2c355b-4311-4c35-b5ae-ed4bc31f9e01"
+  alias: "Time Triggered: Turn off the vanity lights after 45 minutes"
   trigger:
     platform: state
     entity_id: switch.vanity

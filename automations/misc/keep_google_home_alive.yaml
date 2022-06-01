@@ -1,4 +1,5 @@
-- alias: "Misc: Prevent Living Room Google Home Idle"
+- id: "5bf4c90f-62f2-4779-a181-26f04a60d62c"
+  alias: "Misc: Prevent Living Room Google Home Idle"
   description: ""
   trigger:
     - platform: time_pattern
@@ -28,97 +29,42 @@
         media_content_type: music
   mode: single
 
-- alias: "Misc: Prevent Bedroom Pair Google Home Idle"
+- id: "ea9e0a26-64c4-4050-b5da-06d7060c5588"
+  alias: "Misc: Prevent Bedroom Pair Google Home Idle"
   description: ""
   trigger:
     - platform: time_pattern
       minutes: /2
     - platform: state
-      entity_id: media_player.gh_bedroom_pair
+      entity_id: media_player.bedroom_pair
       from: unavailable
       to: idle
     - platform: state
-      entity_id: media_player.gh_bedroom_pair
+      entity_id: media_player.bedroom_pair
       from: unavailable
       to: "off"
   condition:
+    - condition: template
+      value_template: >-
+        {{ state_attr('media_player.bedroom_pair', 'media_title') != 'Rain white noise'}}
     - condition: or
       conditions:
         - condition: state
-          entity_id: media_player.gh_bedroom_pair
+          entity_id: media_player.bedroom_pair
           state: "off"
         - condition: state
-          entity_id: media_player.gh_bedroom_pair
+          entity_id: media_player.bedroom_pair
           state: idle
   action:
     - service: media_player.play_media
-      entity_id: media_player.gh_bedroom_pair
+      entity_id: media_player.bedroom_pair
       data:
         media_content_id: !secret 1_sec_audio_url
         media_content_type: music
   mode: single
 
-- alias: "Misc: Prevent Colton Sidetable Google Home Idle"
-  description: ""
-  trigger:
-    - platform: time_pattern
-      minutes: /2
-    - platform: state
-      entity_id: media_player.gh_colton_side_table
-      from: unavailable
-      to: idle
-    - platform: state
-      entity_id: media_player.gh_colton_side_table
-      from: unavailable
-      to: "off"
-  condition:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: media_player.gh_colton_side_table
-          state: "off"
-        - condition: state
-          entity_id: media_player.gh_colton_side_table
-          state: idle
-  action:
-    - service: media_player.play_media
-      entity_id: media_player.gh_colton_side_table
-      data:
-        media_content_id: !secret 1_sec_audio_url
-        media_content_type: music
-  mode: single
-
-- alias: "Misc: Prevent Miranda Sidetable Google Home Idle"
-  description: ""
-  trigger:
-    - platform: time_pattern
-      minutes: /2
-    - platform: state
-      entity_id: media_player.gh_miranda_side_table
-      from: unavailable
-      to: idle
-    - platform: state
-      entity_id: media_player.gh_miranda_side_table
-      from: unavailable
-      to: "off"
-  condition:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: media_player.gh_miranda_side_table
-          state: "off"
-        - condition: state
-          entity_id: media_player.gh_miranda_side_table
-          state: idle
-  action:
-    - service: media_player.play_media
-      entity_id: media_player.gh_miranda_side_table
-      data:
-        media_content_id: !secret 1_sec_audio_url
-        media_content_type: music
-  mode: single
-
-- alias: "Misc: Prevent Office Google Home Idle"
+- id: "03154974-19c2-41e3-b86a-e87fe93c7868"
+  alias: "Misc: Prevent Office Google Home Idle"
   description: ""
   trigger:
     - platform: time_pattern

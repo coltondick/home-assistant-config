@@ -1,0 +1,27 @@
+- id: "adc7e29c-8c47-4d41-9bea-24957e3c8f63"
+  alias: "State Triggered: Turn on|off all fairy lights when lamp switch state changes."
+  description: ""
+  trigger:
+    - entity_id: switch.bedroom_sidetable_lamp
+      platform: state
+      to: "on"
+    - platform: state
+      entity_id: switch.bedroom_sidetable_lamp
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'on' }}"
+          sequence:
+            - entity_id: "light.fairy_lights"
+              service: light.turn_on
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'off' }}"
+          sequence:
+            - entity_id: "light.fairy_lights"
+              service: light.turn_off
+      default: []
+  mode: single

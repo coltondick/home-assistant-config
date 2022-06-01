@@ -1,4 +1,4 @@
-- id: "1650386038788"
+- id: "12bd3fd1-acd8-473c-9663-1e7368bdfe07"
   alias: Office Controller - Philips 324131092621 Hue Dimmer switch
   description: ""
   use_blueprint:
@@ -44,7 +44,7 @@
       button_down_long_loop: true
       integration: Zigbee2MQTT
 
-- id: "1650386038789"
+- id: "98ecd1eb-d0dd-4b46-97c8-cab5b66932ea"
   alias: MBR Controller - Philips 324131092621 Hue Dimmer switch
   description: ""
   use_blueprint:

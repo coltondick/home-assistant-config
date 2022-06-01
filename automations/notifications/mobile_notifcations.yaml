@@ -1,4 +1,5 @@
-- alias: "Notification: Notify when Dryer finishes"
+- id: "76e6c45b-848c-46a4-927b-8f8c1a697354"
+  alias: "Notification: Notify when Dryer finishes"
   trigger:
     - entity_id: binary_sensor.dryer
       platform: state

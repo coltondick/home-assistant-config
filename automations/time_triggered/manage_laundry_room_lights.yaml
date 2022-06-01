@@ -1,4 +1,5 @@
-- alias: "Time Triggered: Turn off the laundry room lights after 10 minutes"
+- id: "b12847f4-845b-4a1e-b509-138cd0f0cb22"
+  alias: "Time Triggered: Turn off the laundry room lights after 10 minutes"
   trigger:
     platform: state
     entity_id: light.laundry_room_ceiling

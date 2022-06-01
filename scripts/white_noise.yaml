@@ -1,0 +1,32 @@
+white_noise:
+  sequence:
+    - service: media_player.volume_set
+      data:
+        volume_level: 1.0
+      target:
+        entity_id: media_player.bedroom_pair
+    - repeat:
+        until:
+          - condition: template
+            value_template: >-
+              {{ state_attr('media_player.bedroom_pair', 'media_title') != 'Rain white noise' or states('media_player.bedroom_pair') != 'idle' }}
+        sequence:
+          - service: media_player.play_media
+            data:
+              media_content_type: music
+              extra:
+                title: Rain white noise
+                thumb: >-
+                  http://www.gstatic.com/voice_delight/images/relaxation_sounds/icons/rain.png
+              media_content_id: "/local/media/rain.mp3"
+            target:
+              entity_id: media_player.bedroom_pair
+          - wait_for_trigger:
+              - platform: template
+                value_template: >-
+
+                  {{ state_attr('media_player.bedroom_pair', 'media_title') == 'Rain white noise' and is_state('media_player.bedroom_pair', 'idle') }}
+            continue_on_timeout: false
+            timeout: "13:37:35"
+  mode: restart
+  icon: "mdi:weather-pouring"

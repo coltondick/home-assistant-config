@@ -1,4 +1,4 @@
-- id: "lowBattery"
+- id: "34da6d02-e902-4704-821d-442ed0389323"
   alias: Instantly report when a battery is low
   trigger:
     platform: template

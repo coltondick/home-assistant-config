@@ -1,5 +1,6 @@
 # Automatically lock the front door after 20 minutes if someone forgets to lock it behind them.
-- alias: "Time Triggered: Lock front door after 20 minutes"
+- id: "b6f3b998-951e-4a05-8665-f4e7af4f5fa5"
+  alias: "Time Triggered: Lock front door after 20 minutes"
   trigger:
     platform: state
     entity_id: lock.front_door
@@ -17,7 +18,8 @@
       entity_id: lock.front_door
 
 # Automatically check every 5 minutes if we are not home if the door is locked, if not, lock it.
-- alias: "Time Triggered: Lock front door after 5 minutes"
+- id: "c098dde5-cbb7-419c-a3c0-8ec122c1ea10"
+  alias: "Time Triggered: Lock front door after 5 minutes"
   trigger:
     platform: time_pattern
     minutes: /5
@@ -41,7 +43,8 @@
       entity_id: lock.front_door
 
 # Automatically lock the front door 2 minutes after we leave.
-- alias: "Time Triggered: Lock front door after 2 minutes"
+- id: "2ce9d35c-20f6-4e8e-b094-0b0d0b8098a8"
+  alias: "Time Triggered: Lock front door after 2 minutes"
   trigger:
     platform: state
     entity_id: person.colton

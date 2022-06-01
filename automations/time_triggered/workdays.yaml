@@ -1,6 +1,6 @@
 # # Automatically turn on|off all lights and switches, but the office if Miranda is away
 # # and Colton is home. Do not trigger if the home override is on.
-- id: workdays
+- id: "6ca7578f-c647-4178-8869-233d5663c5d2"
   alias: "Time Triggered: Turn on all lights and switches if Miranda is away and Colton is home"
   trigger:
     platform: time_pattern
@@ -36,7 +36,7 @@
       target:
         entity_id: remote.tv
 
-- id: reset_home_override
+- id: "046f2658-93ee-4aa7-b93c-c6529571dd71"
   alias: "Time Triggered: Reset home override everyday at 5 PM"
   trigger:
     platform: time

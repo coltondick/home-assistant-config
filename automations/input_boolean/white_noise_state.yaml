@@ -1,41 +1,24 @@
-- id: "1231231231231123455"
+- id: "70373e94-65a0-419b-8a77-de8965e61f34"
   alias: "Input Boolean: Rain stops playing"
   trigger:
-    - platform: state
-      entity_id: media_player.bedroom_pair_lms
-      to: "off"
-    - platform: state
-      entity_id: media_player.bedroom_pair_lms
-      to: "idle"
+    - platform: template
+      value_template: >-
+        {{ state_attr('media_player.bedroom_pair', 'media_title') != 'Rain white noise'}}
   action:
     service: input_boolean.turn_off
     target:
       entity_id: input_boolean.white_noise
 
-- id: "1231231231231123456"
-  alias: "Input Boolean: Rain stops playing"
-  trigger:
-    - platform: state
-      entity_id: media_player.bedroom_pair
-      to: "off"
-    - platform: state
-      entity_id: media_player.bedroom_pair
-      to: "idle"
-  condition:
-    condition: state
-    entity_id: media_player.bedroom_pair_lms
-    state: "playing"
-  action:
-    service: input_boolean.turn_off
-    target:
-      entity_id: input_boolean.white_noise
-
-- id: "1231256731231123455"
+- id: "fc09894c-c964-4782-9675-a1669bede232"
   alias: "Input Boolean: Rain starts playing"
   trigger:
     - platform: state
-      entity_id: media_player.bedroom_pair_lms
+      entity_id: media_player.bedroom_pair
       to: "playing"
+  condition:
+    - condition: template
+      value_template: >-
+        {{ state_attr('media_player.bedroom_pair', 'media_title') == 'Rain white noise'}}
   action:
     service: input_boolean.turn_on
     target:
