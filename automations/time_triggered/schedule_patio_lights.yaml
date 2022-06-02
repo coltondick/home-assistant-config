@@ -1,4 +1,3 @@
-# Automatically turn on|off the patio lights.
 - id: "31b8535d-de64-49ed-8919-af2ac366f308"
   alias: "Time Triggered: Turn Patio Lights On at 7 PM"
   trigger:

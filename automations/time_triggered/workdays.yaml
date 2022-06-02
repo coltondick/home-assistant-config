@@ -13,9 +13,6 @@
       conditions:
         - condition: template
           value_template: "{{ not is_state('person.miranda', 'home') }}"
-        # - condition: state
-        #   entity_id: person.miranda
-        #   state: not_home
         - condition: state
           entity_id: person.colton
           state: home
