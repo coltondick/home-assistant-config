@@ -68,7 +68,7 @@
       entity_id: lock.front_door
 
 - id: "a5d8b78c-277e-464e-8927-0506e5f4f16a"
-  alias: "Time Triggered: Lock door every 15 minutes if it's unlocked and it's after 10 PM"
+  alias: "Time Triggered: Lock door every 15 minutes if it's unlocked and it's after 11:30 PM"
   trigger:
     platform: time_pattern
     minutes: /15
@@ -79,7 +79,7 @@
     - condition: and
       conditions:
         - condition: time
-          after: "22:00:00"
+          after: "23:30:00"
   action:
     service: lock.lock
     data:
