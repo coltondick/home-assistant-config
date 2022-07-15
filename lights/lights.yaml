@@ -118,7 +118,6 @@
   brightness_value_template: "{{value_json.Dimmer}}"
   on_command_type: "brightness"
   white_value_state_topic: "tele/tasmota_tv_lights/STATE"
-  white_value_command_topic: "cmnd/tasmota_tv_lights/White"
   white_value_scale: 100
   white_value_template: "{{ value_json.White }}"
   rgb_command_topic: "cmnd/tasmota_tv_lights/Color2"

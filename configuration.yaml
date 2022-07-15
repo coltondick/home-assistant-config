@@ -4,6 +4,7 @@ group: !include_dir_merge_named group
 google_assistant: !include google_assistant.yaml
 influxdb: !include influxdb.yaml
 light: !include lights/lights.yaml
+mqtt: !include_dir_merge_named mqtt
 panel_iframe: !include panel_iframe.yaml
 scene: !include scenes.yaml
 script: !include_dir_merge_named scripts
@@ -28,12 +29,22 @@ frontend:
   extra_module_url:
     - /hacsfiles/lovelace-card-mod/card-mod.js
     - /hacsfiles/hass-bha-icons/hass-bha-icons.js
+    - /hacsfiles/hass-hue-icons/hass-hue-icons.js
+    - /hacsfiles/button-card-mod/button-card.js
+    - /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+    - /hacsfiles/mini-media-player/mini-media-player-bundle.js
+    - /hacsfiles/my-cards/my-cards.js
+    - /hacsfiles/light-entity-card/light-entity-card.js
+    - /hacsfiles/lovelace-auto-entities/auto-entities.js
+    - /hacsfiles/lovelace-flower-card/flower-card.js
+    - /local/kiosk-mode.js?v=1.2.1
 
 history:
   include:
     domains:
       - sensor
       - switch
+      - lock
 
 homeassistant:
   name: Home
@@ -53,6 +64,7 @@ homeassistant:
       trusted_networks:
         - 192.168.0.0/24
         - 10.0.0.0/8
+        - 192.168.1.182
       allow_bypass_login: true
 
 http:
@@ -94,6 +106,15 @@ input_text:
   mbr_helper_last_controller_event:
     name: MBR Helper Last Controller Event
 
+input_number:
+  denon_volume:
+    icon: mdi:volume-medium
+    name: Volume
+    min: 1
+    max: 45
+    step: 1
+    mode: slider
+
 logger:
   default: info
   logs:
@@ -112,15 +133,15 @@ lovelace:
       require_admin: true
 
 media_player:
-  # - platform: androidtv
-  #   name: Fire TV
-  #   host: !secret shield_android_tv_ip
-  #   adb_server_ip: !secret docker_adb_server_ip
-  #   adb_server_port: !secret docker_adb_server_port
+  - platform: denon #denonavr
+    name: Denon AVR
+    host: !secret denon_avr_ip
+
   - platform: universal
     name: Nvidia Shield
     children:
       - media_player.adb_shield_tv
+      - media_player.denon_avr_s720w
     attributes:
       state: media_player.adb_shield_tv
       source_list: media_player.adb_shield_tv|source_list
@@ -128,7 +149,7 @@ media_player:
       app_id: media_player.adb_shield_tv|app_id
       entity_picture: media_player.adb_shield_tv|entity_picture
       is_volume_muted: media_player.denon_avr_s720w|is_volume_muted
-      volume_level: media_player.denon_avr_s720w|volume_level
+      volume_level: input_number.denon_volume|volume_level
     commands:
       turn_on:
         service: remote.turn_on

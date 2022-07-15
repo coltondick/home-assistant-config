@@ -1,0 +1,29 @@
+- id: "b828be93-1e76-4d18-a391-83d58f5ecfa7"
+  alias: "Misc: Cast Dashboard on Startup"
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: frontend.set_theme
+      data:
+        name: Google Dark Theme
+    - delay:
+        seconds: 1
+    - service: frontend.set_theme
+      data:
+        name: minimalist-desktop-nord
+    - service: cast.show_lovelace_view
+      data:
+        entity_id: media_player.living_room_hub
+        dashboard_path: ui-lovelace-minimalist
+        view_path: hub-home
+
+- id: "1656626111495"
+  alias: Cast to Google Hub
+  description: ""
+  use_blueprint:
+    path: cast_dashboard_to_hub/cast_dashboard_to_hub.yaml
+    input:
+      player: media_player.living_room_hub
+      view: hub-home
+      dashboard: ui-lovelace-minimalist

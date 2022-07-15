@@ -5,6 +5,10 @@ white_noise:
         volume_level: 1.0
       target:
         entity_id: media_player.bedroom_pair
+    # - service: script.ready_cast_with_set_volume
+    #   data:
+    #     entity_id: media_player.bedroom_pair
+    #     volume_level: 1.0
     - repeat:
         until:
           - condition: template

@@ -89,3 +89,12 @@
         data: {}
         target:
           entity_id: media_player.bedroom_pair_lms
+- id: '1656626111495'
+  alias: Cast to Google Hub
+  description: ''
+  use_blueprint:
+    path: cast_dashboard_to_hub/cast_dashboard_to_hub.yaml
+    input:
+      player: media_player.living_room_hub
+      view: ui-lovelace-minimalist
+      dashboard: hub-home

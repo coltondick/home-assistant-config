@@ -1,0 +1,31 @@
+theme: Nordic
+title: Hub Settings
+path: hub-settings
+icon: mdi:application-cog-outline
+badges: []
+cards:
+  ## Chip Back ##
+  - type: "custom:button-card"
+    template: chip_back
+    variables:
+      ulm_chip_back_path: /ui-lovelace-minimalist/hub-home
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        template:
+          - card_input_boolean
+          - green_on
+        entity: input_boolean.override_home
+        name: Override
+      - type: "custom:button-card"
+        template:
+          - card_input_boolean
+          - green_on
+        entity: switch.party_switch
+        name: Party
+      - type: "custom:button-card"
+        template:
+          - card_input_boolean
+          - green_on
+        entity: input_boolean.vacation_mode
+        name: Vacation Mode

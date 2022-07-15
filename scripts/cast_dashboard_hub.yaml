@@ -1,0 +1,18 @@
+cast_dashboard_to_nest_hub:
+  alias: Cast Dashboard to Nest Hub
+  sequence:
+    - service: frontend.set_theme
+      data:
+        name: Google Dark Theme
+    - delay:
+        seconds: 1
+    - service: frontend.set_theme
+      data:
+        name: minimalist-desktop-nord
+    - service: cast.show_lovelace_view
+      data:
+        entity_id: media_player.living_room_hub
+        dashboard_path: ui-lovelace-minimalist
+        view_path: hub-home
+  mode: restart
+  icon: mdi:cast

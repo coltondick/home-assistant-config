@@ -1,0 +1,46 @@
+switch:
+  - name: "Kitchen LEDs"
+    state_topic: "stat/tasmota_kitchen_leds/RESULT"
+    value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/tasmota_kitchen_leds/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    availability_topic: "tele/tasmota_kitchen_leds/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Dishwasher"
+    state_topic: "stat/DVES_B160F6_fb/RESULT"
+    value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/DVES_B160F6_fb/POWER"
+    payload_on: "ON"
+    payload_off: "OFF"
+    availability_topic: "tele/DVES_B160F6_fb/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Patio Lights"
+    value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/sonoff/POWER"
+    state_topic: "tele/sonoff/STATE"
+    availability_topic: "tele/sonoff/LWT"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Party Switch"
+    command_topic: "home/party/switch"
+    payload_on: "on"
+    payload_off: "off"
+
+  - name: "Update Youtube on Shield"
+    command_topic: "home/shield/update/youtube"
+    payload_on: "on"
+    payload_off: "off"

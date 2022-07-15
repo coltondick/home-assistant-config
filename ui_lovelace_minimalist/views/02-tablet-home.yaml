@@ -1,4 +1,5 @@
 ## BEGIN Tablet HOME ###
+theme: Nordic
 title: Tablet Home
 path: tablet-home
 icon: mdi:picture-in-picture-bottom-right

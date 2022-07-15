@@ -1,7 +1,7 @@
-host: 192.168.1.3
+host: 10.0.0.22
 database: home_assistant
-# username: ""
-# password: ""
+username: ""
+password: ""
 # include:
 #   entities:
 #     - sensor.cage_temperature

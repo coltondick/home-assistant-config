@@ -101,41 +101,41 @@ person_card_new:
     custom_fields:
       battery: |
         [[[
-          if (states["[[battery]]"].attributes.battery >= 75) {
+          if (states["[[battery]]"].attributes.battery_level >= 75) {
           if (states["[[battery]]"].attributes.battery_charging === false) {
             return `<ha-icon
                         icon="mdi:battery"
                         style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--aurora-green); position: relative; bottom: 1px;">
-                        </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
           } else {
             return `<ha-icon
                       icon="mdi:battery-charging"
                       style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--aurora-green); position: relative; bottom: 1px;">
-                      </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+                      </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
           }
         } else if (states["[[battery]]"].attributes.battery <= 35) {
           if (states["[[battery]]"].attributes.battery_charging === false) {
             return `<ha-icon
                         icon="mdi:battery"
                         style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--aurora-red); position: relative; bottom: 1px;">
-                        </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
           } else {
             return `<ha-icon
                       icon="mdi:battery-charging"
                       style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--aurora-red); position: relative; bottom: 1px;">
-                      </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+                      </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
           }
         } else {
           if (states["[[battery]]"].attributes.battery_charging === false) {
             return `<ha-icon
                         icon="mdi:battery"
                         style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
-                        </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
           } else {
             return `<ha-icon
                       icon="mdi:battery-charging"
                       style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
-                      </ha-icon><span>${states["[[battery]]"].attributes.battery}%</span>`
+                      </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
           }
         }
         ]]]

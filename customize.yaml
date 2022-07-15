@@ -5,19 +5,19 @@ light.laundry_room_ceiling:
 light.tv_leds:
   icon: hue:lightstrip
 remote.tv:
-  icon: ios:tv
+  icon: mdi:television
 remote.bedroom:
-  icon: ios:tv
+  icon: mdi:television
 sensor.airgradient_c02:
-  icon: ios:wind
+  icon: mdi:wind
 sensor.airgradient_pm2_5:
-  icon: ios:wind
+  icon: mdi:wind
 sensor.average_indoor_temperature:
-  icon: ios:thermometer
+  icon: mdi:thermometer
 sensor.u_s_air_quality_index:
-  icon: ios:wind
+  icon: mdi:wind
 switch.cage:
-  icon: ios:pawprint-fill
+  icon: mdi:paw
 switch.patio_lights:
   icon: mdi:string-lights
 switch.side_table_lamp:
@@ -25,7 +25,7 @@ switch.side_table_lamp:
 switch.bedroom_sidetable_lamp:
   icon: mdi:lamp
 switch.white_noise_onoff:
-  icon: ios:bed-double
+  icon: mdi:bed-double
 switch.vanity:
   icon: mdi:hair-dryer
 switch.scentsy:
