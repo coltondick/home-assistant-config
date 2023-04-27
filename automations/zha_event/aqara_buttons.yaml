@@ -1,0 +1,114 @@
+- id: "2c6d3588-8a11-437d-9d21-41bf450be27e"
+  alias: "ZHA Event: Office Button"
+  description: ""
+  max_exceeded: silent
+  trigger:
+    platform: state
+    entity_id: sensor.office_button_action
+  action:
+    - variables:
+        command:
+          '{{ trigger.to_state.attributes.action if trigger.to_state.state == ""
+          else trigger.to_state.state }}'
+    - choose:
+        - conditions: "{{ command == 'single' }}"
+          sequence:
+            - service: script.white_noise
+        - conditions: "{{ command == 'hold' }}"
+          sequence:
+            - service: light.turn_off
+              data: {}
+              target:
+                entity_id: light.office_ceiling_lights
+      # - conditions: '{{ command == ''double'' }}'
+      #   sequence: !input 'double_action'
+      # - conditions: '{{ command == ''triple'' }}'
+      #   sequence: !input 'triple_action'
+      # - conditions: '{{ command == ''quadruple'' }}'
+      #   sequence: !input 'quadruple_action'
+      # - conditions: '{{ command == ''release'' }}'
+      #   sequence: !input 'release_action'
+      # - conditions: '{{ command == ''shake'' }}'
+      #   sequence: !input 'shake_action'
+      # - conditions: '{{ command == ''single_left'' }}'
+      #   sequence: !input 'single_left_action'
+      # - conditions: '{{ command == ''double_left'' }}'
+      #   sequence: !input 'double_left_action'
+      # - conditions: '{{ command == ''triple_left'' }}'
+      #   sequence: !input 'triple_left_action'
+      # - conditions: '{{ command == ''hold_left'' }}'
+      #   sequence: !input 'hold_left_action'
+      # - conditions: '{{ command == ''release_left'' }}'
+      #   sequence: !input 'release_left_action'
+      # - conditions: '{{ command == ''single_center'' }}'
+      #   sequence: !input 'single_center_action'
+      # - conditions: '{{ command == ''double_center'' }}'
+      #   sequence: !input 'double_center_action'
+      # - conditions: '{{ command == ''triple_center'' }}'
+      #   sequence: !input 'triple_center_action'
+      # - conditions: '{{ command == ''hold_center'' }}'
+      #   sequence: !input 'hold_center_action'
+      # - conditions: '{{ command == ''release_center'' }}'
+      #   sequence: !input 'release_center_action'
+      # - conditions: '{{ command == ''single_right'' }}'
+      #   sequence: !input 'single_right_action'
+      # - conditions: '{{ command == ''double_right'' }}'
+      #   sequence: !input 'double_right_action'
+      # - conditions: '{{ command == ''triple_right'' }}'
+      #   sequence: !input 'triple_right_action'
+      # - conditions: '{{ command == ''hold_right'' }}'
+      #   sequence: !input 'hold_right_action'
+      # - conditions: '{{ command == ''release_right'' }}'
+      #   sequence: !input 'release_right_action'
+      # - conditions: '{{ command == ''single_both'' }}'
+      #   sequence: !input 'single_both_action'
+      # - conditions: '{{ command == ''double_both'' }}'
+      #   sequence: !input 'double_both_action'
+      # - conditions: '{{ command == ''triple_both'' }}'
+      #   sequence: !input 'triple_both_action'
+      # - conditions: '{{ command == ''hold_both'' }}'
+      #   sequence: !input 'hold_both_action'
+      # - conditions: '{{ command == ''release_both'' }}'
+      #   sequence: !input 'release_both_action'
+
+- id: "2ae28ef1-46eb-4d92-a3df-08cbddea5a75"
+  alias: "ZHA Event: Bedroom Button"
+  description: ""
+  max_exceeded: silent
+  trigger:
+    - platform: state
+      entity_id: sensor.bedroom_button_right_action
+    - platform: state
+      entity_id: sensor.bedroom_button_left_action
+    # - platform: state
+    #   entity_id: sensor.office_button_action
+  action:
+    - variables:
+        command:
+          '{{ trigger.to_state.attributes.action if trigger.to_state.state == ""
+          else trigger.to_state.state }}'
+    - choose:
+        - conditions: "{{ command == 'single' }}"
+          sequence:
+            - service: script.white_noise
+        # - conditions: "{{ command == 'hold' }}"
+        #   sequence:
+        #     - service: shell_command.lms_restart_container
+        #       data: {}
+        #     - delay:
+        #         hours: 0
+        #         minutes: 0
+        #         seconds: 3
+        #         milliseconds: 0
+        #     - service: media_player.clear_playlist
+        #       data: {}
+        #       target:
+        #         entity_id: media_player.bedroom_pair_lms
+        #     - service: shell_command.lms_add_playlist_bedroompair
+        #       data: {}
+        #     - service: shell_command.lms_max_volume_bedroompair
+        #       data: {}
+        #     - service: media_player.media_play
+        #       data: {}
+        #       target:
+        #         entity_id: media_player.bedroom_pair

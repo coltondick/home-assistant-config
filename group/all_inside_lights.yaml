@@ -1,0 +1,9 @@
+all_inside_lights:
+  name: All Lights
+  entities:
+    - group.bedroom
+    - group.entryway
+    - group.office
+    - group.kitchen
+    - group.dining
+    - group.livingroom

@@ -1,0 +1,20 @@
+---
+### Card Button ###
+custom_card_coltondick_button:
+  template:
+    - "icon_info_bg"
+    - "blue_on"
+    - "ulm_language_variables"
+  triggers_update: "all"
+  label: |-
+    [[[
+      if (entity.state === "on") {
+        return variables.ulm_on;
+      } else if (entity.state === "off") {
+        return variables.ulm_off;
+      } else if (entity.state === "unavailable") {
+        return variables.ulm_unavailable;
+      } else {
+        return entity.state;
+      }
+    ]]]

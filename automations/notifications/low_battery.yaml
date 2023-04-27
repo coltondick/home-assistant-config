@@ -1,0 +1,12 @@
+- id: "34da6d02-e902-4704-821d-442ed0389323"
+  alias: Instantly report when a battery is low
+  trigger:
+    platform: template
+    value_template: "{{states('sensor.battery_alert')|int > 0}}"
+  action:
+    service: notify.notify
+    data_template:
+      title: "Low Battery Alert"
+      message: >
+        {% set phrase = 's are ' if states('sensor.battery_alert')|int > 1 else ' is ' %}
+        The following sensor{{ phrase }} low: {{ state_attr('sensor.battery_alert', 'battery_low') }}

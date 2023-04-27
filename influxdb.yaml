@@ -1,0 +1,22 @@
+host: 192.168.1.3
+database: home_assistant
+username: ""
+password: ""
+# include:
+#   entities:
+#     - sensor.cage_temperature
+#     - sensor.cage_humidity
+#     - sensor.cage_power
+#     - sensor.cage_temperature
+#     - climate.bathroom_thermostat
+#     - climate.bedroom_thermostat
+#     - climate.living_room_thermostats
+#     - climate.office_thermostat
+#     - sensor.memory_free
+#     - sensor.processor_use
+#     - sensor.disk_use_percent_share
+#     - sensor.speedtest_download
+#     - sensor.speedtest_upload
+#     - sensor.speetest_ping
+#     - sensor.temperature
+#     - sensor.wind_chill

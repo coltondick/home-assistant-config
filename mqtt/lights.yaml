@@ -1,0 +1,140 @@
+light:
+  - name: "Kitchen Ceiling"
+    command_topic: "cmnd/tasmota_kitchen_lights/POWER"
+    state_topic: "tele/tasmota_kitchen_lights/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/tasmota_kitchen_lights/LWT"
+    brightness_command_topic: "cmnd/tasmota_kitchen_lights/Dimmer"
+    brightness_state_topic: "tele/tasmota_kitchen_lights/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Kitchen Stove"
+    command_topic: "cmnd/tasmota_stove/POWER"
+    state_topic: "tele/tasmota_stove/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/tasmota_stove/LWT"
+    brightness_command_topic: "cmnd/tasmota_stove/Dimmer"
+    brightness_state_topic: "tele/tasmota_stove/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Laundry Room Ceiling"
+    command_topic: "cmnd/tasmota_laundry_room_lights/POWER"
+    state_topic: "tele/tasmota_laundry_room_lights/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/tasmota_laundry_room_lights/LWT"
+    brightness_command_topic: "cmnd/tasmota_laundry_room_lights/Dimmer"
+    brightness_state_topic: "tele/tasmota_laundry_room_lights/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Entryway Ceiling"
+    command_topic: "cmnd/tasmota_entryway_lights/POWER"
+    state_topic: "tele/tasmota_entryway_lights/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/tasmota_entryway_lights/LWT"
+    brightness_command_topic: "cmnd/tasmota_entryway_lights/Dimmer"
+    brightness_state_topic: "tele/tasmota_entryway_lights/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Living Room Ceiling"
+    command_topic: "cmnd/tasmota_livingroom_lights/POWER"
+    state_topic: "tele/tasmota_livingroom_lights/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/tasmota_livingroom_lights/LWT"
+    brightness_command_topic: "cmnd/tasmota_livingroom_lights/Dimmer"
+    brightness_state_topic: "tele/tasmota_livingroom_lights/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Dining Room Ceiling"
+    command_topic: "cmnd/tasmota_dining_room/POWER"
+    state_topic: "tele/tasmota_dining_room/STATE"
+    state_value_template: "{{value_json.POWER}}"
+    availability_topic: "tele/tasmota_dining_room/LWT"
+    brightness_command_topic: "cmnd/tasmota_dining_room/Dimmer"
+    brightness_state_topic: "tele/tasmota_dining_room/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "TV LEDs"
+    command_topic: "cmnd/tasmota_tv_lights/POWER"
+    state_topic: "tele/tasmota_tv_lights/STATE"
+    state_value_template: "{{ value_json.POWER }}"
+    availability_topic: "tele/tasmota_tv_lights/LWT"
+    brightness_command_topic: "cmnd/tasmota_tv_lights/Dimmer"
+    brightness_state_topic: "tele/tasmota_tv_lights/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    rgb_command_topic: "cmnd/tasmota_tv_lights/Color2"
+    rgb_state_topic: "tele/tasmota_tv_lights/STATE"
+    rgb_value_template: "{{ value_json.Color.split(',')[0:3]|join(',') }}"
+    effect_command_topic: "cmnd/tasmota_tv_lights/Scheme"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false
+
+  - name: "Dining Room Light"
+    command_topic: "cmnd/tasmota_dining_room/POWER"
+    state_topic: "tele/tasmota_dining_room/STATE"
+    state_value_template: "{{ value_json.POWER }}"
+    availability_topic: "tele/tasmota_dining_room/LWT"
+    brightness_command_topic: "cmnd/tasmota_dining_room/Dimmer"
+    brightness_state_topic: "tele/tasmota_dining_room/STATE"
+    brightness_scale: 100
+    brightness_value_template: "{{value_json.Dimmer}}"
+    on_command_type: "brightness"
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    qos: 1
+    retain: false

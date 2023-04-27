@@ -1,0 +1,27 @@
+- id: "c79184b0-93ad-43f1-9300-e2a880b8d3a2"
+  alias: "State Triggered: Turn on|off all dining room lights when light switch state changes."
+  description: ""
+  trigger:
+    - entity_id: light.dining_room_ceiling
+      platform: state
+      to: "on"
+    - platform: state
+      entity_id: light.dining_room_ceiling
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'on' }}"
+          sequence:
+            - entity_id: "light.hue_light_strip"
+              service: light.turn_on
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'off' }}"
+          sequence:
+            - entity_id: "light.hue_light_strip"
+              service: light.turn_off
+      default: []
+  mode: single

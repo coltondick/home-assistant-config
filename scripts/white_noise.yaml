@@ -1,0 +1,61 @@
+white_noise:
+  sequence:
+    - service: script.ready_cast_with_set_volume
+      data:
+        entity: media_player.bedroom_pair
+        volume_level: 0.7
+    - repeat:
+        until:
+          - condition: template
+            value_template: >-
+              {{ state_attr('media_player.bedroom_pair', 'media_title') != 'Rain white noise' or states('media_player.bedroom_pair') != 'idle' }}
+        sequence:
+          - service: media_player.play_media
+            data:
+              media_content_type: music
+              extra:
+                title: Rain white noise
+                thumb: >-
+                  http://www.gstatic.com/voice_delight/images/relaxation_sounds/icons/rain.png
+              media_content_id: "/local/media/rain.mp3"
+            target:
+              entity_id: media_player.bedroom_pair
+          - wait_for_trigger:
+              - platform: template
+                value_template: >-
+                  {{ state_attr('media_player.bedroom_pair', 'media_title') == 'Rain white noise' and is_state('media_player.bedroom_pair', 'idle') }}
+            continue_on_timeout: false
+            timeout: "10:00:30"
+  mode: restart
+  icon: "mdi:weather-pouring"
+
+white_noise_kelly:
+  sequence:
+    - service: script.ready_cast_with_set_volume
+      data:
+        entity: media_player.kelly_speaker
+        volume_level: 0.7
+    - repeat:
+        until:
+          - condition: template
+            value_template: >-
+              {{ state_attr('media_player.kelly_speaker', 'media_title') != 'Rain white noise' or states('media_player.kelly_speaker') != 'idle' }}
+        sequence:
+          - service: media_player.play_media
+            data:
+              media_content_type: music
+              extra:
+                title: Rain white noise
+                thumb: >-
+                  http://www.gstatic.com/voice_delight/images/relaxation_sounds/icons/rain.png
+              media_content_id: "/local/media/rain.mp3"
+            target:
+              entity_id: media_player.kelly_speaker
+          - wait_for_trigger:
+              - platform: template
+                value_template: >-
+                  {{ state_attr('media_player.kelly_speaker', 'media_title') == 'Rain white noise' and is_state('media_player.kelly_speaker', 'idle') }}
+            continue_on_timeout: false
+            timeout: "10:00:30"
+  mode: restart
+  icon: "mdi:weather-pouring"

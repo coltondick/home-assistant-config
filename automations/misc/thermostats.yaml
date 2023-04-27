@@ -1,0 +1,23 @@
+#################################################################
+## Thermostat Automations
+#################################################################
+
+## Synchronize Thermostat
+
+- id: "7bee4c73-4b81-4005-9907-5512cf787726"
+  alias: "Misc: Synchronize thermostats"
+  trigger:
+    - platform: state
+      entity_id: &thermostats
+        - climate.dining_room_thermostat
+        - climate.living_room_thermostat
+      attribute: temperature
+  variables:
+    thermostats: *thermostats
+  action:
+    - delay: "00:00:01"
+    - service: climate.set_temperature
+      target:
+        entity_id: "{{ thermostats|reject('eq', trigger.entity_id)|list }}"
+      data:
+        temperature: "{{ trigger.to_state.attributes.temperature }}"

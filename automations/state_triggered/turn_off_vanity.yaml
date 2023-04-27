@@ -1,0 +1,17 @@
+- id: "e672f64f-5d6c-4849-acec-b4d554deb6cc"
+  alias: "State Triggered: Turn on|off vanity lights when motion no longer detected."
+  description: ""
+  trigger:
+    - entity_id: binary_sensor.bedroom_motion_occupancy
+      platform: state
+      to: "off"
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: switch.vanity
+      state: "on"
+  action:
+    - service: switch.turn_off
+      target:
+        entity_id: switch.vanity

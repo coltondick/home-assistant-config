@@ -1,0 +1,15 @@
+motion_sensors:
+  name: All motion sensors
+  entities:
+    - binary_sensor.dining_room_motion
+    - binary_sensor.living_room_motion
+    - binary_sensor.master_bedroom_motion
+    - binary_sensor.office_motion
+
+door_sensors:
+  name: All door sensors
+  entities:
+    - binary_sensor.front_door
+    - binary_sensor.patio_door
+    - binary_sensor.office_door
+    - binary_sensor.bedroom_door

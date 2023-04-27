@@ -1,0 +1,28 @@
+- type: vertical-stack
+  cards:
+    - type: "custom:button-card"
+      template:
+        - card_input_boolean
+        - green_on
+      entity: input_boolean.override_home
+      name: Override
+    - type: "custom:button-card"
+      template:
+        - card_input_boolean
+        - green_on
+      entity: switch.white_noise_onoff
+      name: Sleep
+- type: vertical-stack
+  cards:
+    - type: "custom:button-card"
+      template:
+        - card_input_boolean
+        - green_on
+      entity: switch.party_switch
+      name: Party
+    - type: "custom:button-card"
+      template:
+        - card_input_boolean
+        - green_on
+      entity: script.bedtime_routine
+      name: Bedtime Routine

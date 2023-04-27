@@ -1,0 +1,25 @@
+- id: "e66dc580-a123-4308-b1de-21bd5f692aca"
+  alias: "Time Triggered: Turn Side Table Scentsy On at 8:30 AM"
+  trigger:
+    platform: time
+    at: "08:30:00"
+  # condition:
+  #   - condition: state
+  #     entity_id: person.colton
+  #     state: home
+  #   - condition: and
+  #     conditions:
+  #       - condition: template
+  #         value_template: "{{ is_state('person.miranda', 'home') }}"
+  action:
+    service: switch.turn_on
+    entity_id: switch.scentsy_side_table
+
+- id: "c95e6a44-c190-4a88-83c5-863ac34d3b6d"
+  alias: "Time Triggered: Turn Side Table Scentsy Off at 8 PM"
+  trigger:
+    platform: time
+    at: "20:00:00"
+  action:
+    service: switch.turn_off
+    entity_id: switch.scentsy_side_table

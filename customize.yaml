@@ -1,0 +1,99 @@
+light.hue_light_strip:
+  icon: hue:lightstrip
+light.laundry_room_ceiling:
+  icon: mdi:washing-machine
+light.tv_leds:
+  icon: hue:lightstrip
+remote.tv:
+  icon: mdi:television
+remote.bedroom:
+  icon: mdi:television
+sensor.airgradient_c02:
+  icon: mdi:wind
+sensor.airgradient_pm2_5:
+  icon: mdi:wind
+sensor.average_indoor_temperature:
+  icon: mdi:thermometer
+sensor.u_s_air_quality_index:
+  icon: mdi:wind
+switch.cage:
+  icon: mdi:paw
+switch.patio_lights:
+  icon: mdi:string-lights
+switch.side_table_lamp:
+  icon: mdi:lamp
+switch.bedroom_sidetable_lamp:
+  icon: mdi:lamp
+switch.white_noise_onoff:
+  icon: mdi:bed-double
+switch.vanity:
+  icon: mdi:hair-dryer
+switch.scentsy:
+  icon: mdi:scent
+switch.kitchen_leds:
+  icon: hue:lightstrip
+light.kitchen_stove:
+  icon: mdi:stove
+
+# Door Sensors
+binary_sensor.front_door:
+  device_class:
+  icon: mdi:door
+binary_sensor.patio_door:
+  device_class:
+  icon: mdi:door
+binary_sensor.office_door:
+  device_class:
+  icon: mdi:door
+binary_sensor.bedroom_door:
+  device_class:
+  icon: mdi:door
+binary_sensor.aqara_front_door:
+  device_class:
+  icon: mdi:door
+
+# Motion Sensors
+binary_sensor.dining_room_motion:
+  device_class: motion
+binary_sensor.living_room_motion:
+  device_class: motion
+binary_sensor.master_bedroom_motion:
+  device_class: motion
+binary_sensor.office_motion:
+  device_class: motion
+
+# Window Sensors
+binary_sensor.patio_window:
+  device_class: window
+
+# Battery sensors
+sensor.aqara_front_door_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.bedroom_door_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.cage_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.gate_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.mbr_remote_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_button_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_door_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.button_miranda_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.button_colton_battery:
+  device_class: battery
+  icon: mdi:battery
+sensor.office_remote_battery:
+  device_class: battery
+  icon: mdi:battery

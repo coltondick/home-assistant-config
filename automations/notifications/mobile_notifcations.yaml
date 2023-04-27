@@ -1,0 +1,13 @@
+- id: "76e6c45b-848c-46a4-927b-8f8c1a697354"
+  alias: "Notification: Notify when Dryer finishes"
+  trigger:
+    - entity_id: binary_sensor.dryer
+      platform: state
+      to: "off"
+  action:
+    - service: notify.ALL_DEVICES
+      data:
+        title: "Dryer State"
+        message: "Dryer has finished drying the clothes."
+        data:
+          color: "#2DF56D" # or "red"

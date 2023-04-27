@@ -1,0 +1,74 @@
+- id: "0c3828c9-e24b-479b-b5f4-2671c4f9f6a2"
+  alias: "State Triggered: Turn on|off all TV backlight when TV state changes."
+  description: ""
+  trigger:
+    - entity_id: remote.tv
+      platform: state
+      to: "on"
+    - platform: state
+      entity_id: remote.tv
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'on' }}"
+          sequence:
+            - entity_id: "light.living_room_tv_backlight"
+              service: light.turn_on
+            - entity_id: "light.tv_leds"
+              service: light.turn_on
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'off' }}"
+          sequence:
+            - entity_id: "light.living_room_tv_backlight"
+              service: light.turn_off
+            - entity_id: "light.tv_leds"
+              service: light.turn_off
+      default: []
+  mode: single
+
+- id: "b8dfd229-d95a-46c9-b2d3-1d347dc514ed"
+  alias: "Set hyperion effect after playback"
+  trigger:
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "off"
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "standby"
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "paused"
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "idle"
+  condition:
+    - condition: state
+      entity_id: light.living_room_tv_backlight
+      state: "on"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.living_room_tv_backlight
+      data:
+        effect: "Candle"
+
+- id: "b8c05b14-864a-41c2-ba0e-14bd24b92e07"
+  alias: "Set hyperion to USB Capture for playback"
+  trigger:
+    - platform: state
+      entity_id: media_player.nvidia_shield
+      to: "playing"
+  condition:
+    - condition: state
+      entity_id: light.living_room_tv_backlight
+      state: "on"
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.living_room_tv_backlight
+      data:
+        effect: "USB Capture"

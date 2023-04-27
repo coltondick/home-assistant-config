@@ -1,0 +1,6 @@
+office:
+  name: Office Lights
+  entities:
+    - light.office_light_bulb_1
+    - light.office_light_bulb_2
+    - light.office_light_bulb_3

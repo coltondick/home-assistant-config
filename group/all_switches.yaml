@@ -1,0 +1,10 @@
+all_switches:
+  name: All Switches
+  entities:
+    - switch.side_table_lamp
+    - switch.cage
+    - switch.scentsy
+    - switch.vanity
+    - switch.bedroom_sidetable_lamp
+    - switch.patio_lights
+    - switch.tv_lamp

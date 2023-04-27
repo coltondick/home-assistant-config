@@ -1,0 +1,67 @@
+theme: Nordic
+title: Thermostats
+icon: mdi:thermometer
+path: heating
+badges: []
+cards:
+  ## Chip Back ##
+  - type: "custom:button-card"
+    template: chip_back
+    variables:
+      ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+  - type: vertical-stack
+    cards:
+      - type: "custom:button-card"
+        template: custom_card_coltondick_thermostat
+        entity: climate.living_room_thermostat
+        variables:
+          ulm_card_thermostat_enable_collapse: false
+          ulm_card_thermostat_enable_controls: true
+          ulm_card_thermostat_enable_background_color: true
+          ulm_card_thermostat_enable_hvac_modes: false
+          ulm_card_thermostat_enable_popup: false
+      # - type: "custom:button-card"
+      #   template: custom_card_coltondick_thermostat
+      #   entity: climate.living_room_thermostat
+      #   variables:
+      #     ulm_card_thermostat_enable_collapse: false
+      #     ulm_card_thermostat_enable_controls: true
+      #     ulm_card_thermostat_enable_background_color: true
+      #     ulm_card_thermostat_enable_hvac_modes: false
+      #     ulm_card_thermostat_enable_popup: false
+      # - type: "custom:button-card"
+      #   template: custom_card_coltondick_thermostat
+      #   entity: climate.dining_room_thermostat
+      #   variables:
+      #     ulm_card_thermostat_enable_collapse: false
+      #     ulm_card_thermostat_enable_controls: true
+      #     ulm_card_thermostat_enable_background_color: true
+      #     ulm_card_thermostat_enable_hvac_modes: false
+      #     ulm_card_thermostat_enable_popup: false
+      - type: "custom:button-card"
+        template: custom_card_coltondick_thermostat
+        entity: climate.bedroom_thermostat
+        variables:
+          ulm_card_thermostat_enable_collapse: false
+          ulm_card_thermostat_enable_controls: true
+          ulm_card_thermostat_enable_background_color: true
+          ulm_card_thermostat_enable_hvac_modes: false
+          ulm_card_thermostat_enable_popup: false
+      - type: "custom:button-card"
+        template: custom_card_coltondick_thermostat
+        entity: climate.bathroom_thermostat
+        variables:
+          ulm_card_thermostat_enable_collapse: false
+          ulm_card_thermostat_enable_controls: true
+          ulm_card_thermostat_enable_background_color: true
+          ulm_card_thermostat_enable_hvac_modes: false
+          ulm_card_thermostat_enable_popup: false
+      - type: "custom:button-card"
+        template: custom_card_coltondick_thermostat
+        entity: climate.office_thermostat
+        variables:
+          ulm_card_thermostat_enable_collapse: false
+          ulm_card_thermostat_enable_controls: true
+          ulm_card_thermostat_enable_background_color: true
+          ulm_card_thermostat_enable_hvac_modes: false
+          ulm_card_thermostat_enable_popup: false

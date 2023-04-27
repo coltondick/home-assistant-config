@@ -1,0 +1,109 @@
+- id: '1650386038788'
+  alias: Controller - Philips 324131092621 Hue Dimmer switch
+  description: ''
+  use_blueprint:
+    path: EPMatt/philips_324131092621.yaml
+    input:
+      controller_entity: sensor.office_hue_remote_action
+      helper_last_controller_event: input_text.helper_last_controller_event
+      action_button_on_short:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.mbr_ceiling_lights
+      action_button_off_short:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.mbr_ceiling_lights
+      action_button_up_short:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 10
+        target:
+          entity_id: light.mbr_ceiling_lights
+      action_button_up_long:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 10
+        target:
+          entity_id: light.mbr_ceiling_lights
+      action_button_down_short:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: -10
+        target:
+          entity_id: light.mbr_ceiling_lights
+      action_button_down_long:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: -10
+        target:
+          entity_id: light.mbr_ceiling_lights
+      button_up_long_loop: true
+      button_down_long_loop: true
+      integration: Zigbee2MQTT
+      action_button_on_long:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.bedroom_sidetable_lamp
+      action_button_off_long:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.bedroom_sidetable_lamp
+      button_on_long_loop: true
+- id: '1650394776545'
+  alias: Aqara Buttons All-In-One [Zigbee2MQTT]
+  description: ''
+  use_blueprint:
+    path: Drafted/aqara-buttons-all-in-one-zigbee2mqtt.yaml
+    input:
+      action_sensor: sensor.office_button_action
+      single_action:
+      - service: media_player.clear_playlist
+        data: {}
+        target:
+          entity_id: media_player.bedroom_pair_lms
+      - service: shell_command.lms_add_playlist_bedroompair
+        data: {}
+      - service: shell_command.lms_max_volume_bedroompair
+        data: {}
+      - service: media_player.media_play
+        data: {}
+        target:
+          entity_id: media_player.bedroom_pair
+      hold_action:
+      - service: shell_command.lms_restart_container
+        data: {}
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 3
+          milliseconds: 0
+      - device_id: ''
+        domain: ''
+        entity_id: ''
+      - service: media_player.clear_playlist
+        data: {}
+        target:
+          entity_id: media_player.bedroom_pair_lms
+- id: '1656626111495'
+  alias: Cast to Google Hub
+  description: ''
+  use_blueprint:
+    path: cast_dashboard_to_hub/cast_dashboard_to_hub.yaml
+    input:
+      player: media_player.living_room_hub
+      view: ui-lovelace-minimalist
+      dashboard: hub-home
+- id: '1681427119722'
+  alias: Cast to Google Hub test
+  description: ''
+  use_blueprint:
+    path: cast_dashboard_to_hub/cast_dashboard_to_hub.yaml
+    input:
+      player: media_player.living_room_hub
+      view: hub-home
+      dashboard: ui-lovelace-minimalist

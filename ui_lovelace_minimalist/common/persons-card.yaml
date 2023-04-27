@@ -1,0 +1,28 @@
+- template: person_card_new
+  type: custom:decluttering-card
+  variables:
+    - entity: person.colton
+    - name: Colton
+    - show_name: false
+    - show_state: false
+    - battery: device_tracker.life360_colton
+    - wifi: sensor.colton_s_samsung_wifi_connection
+    - entity_picture: /local/images/colton.jpg
+    - show_entity_picture: true
+    - tap_action:
+        action: more-info
+        haptic: light
+- template: person_card_new
+  type: custom:decluttering-card
+  variables:
+    - entity: person.miranda
+    - name: Miranda
+    - show_name: false
+    - show_state: false
+    - battery: device_tracker.miranda
+    - wifi: sensor.miranda_wifi_connection
+    - entity_picture: /local/images/miranda.jpg
+    - show_entity_picture: true
+    - tap_action:
+        action: more-info
+        haptic: light

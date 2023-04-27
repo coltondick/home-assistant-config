@@ -1,0 +1,7 @@
+media_players_bedroom_exclude:
+  name: Media Players bedroom excluded
+  icon: mdi:music
+  entities:
+    - media_player.gh_kitchen_speaker
+    - media_player.gh_living_room_speaker
+    - media_player.gh_office_speaker

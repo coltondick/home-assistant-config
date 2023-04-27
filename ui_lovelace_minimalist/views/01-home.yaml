@@ -1,0 +1,281 @@
+## BEGIN HOME ###
+theme: Nordic
+title: Home
+path: home
+icon: mdi:home
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      ## Chips Row ##
+      - type: horizontal-stack
+        cards: !include ../common/chips-row.yaml
+      ## Persons Card ##
+      - type: horizontal-stack
+        cards: !include ../common/persons-card.yaml
+      ## Buttons ##
+      - type: horizontal-stack
+        cards: !include ../common/buttons-card.yaml
+  ## Entry Way ##
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Entry Way
+          - type: "custom:button-card"
+            color_type: blank-card
+
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_light
+            entity: light.entryway_ceiling
+            variables:
+              ulm_card_light_enable_slider: false
+              ulm_card_light_enable_color: false
+              ulm_card_light_force_background_color: false
+      ## Buttons ##
+      - type: horizontal-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  # - icon_info_bg
+                  - green_on
+                entity: switch.patio_lights
+                name: Patio Lights
+              - type: "custom:button-card"
+                entity: lock.front_door
+                template: "custom_card_eraycetinay_lock"
+                name: "Front Door"
+                variables:
+                  ulm_custom_card_eraycetinay_lock_tap_control: true
+  ## Dining Room ##
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Dining Room
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_light
+            entity: light.dining_room_ceiling
+            variables:
+              ulm_card_light_enable_slider: false
+              ulm_card_light_enable_color: false
+              ulm_card_light_force_background_color: false
+      ## Buttons ##
+      - type: horizontal-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: switch.scentsy
+                name: Scentsy
+              - type: "custom:button-card"
+                template: card_light
+                entity: light.hue_light_strip
+                variables:
+                  ulm_card_light_enable_slider: false
+                  ulm_card_light_enable_color: false
+                  ulm_card_light_force_background_color: false
+                  ulm_card_light_enable_popup: true
+  ## Kitchen ##
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Kitchen
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_light
+            entity: light.kitchen_ceiling
+            variables:
+              ulm_card_light_enable_slider: false
+              ulm_card_light_enable_color: false
+              ulm_card_light_force_background_color: false
+      ## Buttons ##
+      - type: horizontal-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: switch.kitchen_leds
+                name: LEDs
+              - type: "custom:button-card"
+                template: card_light
+                entity: light.kitchen_stove
+                variables:
+                  ulm_card_light_enable_slider: false
+                  ulm_card_light_enable_color: false
+                  ulm_card_light_force_background_color: false
+                  ulm_card_light_enable_popup: true
+  ## Office ##
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Office
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_light
+            entity: light.office_ceiling_lights
+            variables:
+              ulm_card_light_enable_slider: false
+              ulm_card_light_enable_color: false
+              ulm_card_light_force_background_color: false
+
+  ## Master Bedroom ##
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Master Bedroom
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_light
+            entity: group.bedroom
+            variables:
+              ulm_card_light_enable_slider: false
+              ulm_card_light_enable_color: false
+              ulm_card_light_force_background_color: false
+      ## Buttons ##
+      - type: horizontal-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: remote.bedroom
+                name: TV
+                tap_action:
+                  action: call-service
+                  service: remote.toggle
+                  service_data:
+                    entity_id: remote.bedroom
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: switch.bedroom_sidetable_lamp
+                name: Lamp
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template:
+              - card_input_boolean
+              - red_on
+            entity: switch.vanity
+            name: Vanity
+          - type: "custom:button-card"
+            color_type: blank-card
+
+  ## Living Room ##
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Living Room
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_light
+            entity: light.living_room_ceiling
+            variables:
+              ulm_card_light_enable_slider: false
+              ulm_card_light_enable_color: false
+              ulm_card_light_force_background_color: false
+      ## Buttons ##
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: remote.tv
+                name: TV
+                tap_action:
+                  action: call-service
+                  service: remote.toggle
+                  service_data:
+                    entity_id: remote.tv
+              - type: "custom:button-card"
+                template:
+                  - card_light
+                  - green_on
+                entity: light.living_room_tv_backlight
+                variables:
+                  ulm_card_light_enable_slider: false
+                  ulm_card_light_enable_color: false
+                  ulm_card_light_force_background_color: false
+                  ulm_card_light_enable_popup: true
+          - type: vertical-stack
+            cards:
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: switch.cage
+                name: Cage
+              - type: "custom:button-card"
+                template:
+                  - card_input_boolean
+                  - green_on
+                entity: switch.side_table_lamp
+                name: Lamp

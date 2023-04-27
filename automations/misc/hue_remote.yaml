@@ -1,0 +1,104 @@
+- id: "12bd3fd1-acd8-473c-9663-1e7368bdfe07"
+  alias: Office Controller - Philips 324131092621 Hue Dimmer switch
+  description: ""
+  use_blueprint:
+    path: EPMatt/philips_324131092621.yaml
+    input:
+      controller_entity: sensor.office_hue_remote_action
+      helper_last_controller_event: input_text.office_helper_last_controller_event
+      action_button_on_short:
+        - service: light.turn_on
+          data: {}
+          target:
+            entity_id: light.office_ceiling_lights
+      action_button_off_short:
+        - service: light.turn_off
+          data: {}
+          target:
+            entity_id: light.office_ceiling_lights
+      action_button_up_short:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: 10
+          target:
+            entity_id: light.office_ceiling_lights
+      action_button_up_long:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: 10
+          target:
+            entity_id: light.office_ceiling_lights
+      action_button_down_short:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: -10
+          target:
+            entity_id: light.office_ceiling_lights
+      action_button_down_long:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: -10
+          target:
+            entity_id: light.office_ceiling_lights
+      button_up_long_loop: true
+      button_down_long_loop: true
+      integration: Zigbee2MQTT
+      action_button_off_long:
+        - service: script.white_noise_kelly
+
+- id: "98ecd1eb-d0dd-4b46-97c8-cab5b66932ea"
+  alias: MBR Controller - Philips 324131092621 Hue Dimmer switch
+  description: ""
+  use_blueprint:
+    path: EPMatt/philips_324131092621.yaml
+    input:
+      controller_entity: sensor.bedroom_hue_remote_action
+      helper_last_controller_event: input_text.mbr_helper_last_controller_event
+      action_button_on_short:
+        - service: light.turn_on
+          data: {}
+          target:
+            entity_id: light.mbr_ceiling_lights
+      action_button_off_short:
+        - service: light.turn_off
+          data: {}
+          target:
+            entity_id: light.mbr_ceiling_lights
+      action_button_up_short:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: 10
+          target:
+            entity_id: light.mbr_ceiling_lights
+      action_button_up_long:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: 10
+          target:
+            entity_id: light.mbr_ceiling_lights
+      action_button_down_short:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: -10
+          target:
+            entity_id: light.mbr_ceiling_lights
+      action_button_down_long:
+        - service: light.turn_on
+          data:
+            brightness_step_pct: -10
+          target:
+            entity_id: light.mbr_ceiling_lights
+      button_up_long_loop: true
+      button_down_long_loop: true
+      integration: Zigbee2MQTT
+      action_button_on_long:
+        - service: switch.turn_on
+          data: {}
+          target:
+            entity_id: switch.bedroom_sidetable_lamp
+      action_button_off_long:
+        - service: switch.turn_off
+          data: {}
+          target:
+            entity_id: switch.bedroom_sidetable_lamp
+      button_on_long_loop: true

@@ -1,0 +1,26 @@
+- id: "5fa16531-d6d6-4fad-b4e4-38ade93bab37"
+  alias: Set Thermostats to 20 Degrees
+  trigger:
+    - platform: time
+      at: "21:30:00"
+  action:
+    - condition: template
+      value_template: "{{ states.climate.living_room_thermostat.attributes.current_temperature > 20 }}"
+      service: climate.set_temperature
+      entity_id: climate.living_room_thermostat
+      temperature: 20
+    - condition: template
+      value_template: "{{ states.climate.bedroom_thermostat.attributes.current_temperature > 20 }}"
+      service: climate.set_temperature
+      entity_id: climate.bedroom_thermostat
+      temperature: 20
+    - condition: template
+      value_template: "{{ states.climate.bathroom_thermostat.attributes.current_temperature > 20 }}"
+      service: climate.set_temperature
+      entity_id: climate.bathroom_thermostat
+      temperature: 20
+    - condition: template
+      value_template: "{{ states.climate.office_thermostat.attributes.current_temperature > 20 }}"
+      service: climate.set_temperature
+      entity_id: climate.office_thermostat
+      temperature: 20

@@ -1,0 +1,257 @@
+automation: !include_dir_merge_list automations
+binary_sensor: !include_dir_merge_list binary_sensor
+group: !include_dir_merge_named group
+google_assistant: !include google_assistant.yaml
+influxdb: !include influxdb.yaml
+light: !include lights/lights.yaml
+mqtt: !include_dir_merge_named mqtt
+panel_iframe: !include panel_iframe.yaml
+scene: !include scenes.yaml
+script: !include_dir_merge_named scripts
+sensor: !include_dir_merge_list sensor
+shell_command: !include_dir_merge_named shell_command
+switch: !include switches.yaml
+browser_mod:
+
+stream:
+# camera:
+#   - platform: ffmpeg
+#     name: Birdcam
+#     input: rtsp://192.168.1.3:8554/bird-cam
+#     # input: !secret rtsp_input
+
+climate:
+  - platform: climate_group
+    name: "Living Room Thermostats"
+    temperature_unit: C
+    entities:
+      - climate.dining_room_thermostat
+      - climate.living_room_thermostat
+
+emulated_hue:
+  expose_by_default: true
+
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
+    - /hacsfiles/hass-bha-icons/hass-bha-icons.js
+    - /hacsfiles/hass-hue-icons/hass-hue-icons.js
+    - /hacsfiles/button-card-mod/button-card.js
+    - /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+    - /hacsfiles/mini-media-player/mini-media-player-bundle.js
+    - /hacsfiles/my-cards/my-cards.js
+    - /hacsfiles/light-entity-card/light-entity-card.js
+    - /hacsfiles/lovelace-auto-entities/auto-entities.js
+    - /hacsfiles/lovelace-flower-card/flower-card.js
+    - /local/kiosk-mode.js?v=1.2.1
+    - /hacsfiles/ha-catt-fix/ha-catt-fix.js
+
+history:
+  include:
+    domains:
+      - sensor
+      - switch
+      - lock
+
+homeassistant:
+  name: Home
+  latitude: !secret homeassistant_latitude
+  longitude: !secret homeassistant_longitude
+  elevation: !secret homeassistant_elevation
+  unit_system: metric
+  currency: CAD
+  country: CA
+  time_zone: America/Vancouver
+  external_url: !secret external_url
+  internal_url: !secret internal_url
+  customize: !include customize.yaml
+  customize_domain: !include customize_domain.yaml
+  packages: !include_dir_named packages
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/24
+        - 10.0.0.0/8
+        - 192.168.1.182
+      allow_bypass_login: true
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.0.0/24
+    - 10.0.0.0/8
+    - 172.17.0.0/24
+    - 20.0.0.0/8
+
+input_boolean:
+  override_home:
+    name: Home override
+    icon: mdi:home
+  vacation_mode:
+    name: Vacation Mode
+    icon: mdi:beach
+  sleep_mode:
+    name: Sleep Mode
+    icon: mdi:moon-waning-crescent
+  occupancy_colton:
+    name: Occupancy Colton
+    icon: mdi:account
+  occupancy_miranda:
+    name: Occupancy Miranda
+    icon: mdi:account
+  occupancy_kelly:
+    name: Occupancy Kelly
+    icon: mdi:account
+  guestmode:
+    name: Guest Mode
+    icon: ios:house-fill
+  white_noise:
+    name: White Noise
+    icon: mdi:music-note
+    initial: off
+  white_noise_kelly:
+    name: White Noise Kelly
+    icon: mdi:music-note
+    initial: off
+
+input_text:
+  office_helper_last_controller_event:
+    name: Office Helper Last Controller Event
+  mbr_helper_last_controller_event:
+    name: MBR Helper Last Controller Event
+
+input_number:
+  denon_volume:
+    icon: mdi:volume-medium
+    name: Volume
+    min: 1
+    max: 45
+    step: 1
+    mode: slider
+
+logger:
+  default: info
+  logs:
+    custom_components.bchydro: debug
+    homeassistant.components.recorder.migration: info
+
+# lovelace:
+#   mode: storage
+#   dashboards:
+#     test-bed:
+#       mode: yaml
+#       filename: ui_lovelace_minimalist/dashboard/testing.yaml
+#       title: Testing
+#       icon: mdi:test-tube
+#       show_in_sidebar: true
+#       require_admin: true
+
+media_player:
+  - platform: denon #denonavr
+    name: Denon AVR
+    host: !secret denon_avr_ip
+
+  - platform: universal
+    name: Nvidia Shield
+    children:
+      - media_player.adb_shield_tv
+      - media_player.denon_avr_s720w
+    attributes:
+      state: media_player.adb_shield_tv
+      source_list: media_player.adb_shield_tv|source_list
+      source: media_player.adb_shield_tv|source
+      app_id: media_player.adb_shield_tv|app_id
+      entity_picture: media_player.adb_shield_tv|entity_picture
+      is_volume_muted: media_player.denon_avr_s720w|is_volume_muted
+      volume_level: input_number.denon_volume|volume_level
+    commands:
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.tv
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.tv
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.denon_avr_s720w
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.denon_avr_s720w
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          entity_id: media_player.denon_avr_s720w
+      media_play:
+        service: media_player.media_play_pause
+        data:
+          entity_id: media_player.shield_android_tv
+      media_pause:
+        service: media_player.media_play_pause
+        data:
+          entity_id: media_player.shield_android_tv
+      media_previous_track:
+        service: media_player.media_previous_track
+        data:
+          entity_id: media_player.shield_android_tv
+      media_next_track:
+        service: media_player.media_next_track
+        data:
+          entity_id: media_player.shield_android_tv
+    device_class: tv
+
+notify:
+  - name: ALL_DEVICES
+    platform: group
+    services:
+      - service: mobile_app_sm_g986w
+      - service: mobile_app_miranda
+  - name: TELEGRAM_BOT
+    platform: telegram
+    chat_id: !secret telegram_chat_id
+
+plant:
+  openplantbook:
+    client_id: !secret plantbook_client_id
+    secret: !secret plantbook_secret
+  madagascar_jewel:
+    species: euphorbia leuconeura
+    sensors:
+      moisture: sensor.miflora_madagascar_jewel_moisture
+      battery: sensor.miflora_madagascar_jewel_battery
+      temperature: sensor.miflora_madagascar_jewel_temperature
+      conductivity: sensor.miflora_madagascar_jewel_conductivity
+      brightness: sensor.miflora_madagascar_jewel_light
+
+recorder:
+  purge_keep_days: 15
+
+# spotify:
+#   client_id: !secret spotify_client_id
+#   client_secret: !secret spotify_client_secret
+
+spotcast:
+  sp_dc: !secret sp_dc
+  sp_key: !secret sp_key
+sun:
+
+system_health:
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_token
+    allowed_chat_ids: !secret telegram_chat_id
+
+tplink:
+  discovery: true
+  switch:
+    - host: !secret kasa_cage_ip
+    - host: !secret kasa_sidetable_livingroom_ip
+    - host: !secret kasa_tvlamp_livingroom_ip
+    - host: !secret kasa_scentsy_diningroom_ip
+    - host: !secret kasa_vanity_master_ip

@@ -1,0 +1,7 @@
+family:
+  name: Family
+  entities:
+    - device_tracker.life360_colton
+    - device_tracker.life360_miranda
+    - device_tracker.miranda
+    - device_tracker.colton

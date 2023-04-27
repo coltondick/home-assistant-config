@@ -1,0 +1,287 @@
+## BEGIN Tablet HOME ###
+theme: Nordic
+title: Tablet Home
+path: tablet-home
+icon: mdi:picture-in-picture-bottom-right
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      ## Chips Row ##
+      - type: horizontal-stack
+        cards: !include ../common/chips-row.yaml
+      ## Persons Card ##
+      - type: horizontal-stack
+        cards: !include ../common/persons-card.yaml
+      ## Buttons ##
+      - type: horizontal-stack
+        cards: !include ../common/buttons-card.yaml
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Heating
+          - type: "custom:button-card"
+            color_type: blank-card
+
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: custom_card_coltondick_thermostat
+            entity: climate.living_room_thermostat
+            variables:
+              ulm_card_thermostat_enable_collapse: false
+              ulm_card_thermostat_enable_controls: true
+              ulm_card_thermostat_enable_background_color: true
+              ulm_card_thermostat_enable_hvac_modes: false
+              ulm_card_thermostat_enable_popup: false
+      - type: "custom:button-card"
+        template: card_flower
+        variables:
+          ulm_card_flower_entity: plant.madagascar_jewel
+          ulm_card_flower_name: Madagascar Jewel
+          ulm_card_flower_species: "Euphorbia leuconeura"
+  - type: vertical-stack
+    cards:
+      # title card
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: card_title
+            name: Rooms
+          - type: "custom:button-card"
+            color_type: blank-card
+      - type: horizontal-stack
+        cards:
+          ## Entry Way ##
+          # - type: "custom:button-card"
+          #   template:
+          #     - custom_card_coltondick_room
+          #     - grey_off
+          #     - blue_on
+          #   name: Entry Way
+          #   entity: light.entryway_ceiling
+          #   icon: hue:room-hallway
+          #   templates:
+          #     - yellow_on
+          #   tap_action:
+          #     action: toggle
+          #   variables:
+          #     label_use_temperature: false
+          #     label_use_brightness: false
+          #     room_temperature: sensor.average_indoor_temperature
+          #     entity_1:
+          #       entity_id: lock.front_door
+          #       templates:
+          #         - custom_coltondick_lock_on
+          #         - custom_coltondick_lock_off
+          #       tap_action:
+          #         action: toggle
+          #     entity_2:
+          #       entity_id: switch.patio_lights
+          #       templates:
+          #         - green_on
+          #         - grey_off
+          #       tap_action:
+          #         action: toggle
+          #     entity_3:
+          #       entity_id: light.laundry_room_ceiling
+          #       templates:
+          #         - green_on
+          #         - grey_off
+          #     entity_4:
+          #       entity_id: binary_sensor.aqara_front_door
+          #       templates:
+          #         - red_on
+          #         - green_off
+          ## Living Room ##
+          - type: "custom:button-card"
+            template:
+              - custom_card_coltondick_room
+              - grey_off
+              - blue_on
+            name: Living Room
+            entity: light.living_room_ceiling
+            icon: hue:room-living
+            templates:
+              - yellow_on
+            tap_action:
+              action: toggle
+            variables:
+              label_use_temperature: true
+              label_use_brightness: false
+              room_temperature: sensor.living_room_temperature
+              entity_1:
+                entity_id: remote.tv
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_2:
+                entity_id: switch.side_table_lamp
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_3:
+                entity_id: switch.cage
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_4:
+                entity_id: light.living_room_tv_backlight
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+
+      - type: horizontal-stack
+        cards:
+          ## Kitchen ##
+          - type: "custom:button-card"
+            template:
+              - custom_card_coltondick_room
+              - grey_off
+              - blue_on
+            name: Kitchen
+            entity: light.kitchen_ceiling
+            icon: hue:room-kitchen
+            templates:
+              - yellow_on
+            tap_action:
+              action: toggle
+            variables:
+              label_use_temperature: false
+              label_use_brightness: false
+              entity_1:
+                entity_id: light.kitchen_stove
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_2:
+                entity_id: switch.kitchen_leds
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+          ## Dining Room ##
+          - type: "custom:button-card"
+            template:
+              - custom_card_coltondick_room
+              - grey_off
+              - blue_on
+            name: Dining Room
+            entity: light.dining_room_ceiling
+            icon: hue:room-dining
+            templates:
+              - yellow_on
+            tap_action:
+              action: toggle
+            variables:
+              label_use_temperature: true
+              label_use_brightness: false
+              room_temperature: sensor.dining_room_temperature
+              entity_1:
+                entity_id: light.hue_light_strip
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_2:
+                entity_id: switch.scentsy
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+      - type: horizontal-stack
+        cards:
+          ## Master ##
+          - type: "custom:button-card"
+            template:
+              - custom_card_coltondick_room
+              - grey_off
+              - blue_on
+            name: Master Bedroom
+            entity: group.bedroom
+            icon: hue:room-bedroom
+            templates:
+              - yellow_on
+            tap_action:
+              action: toggle
+            variables:
+              label_use_temperature: true
+              label_use_brightness: false
+              room_temperature: sensor.bedroom_temperature
+              entity_1:
+                entity_id: remote.bedroom
+                templates:
+                  - green_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_2:
+                entity_id: switch.vanity
+                templates:
+                  - red_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_3:
+                entity_id: switch.bedroom_sidetable_lamp
+                templates:
+                  - yellow_on
+                  - grey_off
+                tap_action:
+                  action: toggle
+              entity_4:
+                entity_id: binary_sensor.bedroom_door
+                templates:
+                  - red_on
+                  - green_off
+          ## Office ##
+          - type: "custom:button-card"
+            template:
+              - custom_card_coltondick_room
+              - grey_off
+              - blue_on
+            name: Office
+            entity: light.office_ceiling_lights
+            icon: hue:room-office
+            templates:
+              - yellow_on
+            tap_action:
+              action: toggle
+            variables:
+              label_use_temperature: true
+              label_use_brightness: false
+              room_temperature: sensor.office_temperature
+              entity_1:
+                entity_id: media_player.spotify_colt_dick
+                templates:
+                  - custom_coltondick_media_on
+                  - custom_coltondick_media_off
+                tap_action:
+                  action: call-service
+                  service: script.play_pause_spotify
+                  service_data:
+                    entity_id: media_player.spotify_colt_dick
+              entity_2:
+                entity_id: binary_sensor.office_door
+                templates:
+                  - red_on
+                  - green_off

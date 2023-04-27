@@ -1,0 +1,77 @@
+sensor:
+  - name: "AirGradient PM2.5"
+    state_topic: "air-gradient"
+    value_template: "{{ value_json.pm02 }}"
+    unit_of_measurement: "μg/m³"
+
+  - name: "AirGradient C02"
+    state_topic: "air-gradient"
+    value_template: "{{ value_json.rco2 }}"
+    unit_of_measurement: "ppm"
+
+  - name: "AirGradient Temperature"
+    state_topic: "air-gradient"
+    value_template: "{{ value_json.atmp }}"
+    unit_of_measurement: "c"
+
+  - name: "AirGradient Humidity"
+    state_topic: "air-gradient"
+    value_template: "{{ value_json.rhum }}"
+    unit_of_measurement: "%"
+
+  - name: Outside Temperature
+    device_class: temperature
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.temperature_C }}"
+    state_topic: rtl_433/Oregon-THGR810/13
+    json_attributes_topic: rtl_433/Oregon-THGR810/13
+
+  - name: Outside Humidity
+    device_class: humidity
+    unit_of_measurement: "%"
+    value_template: "{{ value_json.humidity }}"
+    state_topic: rtl_433/Oregon-THGR810/13
+    json_attributes_topic: rtl_433/Oregon-THGR810/13
+
+  - name: Outside Wind
+    unit_of_measurement: "km/h"
+    value_template: "{{ (value_json.wind_avg_m_s * 3.6)  | round(1) }}"
+    state_topic: rtl_433/Oregon-WGR800/19
+    json_attributes_topic: rtl_433/Oregon-WGR800/19
+
+  - name: "Bedroom Sidetable Watts"
+    state_topic: "bedroom_sidetable_lamp/tele/SENSOR"
+    value_template: "{{value_json['ENERGY'].Power }}"
+    unit_of_measurement: "W"
+    icon: mdi:flash-circle
+    json_attributes_topic: "bedroom_sidetable_lamp/tele/SENSOR"
+
+  - name: "Laundry Room Colton"
+    state_topic: "monitor/laundry_room/colton"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+
+  - name: "Office Colton"
+    state_topic: "monitor/office/colton"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+
+  - name: "Laundry Room Miranda"
+    state_topic: "monitor/laundry_room/miranda"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+
+  - name: "Office Miranda"
+    state_topic: "monitor/office/miranda"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+
+  - name: "Laundry Room Kelly"
+    state_topic: "monitor/laundry_room/kelly"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+
+  - name: "Office Kelly"
+    state_topic: "monitor/office/kelly"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"

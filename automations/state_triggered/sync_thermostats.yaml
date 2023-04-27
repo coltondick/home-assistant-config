@@ -1,0 +1,14 @@
+# - alias: Sync thermostats
+#   trigger:
+#     - platform: state
+#       entity_id: sensor.dining_room_thermostat_setpoint
+#     - platform: state
+#       entity_id: sensor.living_room_thermostat_setpoint
+#   action:
+#     - service: climate.set_temperature
+#       data_template:
+#         entity_id: '{% if trigger.entity_id == "sensor.dining_room_thermostat_setpoint" %}climate.living_room_thermostat{% else %}climate.dining_room_thermostat{% endif %}'
+#         temperature: "{{ trigger.to_state.state }}"
+#   condition:
+#     condition: template
+#     value_template: "{{ now().strftime('%s') - as_timestamp(last_triggered|default('')) > 5 }}"

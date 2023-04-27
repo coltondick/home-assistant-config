@@ -1,0 +1,10 @@
+workdays:
+  name: Workdays
+  entities:
+    - group.bedroom
+    - group.entryway
+    - group.guestbath
+    - group.kitchen
+    - group.livingroom
+    - group.masterbath
+    - light.dining_room_ceiling

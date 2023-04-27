@@ -1,0 +1,18 @@
+# Automatically turn on|off the guinea pig cage.
+- id: "aae8ae37-b155-4bf8-a6db-7323ad6f79c7"
+  alias: "Time Triggered: Turn Cage Lights On at 7 AM"
+  trigger:
+    platform: time
+    at: "07:00:00"
+  action:
+    service: switch.turn_on
+    entity_id: switch.cage
+
+- id: "9bb61678-346d-450d-9fdd-e176cfa490cc"
+  alias: "Time Triggered: Turn Cage Lights Off at 10 PM"
+  trigger:
+    platform: time
+    at: "22:00:00"
+  action:
+    service: switch.turn_off
+    entity_id: switch.cage

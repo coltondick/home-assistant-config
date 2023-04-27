@@ -1,0 +1,87 @@
+custom_card_coltondick_hub_buttons:
+  template:
+    - ulm_language_variables
+  color: var(--google-grey-500)
+  show_icon: true
+  show_name: true
+  show_label: true
+  size: 45%
+  aspect_ratio: 1/1
+  label: |-
+    [[[
+        return entity.state
+    ]]]
+  state:
+    - styles:
+        custom_fields:
+          notification:
+            - border-radius: 50%
+            - border: 2px solid var(--card-background-color)
+            - width: 24.5px
+            - height: 24.5px
+            - position: absolute
+            - left: 50%
+            - top: 50%
+            - transform: translate(-50%,-50%)
+            - margin-top: 35%
+            - margin-left: "-35%"
+            - line-height: 0
+            - display: grid
+            - background-color: |
+                [[[
+                  return "rgba(var(--color-red),1)";
+                ]]]
+      value: unavailable
+  styles:
+    card:
+      - border-radius: 20px
+      - box-shadow: var(--box-shadow)
+      - padding: 5px
+    grid:
+      - grid-template-areas: "'n n n' 'l l l' 'i i i' 'i i i'"
+      - grid-template-columns: 1fr 1fr 1fr 1fr
+      - grid-template-rows: 1fr 1fr 1fr 1fr
+      - justify-items: center
+    icon:
+      - color: rgba(var(--color-theme),0.2)
+    img_cell:
+      - background-color: rgba(var(--color-theme),0.5)
+      - border-radius: 50%
+      - width: 75%
+      - height: 75%
+      - max-width: none
+      - max-height: none
+      - position: absolute
+      - left: 50%
+      - top: 50%
+      - transform: translate(-50%,-50%)
+      - margin-top: 15%
+      - margin-left: "-0%"
+    name:
+      - justify-self: start
+      - align-self: end
+      - font-weight: bold
+      - font-size: 14px
+      - margin-left: 12px
+      - margin-bottom: 10%
+    label:
+      - justify-self: start
+      - align-self: start
+      - font-weight: bold
+      - font-size: 12px
+      - filter: opacity(40%)
+      - margin-left: 12px
+      - margin-top: "-10%"
+    state:
+      - justify-self: start
+      - font-weight: bold
+      - font-size: 12px
+      - filter: opacity(40%)
+      - margin-left: 6px
+  custom_fields:
+    notification: |
+      [[[
+        if (entity.state =='unavailable'){
+          return `<ha-icon icon="mdi:exclamation" style="width: 50%; height: 50%; color: var(--primary-background-color);"></ha-icon>`
+        }
+      ]]]

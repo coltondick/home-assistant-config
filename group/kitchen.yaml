@@ -1,0 +1,6 @@
+kitchen:
+  name: kitchen Lights
+  entities:
+    - light.kitchen_ceiling
+    - switch.kitchen_leds
+    - light.kitchen_stove

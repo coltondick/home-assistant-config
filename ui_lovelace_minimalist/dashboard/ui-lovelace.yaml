@@ -1,0 +1,22 @@
+---
+button_card_templates: !include_dir_merge_named "../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/"
+decluttering_templates: !include_dir_merge_named "../../ui_lovelace_minimalist/decluttering_templates"
+
+title: Home
+swipe_nav:
+  wrap: true
+  animate: fade
+  prevent_default: true
+  swipe_amount: 15
+  skip_tabs: 2,3,4,5,6,7,8,9
+# views: !include_dir_list "../../views/"
+views:
+  - !include ../../ui_lovelace_minimalist/views/01-home.yaml
+  - !include ../../ui_lovelace_minimalist/views/02-tablet-home.yaml
+  - !include ../../ui_lovelace_minimalist/views/05-thermostats.yaml
+  - !include ../../ui_lovelace_minimalist/views/08-livingroom.yaml
+  - !include ../../ui_lovelace_minimalist/views/09-weather.yaml
+  - !include ../../ui_lovelace_minimalist/views/10-security.yaml
+  - !include ../../ui_lovelace_minimalist/views/11-batteries.yaml
+  - !include ../../ui_lovelace_minimalist/views/12-hub-home.yaml
+  - !include ../../ui_lovelace_minimalist/views/13-hub-settings.yaml

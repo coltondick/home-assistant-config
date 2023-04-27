@@ -1,0 +1,81 @@
+- id: "b6f3b998-951e-4a05-8665-f4e7af4f5fa5"
+  alias: "Time Triggered: Lock front door after 20 minutes"
+  trigger:
+    platform: state
+    entity_id: lock.front_door
+    from: "locked"
+    to: "unlocked"
+    for:
+      hours: 0
+      minutes: 20
+      seconds: 0
+  action:
+    service: lock.lock
+    data:
+      entity_id: lock.front_door
+
+- id: "c098dde5-cbb7-419c-a3c0-8ec122c1ea10"
+  alias: "Time Triggered: Lock front door after 5 minutes"
+  trigger:
+    platform: time_pattern
+    minutes: /5
+  condition:
+    - condition: state
+      entity_id: lock.front_door
+      state: "unlocked"
+    - condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ not is_state('person.miranda', 'home') }}"
+        - condition: state
+          entity_id: person.colton
+          state: not_home
+        - condition: numeric_state
+          entity_id: sensor.tim_presence_detection
+          below: 50
+  action:
+    service: lock.lock
+    data:
+      entity_id: lock.front_door
+
+- id: "2ce9d35c-20f6-4e8e-b094-0b0d0b8098a8"
+  alias: "Time Triggered: Lock front door after 2 minutes"
+  trigger:
+    platform: state
+    entity_id: person.colton
+    from: home
+    to: not_home
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  condition:
+    - condition: template
+      value_template: "{{ not is_state('person.miranda', 'home') }}"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: lock.front_door
+          state: unlocked
+  action:
+    service: lock.lock
+    data:
+      entity_id: lock.front_door
+
+- id: "a5d8b78c-277e-464e-8927-0506e5f4f16a"
+  alias: "Time Triggered: Lock door every 15 minutes if it's unlocked and it's after 11:30 PM"
+  trigger:
+    platform: time_pattern
+    minutes: /15
+  condition:
+    - condition: state
+      entity_id: lock.front_door
+      state: "unlocked"
+    - condition: and
+      conditions:
+        - condition: time
+          after: "23:30:00"
+  action:
+    service: lock.lock
+    data:
+      entity_id: lock.front_door

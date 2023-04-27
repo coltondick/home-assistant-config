@@ -1,0 +1,95 @@
+- id: "5bf4c90f-62f2-4779-a181-26f04a60d62c"
+  alias: "Misc: Prevent Living Room Google Home Idle"
+  description: ""
+  trigger:
+    - platform: time_pattern
+      minutes: /2
+    - platform: state
+      entity_id: media_player.gh_living_room_speaker
+      from: unavailable
+      to: idle
+    - platform: state
+      entity_id: media_player.gh_living_room_speaker
+      from: unavailable
+      to: "off"
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.gh_living_room_speaker
+          state: "off"
+        - condition: state
+          entity_id: media_player.gh_living_room_speaker
+          state: idle
+  action:
+    - service: media_player.play_media
+      entity_id: media_player.gh_living_room_speaker
+      data:
+        media_content_id: !secret 1_sec_audio_url
+        media_content_type: music
+  mode: single
+
+- id: "ea9e0a26-64c4-4050-b5da-06d7060c5588"
+  alias: "Misc: Prevent Bedroom Pair Google Home Idle"
+  description: ""
+  trigger:
+    - platform: time_pattern
+      minutes: /2
+    - platform: state
+      entity_id: media_player.bedroom_pair
+      from: unavailable
+      to: idle
+    - platform: state
+      entity_id: media_player.bedroom_pair
+      from: unavailable
+      to: "off"
+  condition:
+    - condition: template
+      value_template: >-
+        {{ state_attr('media_player.bedroom_pair', 'media_title') != 'Rain white noise'}}
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.bedroom_pair
+          state: "off"
+        - condition: state
+          entity_id: media_player.bedroom_pair
+          state: idle
+  action:
+    - service: media_player.play_media
+      entity_id: media_player.bedroom_pair
+      data:
+        media_content_id: !secret 1_sec_audio_url
+        media_content_type: music
+  mode: single
+
+- id: "03154974-19c2-41e3-b86a-e87fe93c7868"
+  alias: "Misc: Prevent Kelly's Google Home Idle"
+  description: ""
+  trigger:
+    - platform: time_pattern
+      minutes: /2
+    - platform: state
+      entity_id: media_player.kelly_speaker
+      from: unavailable
+      to: idle
+    - platform: state
+      entity_id: media_player.kelly_speaker
+      from: unavailable
+      to: "off"
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: media_player.kelly_speaker
+          state: "off"
+        - condition: state
+          entity_id: media_player.kelly_speaker
+          state: idle
+  action:
+    - service: media_player.play_media
+      entity_id: media_player.kelly_speaker
+      data:
+        media_content_id: !secret 1_sec_audio_url
+        media_content_type: music
+  mode: single

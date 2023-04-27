@@ -1,0 +1,5 @@
+masterbath:
+  name: Master Bathroom Lights
+  entities:
+    - light.master_bath_1
+    - light.master_bath_2

@@ -1,0 +1,25 @@
+theme: Nordic
+title: Batteries
+path: batteries
+icon: mdi:battery
+badges: []
+cards:
+  ## Chip Back ##
+  - type: "custom:button-card"
+    template: chip_back
+    variables:
+      ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+    ## Battery Panel ##
+  - type: vertical-stack
+    cards:
+      - type: custom:auto-entities
+        card:
+          type: custom:battery-state-card
+          title:
+          secondary_info: last_updated
+          sort_by_level: "asc"
+        filter:
+          exclude:
+            - state: "unavailable"
+          include:
+            - entity_id: sensor.*_battery

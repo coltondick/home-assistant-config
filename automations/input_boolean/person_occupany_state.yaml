@@ -1,0 +1,65 @@
+- id: "76bec8b7-f9f7-4a4e-bbb1-840a7272eb60"
+  alias: "Input Boolean: Colton Occupancy On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_colton
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_colton
+
+- id: "4fc5adce-6155-4d07-a20a-19ef50901aeb"
+  alias: "Input Boolean: Colton Occupancy Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_colton
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_colton
+
+- id: "324b03d9-67e1-44de-9602-72918d24f301"
+  alias: "Input Boolean: Miranda Occupancy On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_miranda
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_miranda
+
+- id: "8db27f7e-3cd1-4c22-a406-5ca7d129a2d0"
+  alias: "Input Boolean: Miranda Occupancy Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_miranda
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_miranda
+
+- id: "5bbd61e1-0aa1-4261-a217-6e51781d4fdc"
+  alias: "Input Boolean: Kelly Occupancy On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_kelly
+      above: 10
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.occupancy_kelly
+
+- id: "f2164b92-350a-4c40-97a8-a2ac4fb5de53"
+  alias: "Input Boolean: Kelly Occupancy Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.home_occupancy_confidence_of_kelly
+      below: 10
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.occupancy_kelly

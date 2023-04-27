@@ -1,0 +1,8 @@
+cast_birdcam:
+  alias: Cast Birdcam stream on Shield TV
+  sequence:
+    - service: camera.play_stream
+      data:
+        media_player: media_player.shield_android_tv
+      target:
+        entity_id: camera.birdcam_7

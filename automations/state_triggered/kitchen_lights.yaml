@@ -1,0 +1,31 @@
+- id: "a1fb089c-a72a-4957-96c8-e7145261508a"
+  alias: "State Triggered: Turn on|off all kitchen lights when light switch state changes."
+  description: ""
+  trigger:
+    - entity_id: light.kitchen_ceiling
+      platform: state
+      to: "on"
+    - platform: state
+      entity_id: light.kitchen_ceiling
+      to: "off"
+  condition: []
+  action:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'on' }}"
+          sequence:
+            - entity_id: "group.kitchen"
+              service: light.turn_on
+            - entity_id: "switch.kitchen_leds"
+              service: switch.turn_on
+        - conditions:
+            - condition: template
+              value_template: "{{ trigger.to_state.state == 'off' }}"
+          sequence:
+            - entity_id: "group.kitchen"
+              service: light.turn_off
+            - entity_id: "switch.kitchen_leds"
+              service: switch.turn_off
+      default: []
+  mode: single

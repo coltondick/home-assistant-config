@@ -1,0 +1,17 @@
+- id: "31b8535d-de64-49ed-8919-af2ac366f308"
+  alias: "Time Triggered: Turn Patio Lights On at 4 PM"
+  trigger:
+    platform: time
+    at: "16:00:00"
+  action:
+    service: switch.turn_on
+    entity_id: switch.patio_lights
+
+- id: "177cfd3a-e44b-40c1-891b-c20368e5f953"
+  alias: "Time Triggered: Turn Patio Lights Off at 10 PM"
+  trigger:
+    platform: time
+    at: "22:00:00"
+  action:
+    service: switch.turn_off
+    entity_id: switch.patio_lights

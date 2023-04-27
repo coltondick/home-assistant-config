@@ -1,0 +1,50 @@
+bedtime_routine:
+  alias: Bedtime Routine
+  sequence:
+    - service: light.turn_off
+      entity_id:
+        - light.entryway_ceiling
+        - light.laundry_room_ceiling
+        - light.christmas_tree
+        - light.dining_room_ceiling
+        - light.hue_light_strip
+        - light.kitchen_ceiling
+        - light.kitchen_stove
+        - light.living_room_ceiling
+        - light.living_room_tv_backlight
+    - service: switch.turn_off
+      entity_id:
+        - switch.side_table_lamp
+        - switch.cage
+        - switch.patio_lights
+        - switch.kitchen_leds
+    - service: remote.turn_off
+      entity_id: remote.tv
+    # - condition: template
+    #   value_template: "{{ states.climate.living_room_thermostat.attributes.current_temperature > 20 }}"
+    #   sequence:
+    #     - service: climate.set_temperature
+    #       entity_id: climate.living_room_thermostat
+    #       temperature: 20
+    # - condition: template
+    #   value_template: "{{ states.climate.bedroom_thermostat.attributes.current_temperature > 20 }}"
+    #   sequence:
+    #     - service: climate.set_temperature
+    #       entity_id: climate.bedroom_thermostat
+    #       temperature: 20
+    # - condition: template
+    #   value_template: "{{ states.climate.bathroom_thermostat.attributes.current_temperature > 20 }}"
+    #   sequence:
+    #     - service: climate.set_temperature
+    #       entity_id: climate.bathroom_thermostat
+    #       temperature: 20
+    # - condition: template
+    #   value_template: "{{ states.climate.office_thermostat.attributes.current_temperature > 20 }}"
+    #   sequence:
+    #     - service: climate.set_temperature
+    #       entity_id: climate.office_thermostat
+    #       temperature: 20
+    - service: alarm_control_panel.alarm_arm_home
+      entity_id: alarm_control_panel.panel
+    - service: script.turn_on
+      entity_id: script.white_noise_kelly

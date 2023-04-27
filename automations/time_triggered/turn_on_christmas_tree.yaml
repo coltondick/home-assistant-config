@@ -1,0 +1,11 @@
+- id: "736af8a3-79b2-402e-a133-e5c5f509f6e2"
+  alias: Turn On Christmas Tree
+  trigger:
+    - platform: time
+      at: "07:00:00"
+  # condition:
+  #   - condition: template
+  #     value_template: "{{ as_timestamp(now()) < as_timestamp(datetime(2022, 12, 31)) }}"
+  action:
+    - service: light.turn_on
+      entity_id: light.christmas_tree

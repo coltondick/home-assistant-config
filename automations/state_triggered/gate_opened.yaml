@@ -1,0 +1,12 @@
+- id: "cb337e40-0f82-4d54-b8b6-5155dfb8c1cf"
+  alias: "State Triggered: Announce whenever gate is opened."
+  description: ""
+  trigger:
+    - entity_id: binary_sensor.gate_sensor_contact
+      platform: state
+      to: "on"
+  condition: []
+  # action:
+  #   - service: script.announce
+  #     data: '{"my_message":"Gate opened"}'
+  mode: single

@@ -1,0 +1,48 @@
+# # Automatically turn on|off all lights and switches, but the office if Miranda is away
+# # and Colton is home. Do not trigger if the home override is on.
+- id: "6ca7578f-c647-4178-8869-233d5663c5d2"
+  alias: "Time Triggered: Turn on all lights and switches if Miranda is away and Colton is home"
+  trigger:
+    platform: time_pattern
+    minutes: "/5"
+  condition:
+    - condition: time
+      after: "08:30:00"
+      before: "16:00:00"
+    - condition: and
+      conditions:
+        - condition: template
+          value_template: "{{ not is_state('person.miranda', 'home') }}"
+        - condition: state
+          entity_id: person.colton
+          state: home
+        - condition: numeric_state
+          entity_id: sensor.tim_presence_detection
+          below: 50
+        - condition: state
+          entity_id: input_boolean.override_home
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.workday_sensor
+          state: "on"
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: group.workdays
+    - service: remote.turn_off
+      target:
+        entity_id: remote.tv
+
+- id: "046f2658-93ee-4aa7-b93c-c6529571dd71"
+  alias: "Time Triggered: Reset home override everyday at 5 PM"
+  trigger:
+    platform: time
+    at: "17:00:00"
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: "on"
+  action:
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.override_home

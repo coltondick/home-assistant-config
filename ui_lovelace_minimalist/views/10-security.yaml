@@ -1,0 +1,126 @@
+theme: Nordic
+title: Security
+path: security
+icon: mdi:lock
+badges: []
+cards:
+  ## Chip Back ##
+  - type: "custom:button-card"
+    template: chip_back
+    variables:
+      ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+    ## Alarm Panel ##
+  - type: vertical-stack
+    cards:
+      - card:
+          entity: alarm_control_panel.panel
+          states:
+            - arm_home
+          style:
+            "#armActions":
+              mwc-button:
+                $: |
+                  #button > span.slot-container{
+                    color: transparent;
+                    position: absolute;
+
+                  }
+                  #button{
+                    width: 150px;
+                    border-radius: 21px;
+                  }
+                  #button > span.slot-container::before{
+                    color: var(--mdc-theme-primary, #6200ee);
+                    content: "Arm";
+                    margin: 0 0 0 50%;
+                  }
+            .: |
+              ha-card > ha-label-badge{
+                --alarm-state-color: var(--aurora-green) !important;
+              }
+              ha-card{
+                padding-top: 16px;
+                padding-bottom: 12px !important;
+                border-radius: 21px;
+              }
+              ha-card > h1{
+                padding-top: 0;
+                color: transparent;
+              }
+              ha-card > h1::before{
+                content: "Disarmed";
+                color: var(--aurora-green);
+                position: absolute;
+                font-variant: small-caps;
+              }
+              #alarmCode{
+                display: none;
+              }
+              #keypad{
+                display: none !important;
+              }
+          title: Alarm
+          type: alarm-panel
+        conditions:
+          - entity: alarm_control_panel.panel
+            state: disarmed
+        type: conditional
+      - card:
+          entity: alarm_control_panel.panel
+          states:
+            - arm_home
+          style:
+            "#armActions":
+              mwc-button:
+                $: |
+                  #button > span.slot-container{
+                    color: transparent;
+                    position: absolute;
+                  }
+                  #button{
+                    width: 150px;
+                    border-radius: 21px;
+                  }
+                  #button > span.slot-container::before{
+                    color: var(--mdc-theme-primary, #6200ee);
+                    content: "Disarm";
+                    margin: 0 0 0 50%;
+                  }
+            "#keypad":
+              mwc-button:
+                $: |
+                  #button{
+                    border-radius: 12px
+                  }
+            .: |
+              ha-card > ha-label-badge{
+                --alarm-state-color: var(--aurora-red) !important;
+              }
+              ha-card{
+                padding-top: 16px;
+                padding-bottom: 12px !important;
+                border-radius: 21px;
+              }
+              ha-card > h1{
+                padding-top: 0;
+                color: transparent;
+              }
+              ha-card > h1::before{
+                content: "Armed";
+                color: var(--aurora-red);
+                position: absolute;
+                font-variant: small-caps;
+              }
+          title: Alarm
+          type: alarm-panel
+        conditions:
+          - entity: alarm_control_panel.panel
+            state_not: disarmed
+        type: conditional
+        ## Door Lock ##
+      - entity: lock.front_door
+        name: Door Lock
+        template: custom_card_eraycetinay_lock
+        type: custom:button-card
+        variables:
+          ulm_custom_card_eraycetinay_lock_tap_control: true

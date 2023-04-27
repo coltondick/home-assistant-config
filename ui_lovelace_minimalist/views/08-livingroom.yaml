@@ -1,0 +1,52 @@
+title: Living Room
+path: living-room
+icon: mdi:sofa-outline
+badges: []
+cards:
+  - type: "custom:button-card"
+    template: chip_back
+    variables:
+      ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_power_outlet
+            entity: group.livingroom
+            name: Living Room Lights
+          - type: "custom:button-card"
+            template: card_power_outlet
+            entity: switch.cage
+            name: Cage
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_power_outlet
+            entity: switch.side_table_lamp
+            name: Lamp
+          - type: "custom:button-card"
+            template: card_generic
+            entity: remote.tv
+            name: TV
+            tap_action:
+              action: toggle
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: custom_card_coltondick_thermostat
+            entity: climate.living_room_thermostats
+            variables:
+              ulm_card_thermostat_enable_collapse: false
+              ulm_card_thermostat_enable_controls: true
+              ulm_card_thermostat_enable_background_color: false
+              ulm_card_thermostat_enable_hvac_modes: false
+              ulm_card_thermostat_enable_popup: false
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_graph
+            variables:
+              ulm_card_graph_color: "var(--aurora-green)"
+              ulm_card_graph_name: Living Room Temperature
+              ulm_card_graph_entity: sensor.living_room_temperature

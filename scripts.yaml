@@ -1,0 +1,10 @@
+cast_dashboard_to_nest_hub:
+  alias: Cast Dashboard to Nest Hub
+  sequence:
+  - service: cast.show_lovelace_view
+    data:
+      entity_id: media_player.nesthub9fe4
+      dashboard_path: ui-lovelace-minimalis
+      view_path: tablet-home
+  mode: single
+  icon: mdi:cast
