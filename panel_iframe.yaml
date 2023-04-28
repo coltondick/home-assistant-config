@@ -1,8 +1,8 @@
 sonarr:
   title: "Sonarr"
-  url: "https://sonarr.colton.sh"
+  url: !secret sonarr_url
   icon: mdi:television-classic
 radarr:
   title: "Radarr"
-  url: "https://radarr.colton.sh"
+  url: !secret radarr_url
   icon: mdi:movie-open
