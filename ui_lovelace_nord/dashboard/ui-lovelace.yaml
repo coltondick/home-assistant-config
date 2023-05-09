@@ -15,8 +15,8 @@ views:
   - !include ../../ui_lovelace_nord/views/02-tablet-home.yaml
   - !include ../../ui_lovelace_nord/views/03-battery-panel.yaml
   - !include ../../ui_lovelace_nord/views/04-hub-home.yaml
-  - !include ../../ui_lovelace_nord/views/09-weather.yaml
-  - !include ../../ui_lovelace_nord/views/10-security.yaml
-  - !include ../../ui_lovelace_nord/views/11-batteries.yaml
-  - !include ../../ui_lovelace_nord/views/12-hub-home.yaml
-  - !include ../../ui_lovelace_nord/views/13-hub-settings.yaml
+  # - !include ../../ui_lovelace_nord/views/09-weather.yaml
+  # - !include ../../ui_lovelace_nord/views/10-security.yaml
+  # - !include ../../ui_lovelace_nord/views/11-batteries.yaml
+  # - !include ../../ui_lovelace_nord/views/12-hub-home.yaml
+  # - !include ../../ui_lovelace_nord/views/13-hub-settings.yaml
