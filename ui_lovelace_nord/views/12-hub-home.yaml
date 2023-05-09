@@ -1,0 +1,122 @@
+## BEGIN HOME ###
+theme: Nordic
+title: Hub Home
+path: hub-home
+icon: mdi:google-home
+badges: []
+cards:
+  ## Media Controls ##
+  - type: vertical-stack
+    cards:
+      - type: vertical-stack
+        cards:
+          ## Chips Row ##
+          - type: "custom:button-card"
+            color_type: blank-card
+          - type: "custom:button-card"
+            template: chip_icon_label
+            label: "Settings"
+            icon: mdi:cog
+            tap_action:
+              action: navigate
+              navigation_path: /ui-lovelace-minimalist/hub-settings
+      - type: "custom:button-card"
+        color_type: blank-card
+      - type: custom:button-card
+        template: custom_card_coltondick_nvidia_shield
+        entity: media_player.nvidia_shield
+        name: Nvidia Shield
+        variables:
+          ulm_custom_card_coltondick_nvidia_shield_enable_art: true
+          ulm_custom_card_coltondick_nvidia_shield_enable_controls: true
+          ulm_custom_card_coltondick_nvidia_shield_enable_popup: false
+          ulm_custom_card_coltondick_nvidia_shield_enable_volume_slider: false
+      - type: custom:my-slider
+        entity: input_number.denon_volume
+        radius: 14px
+        height: 50px
+        step: "1"
+        minSet: "0"
+        maxSet: "45"
+        mainSliderColor: rgba(var(--color-blue),1)
+        secondarySliderColor: rgba(var(--color-blue),0.2)
+        mainSliderColorOff: rgba(var(--color-theme),0.05)
+        secondarySliderColorOff: rgba(var(--color-theme),0.05)
+        thumbHorizontalPadding: 0px
+        thumbVerticalPadding: 0px
+        thumbWidth: 1px
+        card_mod: null
+        style: |
+          ha-card {
+            border-radius: 14px;
+            background-color: transparent;
+            box-shadow: none;
+          }
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Television
+            template:
+              - custom_card_coltondick_hub_buttons
+              - grey_off
+              - red_on
+            entity: remote.tv
+            icon: mdi:television-classic
+            tap_action:
+              action: toggle
+          - type: custom:button-card
+            name: Side Table Lamp
+            template:
+              - custom_card_coltondick_hub_buttons
+              - grey_off
+              - red_on
+            entity: switch.side_table_lamp
+            icon: mdi:desk-lamp-on
+            tap_action:
+              action: toggle
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Living Room Lights
+            template:
+              - custom_card_coltondick_hub_buttons
+              - grey_off
+              - red_on
+            entity: light.living_room_ceiling
+            icon: mdi:sofa
+            tap_action:
+              action: toggle
+          - type: custom:button-card
+            name: Kitchen Lights
+            template:
+              - custom_card_coltondick_hub_buttons
+              - grey_off
+              - red_on
+            entity: light.kitchen_ceiling
+            icon: mdi:silverware-fork-knife
+            tap_action:
+              action: toggle
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            name: Dining Room Lights
+            template:
+              - custom_card_coltondick_hub_buttons
+              - grey_off
+              - red_on
+            entity: light.dining_room_ceiling
+            icon: mdi:table-furniture
+            tap_action:
+              action: toggle
+          - type: custom:button-card
+            name: Cast Bird Cam
+            template:
+              - custom_card_coltondick_hub_buttons
+              - grey_off
+              - red_on
+            entity: script.cast_birdcam
+            icon: mdi:bird
+            tap_action:
+              action: toggle

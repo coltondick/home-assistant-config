@@ -26,6 +26,8 @@ switch.bedroom_sidetable_lamp:
   icon: mdi:lamp
 switch.white_noise_onoff:
   icon: mdi:bed-double
+switch.white_noise_kelly_onoff:
+  icon: mdi:bed-double
 switch.vanity:
   icon: mdi:hair-dryer
 switch.scentsy:

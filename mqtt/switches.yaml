@@ -11,17 +11,17 @@ switch:
     qos: 1
     retain: false
 
-  - name: "Dishwasher"
-    state_topic: "stat/DVES_B160F6_fb/RESULT"
-    value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/DVES_B160F6_fb/POWER"
-    payload_on: "ON"
-    payload_off: "OFF"
-    availability_topic: "tele/DVES_B160F6_fb/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    qos: 1
-    retain: false
+  # - name: "Dishwasher"
+  #   state_topic: "stat/DVES_B160F6_fb/RESULT"
+  #   value_template: "{{ value_json.POWER }}"
+  #   command_topic: "cmnd/DVES_B160F6_fb/POWER"
+  #   payload_on: "ON"
+  #   payload_off: "OFF"
+  #   availability_topic: "tele/DVES_B160F6_fb/LWT"
+  #   payload_available: "Online"
+  #   payload_not_available: "Offline"
+  #   qos: 1
+  #   retain: false
 
   - name: "Patio Lights"
     value_template: "{{ value_json.POWER }}"
@@ -44,3 +44,14 @@ switch:
     command_topic: "home/shield/update/youtube"
     payload_on: "on"
     payload_off: "off"
+
+  - name: "Cage Light"
+    state_topic: "tele/cage/STATE"
+    command_topic: "cmnd/cage/POWER"
+    availability_topic: "tele/cage/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: true

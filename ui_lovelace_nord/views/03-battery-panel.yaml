@@ -1,0 +1,42 @@
+title: Battery Panel
+path: battery-panel
+icon: mdi:battery-heart-variant
+theme: Nordic Mushroom
+subview: true
+badges: []
+cards:
+  - type: custom:stack-in-card
+    keep:
+      box_shadow: true
+      margin: true
+      border_radius: true
+      background: true
+      outer_padding: true
+    cards:
+      - type: custom:mushroom-title-card
+        title: Battery Health
+        subtitle: >-
+          This panel displays information about the battery % for all
+          devices with a battery.
+        alignment: justify
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: back
+      - type: vertical-stack
+        cards:
+          - type: custom:auto-entities
+            card:
+              type: custom:battery-state-card
+              title: null
+              secondary_info: last_updated
+              sort_by_level: asc
+            filter:
+              exclude:
+                - state: unavailable
+              include:
+                - entity_id: sensor.*_battery
+    card_mod:
+      style: |
+        ha-card {
+          background-color: var(--polar-bright-gray);
+        }

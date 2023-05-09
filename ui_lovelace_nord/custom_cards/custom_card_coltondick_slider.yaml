@@ -1,0 +1,62 @@
+custom_card_coltondick_slider:
+  template:
+    - "ulm_language_variables"
+  variables:
+    ulm_custom_card_coltondick_slider_name: "[[[ return entity.attributes.friendly_name ]]]"
+    ulm_custom_card_coltondick_slider_icon: false
+    ulm_custom_card_coltondick_slider_enable_volume_slider: true
+
+  triggers_update: "all"
+  show_icon: false
+  show_name: false
+  show_label: false
+  styles:
+    grid:
+      - grid-template-areas: "item1"
+      - grid-template-columns: "1fr"
+      - grid-template-rows: |
+          [[[
+            var rows = "min-content";
+
+            rows = rows + " min-content";
+
+            return rows;
+          ]]]
+      - row-gap: "12px"
+    card:
+      - border-radius: "var(--border-radius)"
+      - box-shadow: "var(--box-shadow)"
+      - padding: "12px"
+      - background-blend-mode: "multiply"
+    custom_fields:
+      item1:
+        - display: |
+            [[[
+              return variables.ulm_custom_card_coltondick_slider_enable_volume_slider
+                ? "block"
+                : "none"
+            ]]]
+  custom_fields:
+    item1:
+      card:
+        type: "custom:my-slider"
+        entity: "[[[ return entity.entity_id ]]]"
+        radius: "14px"
+        height: "45px"
+        step: "1"
+        minSet: "0"
+        maxSet: "70"
+        mainSliderColor: "rgba(var(--color-blue),1)"
+        secondarySliderColor: "rgba(var(--color-blue),0.2)"
+        mainSliderColorOff: "rgba(var(--color-theme),0.05)"
+        secondarySliderColorOff: "rgba(var(--color-theme),0.05)"
+        thumbHorizontalPadding: "0px"
+        thumbVerticalPadding: "0px"
+        thumbWidth: "0px"
+        card_mod:
+        style: |
+          ha-card {
+            border-radius: 14px;
+            background-color: transparent;
+            box-shadow: none;
+          }

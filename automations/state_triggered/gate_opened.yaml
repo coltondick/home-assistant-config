@@ -6,7 +6,4 @@
       platform: state
       to: "on"
   condition: []
-  # action:
-  #   - service: script.announce
-  #     data: '{"my_message":"Gate opened"}'
   mode: single

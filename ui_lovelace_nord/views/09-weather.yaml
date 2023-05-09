@@ -1,0 +1,70 @@
+theme: Nordic
+title: Weather
+path: weather
+icon: mdi:sun-thermometer
+badges: []
+cards:
+  ## Chip Back ##
+  - type: "custom:button-card"
+    template: chip_back
+    variables:
+      ulm_chip_back_path: /ui-lovelace-minimalist/tablet-home
+  ## Sensor Graphs ##
+  - type: vertical-stack
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_graph
+            variables:
+              ulm_card_graph_color: "var(--aurora-green)"
+              ulm_card_graph_name: Outdoor Temperature
+              ulm_card_graph_entity: sensor.temperature
+          - type: "custom:button-card"
+            template: card_graph
+            variables:
+              ulm_card_graph_color: "var(--aurora-blue)"
+              ulm_card_graph_name: Outdoor Humidity
+              ulm_card_graph_entity: sensor.humidity
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            template: card_graph
+            variables:
+              ulm_card_graph_color: "var(--aurora-red)"
+              ulm_card_graph_name: Temperature Inside
+              ulm_card_graph_entity: sensor.average_indoor_temperature
+          - type: "custom:button-card"
+            template: card_graph
+            variables:
+              ulm_card_graph_color: "var(--aurora-green)"
+              ulm_card_graph_name: Humidity Inside
+              ulm_card_graph_entity: sensor.cage_humidity
+      ## Radial Graph ##
+      - type: "custom:button-card"
+        template: radial_icon_info
+        variables:
+          entity_1: sensor.airgradient_c02
+          entity_1_name: "Indoor C02"
+          entity_1_color: red
+          entity_1_icon: mdi:weather-windy
+          entity_1_min: 0
+          entity_1_max: 2000
+          entity_2: sensor.u_s_air_quality_index
+          entity_2_name: "Air Quality"
+          entity_2_color: green
+          entity_2_icon: mdi:thermometer
+          entity_2_min: 0
+          entity_2_max: 100
+          entity_3: sensor.airgradient_pm2_5
+          entity_3_name: "Indoor PM2.5"
+          entity_3_color: yellow
+          entity_3_icon: mdi:weather-windy
+          entity_3_min: 0
+          entity_3_max: 500
+          entity_4: sensor.wind_speed
+          entity_4_name: "Wind Speed"
+          entity_4_color: pink
+          entity_4_icon: mdi:weather-windy
+          entity_4_min: 0
+          entity_4_max: 200

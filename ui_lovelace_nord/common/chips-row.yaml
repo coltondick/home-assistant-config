@@ -1,0 +1,39 @@
+- type: "custom:button-card"
+  color_type: blank-card
+- type: custom:button-card
+  template: chip_temperature
+  tap_action:
+    action: navigate
+    navigation_path: /ui-lovelace-minimalist/weather
+  variables:
+    ulm_chip_temperature_inside: sensor.average_indoor_temperature
+    ulm_chip_temperature_outside: sensor.temperature
+    ulm_chip_temperature_weather: weather.kamloops
+- type: custom:button-card
+  entity: alarm_control_panel.panel
+  template: chip_alarm
+  tap_action:
+    action: navigate
+    navigation_path: /ui-lovelace-minimalist/security
+- type: custom:button-card
+  template: chip_presence_detection
+  variables:
+    ulm_chip_presence_counter_residents: sensor.presence_detection
+- type: "custom:button-card"
+  template: chip_navigate
+  label: "Thermostats"
+  variables:
+    ulm_chip_navigate_path: /ui-lovelace-minimalist/heating
+    ulm_chip_navigate_icon: mdi:thermometer
+- type: custom:button-card
+  template: custom_chip_coltondick_battery
+  entity: sensor.battery_alert
+  tap_action:
+    action: navigate
+    navigation_path: /ui-lovelace-minimalist/batteries
+  variables:
+    ulm_chip_mdi_icon_only_icon: mdi:battery
+    ulm_chip_mdi_icon_only_icon_color: var(--google-green)
+    ulm_chip_mdi_icon_only_icon_color_alert: var(--google-red)
+- type: "custom:button-card"
+  color_type: blank-card

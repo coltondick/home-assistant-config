@@ -1,4 +1,4 @@
-host: 192.168.1.3
+host: !secret localhost
 database: home_assistant
 username: ""
 password: ""

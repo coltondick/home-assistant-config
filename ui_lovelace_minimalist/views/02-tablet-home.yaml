@@ -138,7 +138,7 @@ cards:
                 tap_action:
                   action: toggle
               entity_4:
-                entity_id: light.living_room_tv_backlight
+                entity_id: switch.scentsy_side_table
                 templates:
                   - yellow_on
                   - grey_off

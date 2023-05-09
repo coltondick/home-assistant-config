@@ -75,3 +75,27 @@ sensor:
     state_topic: "monitor/office/kelly"
     value_template: "{{ value_json.confidence }}"
     unit_of_measurement: "%"
+
+  - name: "Living Room Temperature"
+    state_topic: "zigbee2mqtt/Living Room Thermostat"
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.local_temperature }}"
+    unique_id: "living_room_temp"
+
+  - name: "Dining Room Temperature"
+    state_topic: "zigbee2mqtt/Dining Room Thermostat"
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.local_temperature }}"
+    unique_id: "dining_room_temp"
+
+  - name: "Master Bedroom Temperature"
+    state_topic: "zigbee2mqtt/Bedroom Thermostat"
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.local_temperature }}"
+    unique_id: "master_bedroom_temp"
+
+  - name: "Kelly's Bedroom Temperature"
+    state_topic: "zigbee2mqtt/Office Thermostat"
+    unit_of_measurement: "°C"
+    value_template: "{{ value_json.local_temperature }}"
+    unique_id: "kellys_bedroom_temp"

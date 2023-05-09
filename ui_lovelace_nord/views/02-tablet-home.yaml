@@ -1,0 +1,266 @@
+## BEGIN Tablet HOME ###
+icon: mdi:tablet-dashboard
+title: Tablet Dashboard
+path: tablet-dashboard
+theme: Nordic Mushroom
+subview: false
+type: custom:masonry-layout
+layout:
+  width: 500
+  max_cols: 2
+badges: []
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:stack-in-card
+        keep:
+          box_shadow: true
+          margin: true
+          border_radius: true
+          background: true
+          outer_padding: true
+        cards:
+          - type: custom:mushroom-title-card
+            title: Actions
+            subtitle: null
+            alignment: justify
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: person.colton
+                    use_entity_picture: true
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: person.miranda
+                    use_entity_picture: true
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: alarm_control_panel.panel
+                    icon_color: "#a3be8c"
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: sensor.pirateweather_apparent_temperature
+                    icon_color: "#bf616a"
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: switch.white_noise_onoff
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: script.bedtime_routine
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: switch.patio_lights
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: light.entryway_ceiling
+        card_mod:
+          style: |
+            ha-card {
+              background-color: var(--polar-bright-gray);
+            }
+      - type: custom:stack-in-card
+        keep:
+          box_shadow: true
+          margin: true
+          border_radius: true
+          background: true
+          outer_padding: true
+        cards:
+          - type: custom:mod-card
+            card:
+              type: custom:mushroom-title-card
+              title: Living Room
+              subtitle: >-
+                {% set total = 0 %} {% if
+                is_state('light.living_room_ceiling', 'on') %}
+                  {% set total = total + 1 %}
+                {% endif %} {% if is_state('switch.side_table_lamp', 'on')
+                %}
+                  {% set total = total + 1 %}
+                {% endif %} {% if is_state('switch.cage', 'on') %}
+                  {% set total = total + 1 %}
+                {% endif %} {% if is_state('switch.scentsy_side_table',
+                'on') %}
+                  {% set total = total + 1 %}
+                {% endif %} {% if is_state('remote.tv', 'on') %}
+                  {% set total = total + 1 %}
+                {% endif %} {% if is_state('light.living_room_tv_backlight',
+                'on') %}
+                  {% set total = total + 1 %}
+                {% endif %} {% if total == 0 %}
+                  Everything is turned off.
+                {% elif total == 1 %}
+                  There is currently {{total}} device on.
+                {% else %}
+                  There are currently {{total}} devices on.
+                {% endif %}
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: sensor.living_room_temperature
+                icon_color: "#bf616a"
+            alignment: start
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.living_room_ceiling
+                icon: mdi:ceiling-light
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                icon: ""
+                entity: switch.side_table_lamp
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: remote.tv
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: light.living_room_tv_backlight
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: switch.cage
+              - type: custom:mushroom-entity-card
+                tap_action:
+                  action: toggle
+                entity: switch.scentsy_side_table
+                icon: mdi:heat-wave
+          - type: custom:seasonal-card
+            seasons:
+              - start: 09-01
+                end: 03-31
+            cards:
+              - type: custom:mushroom-climate-card
+                collapsible_controls: true
+                show_temperature_control: true
+                entity: climate.living_room_thermostat
+        card_mod:
+          style: |
+            ha-card {
+              background-color: var(--polar-bright-gray);
+            }
+  - type: vertical-stack
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:stack-in-card
+            keep:
+              box_shadow: true
+              margin: true
+              border_radius: true
+              background: true
+              outer_padding: true
+            cards:
+              - type: custom:mod-card
+                card:
+                  type: custom:mushroom-title-card
+                  title: Kitchen
+                  subtitle: >-
+                    {% set total = 0 %} {% if
+                    is_state('light.kitchen_ceiling', 'on') %}
+                      {% set total = total + 1 %}
+                    {% endif %} {% if is_state('light.kitchen_stove', 'on')
+                    %}
+                      {% set total = total + 1 %}
+                    {% endif %} {% if is_state('switch.kitchen_leds', 'on')
+                    %}
+                      {% set total = total + 1 %}
+                    {% endif %} {% if total == 0 %}
+                      Everything is turned off.
+                    {% elif total == 1 %}
+                      There is currently {{total}} device on.
+                    {% else %}
+                      There are currently {{total}} devices on.
+                    {% endif %}
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.kitchen_ceiling
+                    icon: mdi:ceiling-light
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-entity-card
+                    tap_action:
+                      action: toggle
+                    entity: switch.kitchen_leds
+                  - type: custom:mushroom-entity-card
+                    tap_action:
+                      action: toggle
+                    entity: light.kitchen_stove
+            card_mod:
+              style: |
+                ha-card {
+                  background-color: var(--polar-bright-gray);
+                }
+          - type: custom:stack-in-card
+            keep:
+              box_shadow: true
+              margin: true
+              border_radius: true
+              background: true
+              outer_padding: true
+            cards:
+              - type: custom:mod-card
+                card:
+                  type: custom:mushroom-title-card
+                  title: Dining Room
+                  subtitle: >-
+                    {% set total = 0 %} {% if
+                    is_state('light.dining_room_ceiling', 'on') %}
+                      {% set total = total + 1 %}
+                    {% endif %} {% if is_state('light.hue_light_strip',
+                    'on') %}
+                      {% set total = total + 1 %}
+                    {% endif %} {% if is_state('switch.scentsy', 'on') %}
+                      {% set total = total + 1 %}
+                    {% endif %} {% if total == 0 %}
+                      Everything is turned off.
+                    {% elif total == 1 %}
+                      There is currently {{total}} device on.
+                    {% else %}
+                      There are currently {{total}} devices on.
+                    {% endif %}
+              - type: custom:mushroom-chips-card
+                chips:
+                  - type: entity
+                    entity: sensor.dining_room_temperature
+                    icon_color: "#bf616a"
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-light-card
+                    entity: light.dining_room_ceiling
+                    icon: mdi:ceiling-light
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-entity-card
+                    tap_action:
+                      action: toggle
+                    entity: light.hue_light_strip
+                  - type: custom:mushroom-entity-card
+                    tap_action:
+                      action: toggle
+                    entity: switch.scentsy
+            card_mod:
+              style: |
+                ha-card {
+                  background-color: var(--polar-bright-gray);
+                }

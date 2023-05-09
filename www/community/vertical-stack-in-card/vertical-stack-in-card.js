@@ -1,4 +1,8 @@
-console.log(`%cvertical-stack-in-card\n%cVersion: ${'0.4.4'}`, 'color: #1976d2; font-weight: bold;', '');
+console.log(
+  `%cvertical-stack-in-card\n%cVersion: ${"0.4.4"}`,
+  "color: #1976d2; font-weight: bold;",
+  ""
+);
 
 class VerticalStackInCard extends HTMLElement {
   constructor() {
@@ -7,10 +11,12 @@ class VerticalStackInCard extends HTMLElement {
 
   setConfig(config) {
     this._cardSize = {};
-    this._cardSize.promise = new Promise((resolve) => (this._cardSize.resolve = resolve));
+    this._cardSize.promise = new Promise(
+      (resolve) => (this._cardSize.resolve = resolve)
+    );
 
     if (!config || !config.cards || !Array.isArray(config.cards)) {
-      throw new Error('Card config incorrect');
+      throw new Error("Card config incorrect");
     }
     this._config = config;
     this._refCards = [];
@@ -22,7 +28,9 @@ class VerticalStackInCard extends HTMLElement {
     if (window.loadCardHelpers) {
       this.helpers = await window.loadCardHelpers();
     }
-    const promises = config.cards.map((config) => this.createCardElement(config));
+    const promises = config.cards.map((config) =>
+      this.createCardElement(config)
+    );
     this._refCards = await Promise.all(promises);
 
     // Style cards
@@ -35,21 +43,21 @@ class VerticalStackInCard extends HTMLElement {
     });
 
     // Create the card
-    const card = document.createElement('ha-card');
-    const cardContent = document.createElement('div');
+    const card = document.createElement("ha-card");
+    const cardContent = document.createElement("div");
     card.header = config.title;
-    card.style.overflow = 'hidden';
+    card.style.overflow = "hidden";
     this._refCards.forEach((card) => cardContent.appendChild(card));
     if (config.horizontal) {
-      cardContent.style.display = 'flex';
+      cardContent.style.display = "flex";
       cardContent.childNodes.forEach((card) => {
-        card.style.flex = '1 1 0';
+        card.style.flex = "1 1 0";
         card.style.minWidth = 0;
       });
     }
     card.appendChild(cardContent);
-    
-    const shadowRoot = this.shadowRoot || this.attachShadow({mode: 'open'});
+
+    const shadowRoot = this.shadowRoot || this.attachShadow({ mode: "open" });
     while (shadowRoot.hasChildNodes()) {
       shadowRoot.removeChild(shadowRoot.lastChild);
     }
@@ -61,16 +69,16 @@ class VerticalStackInCard extends HTMLElement {
 
   async createCardElement(cardConfig) {
     const createError = (error, origConfig) => {
-      return createThing('hui-error-card', {
-        type: 'error',
+      return createThing("hui-error-card", {
+        type: "error",
         error,
-        origConfig
+        origConfig,
       });
     };
 
     const createThing = (tag, config) => {
       if (this.helpers) {
-        if (config.type === 'divider') {
+        if (config.type === "divider") {
           return this.helpers.createRowElement(config);
         } else {
           return this.helpers.createCardElement(config);
@@ -88,10 +96,10 @@ class VerticalStackInCard extends HTMLElement {
     };
 
     let tag = cardConfig.type;
-    if (tag.startsWith('divider')) {
+    if (tag.startsWith("divider")) {
       tag = `hui-divider-row`;
-    } else if (tag.startsWith('custom:')) {
-      tag = tag.substr('custom:'.length);
+    } else if (tag.startsWith("custom:")) {
+      tag = tag.substr("custom:".length);
     } else {
       tag = `hui-${tag}-card`;
     }
@@ -99,7 +107,7 @@ class VerticalStackInCard extends HTMLElement {
     const element = createThing(tag, cardConfig);
     element.hass = this._hass;
     element.addEventListener(
-      'll-rebuild',
+      "ll-rebuild",
       (ev) => {
         ev.stopPropagation();
         this.createCardElement(cardConfig).then(() => {
@@ -123,42 +131,49 @@ class VerticalStackInCard extends HTMLElement {
   styleCard(element) {
     const config = this._config;
     if (element.shadowRoot) {
-      if (element.shadowRoot.querySelector('ha-card')) {
-        let ele = element.shadowRoot.querySelector('ha-card');
-        ele.style.boxShadow = 'none';
-        ele.style.borderRadius = '0';
+      if (element.shadowRoot.querySelector("ha-card")) {
+        let ele = element.shadowRoot.querySelector("ha-card");
+        ele.style.boxShadow = "none";
+        ele.style.borderRadius = "0";
         ele.style.border = "none";
-        if ('styles' in config) {
-          Object.entries(config.styles).forEach(([key, value]) => ele.style.setProperty(key, value));
+        if ("styles" in config) {
+          Object.entries(config.styles).forEach(([key, value]) =>
+            ele.style.setProperty(key, value)
+          );
         }
       } else {
-        let searchEles = element.shadowRoot.getElementById('root');
+        let searchEles = element.shadowRoot.getElementById("root");
         if (!searchEles) {
-          searchEles = element.shadowRoot.getElementById('card');
+          searchEles = element.shadowRoot.getElementById("card");
         }
         if (!searchEles) return;
         searchEles = searchEles.childNodes;
         for (let i = 0; i < searchEles.length; i++) {
           if (searchEles[i].style) {
-            searchEles[i].style.margin = '0px';
+            searchEles[i].style.margin = "0px";
           }
           this.styleCard(searchEles[i]);
         }
       }
     } else {
-      if (typeof element.querySelector === 'function' && element.querySelector('ha-card')) {
-        let ele = element.querySelector('ha-card');
-        ele.style.boxShadow = 'none';
-        ele.style.borderRadius = '0';
+      if (
+        typeof element.querySelector === "function" &&
+        element.querySelector("ha-card")
+      ) {
+        let ele = element.querySelector("ha-card");
+        ele.style.boxShadow = "none";
+        ele.style.borderRadius = "0";
         ele.style.border = "none";
-        if ('styles' in config) {
-          Object.entries(config.styles).forEach(([key, value]) => ele.style.setProperty(key, value));
+        if ("styles" in config) {
+          Object.entries(config.styles).forEach(([key, value]) =>
+            ele.style.setProperty(key, value)
+          );
         }
       }
       let searchEles = element.childNodes;
       for (let i = 0; i < searchEles.length; i++) {
         if (searchEles[i] && searchEles[i].style) {
-          searchEles[i].style.margin = '0px';
+          searchEles[i].style.margin = "0px";
         }
         this.styleCard(searchEles[i]);
       }
@@ -166,7 +181,7 @@ class VerticalStackInCard extends HTMLElement {
   }
 
   _computeCardSize(card) {
-    if (typeof card.getCardSize === 'function') {
+    if (typeof card.getCardSize === "function") {
       return card.getCardSize();
     }
     return customElements
@@ -182,8 +197,9 @@ class VerticalStackInCard extends HTMLElement {
   }
 }
 
-customElements.define('vertical-stack-in-card', VerticalStackInCard);
+customElements.define("vertical-stack-in-card", VerticalStackInCard);
 
-window.customElements.get('vertical-stack-in-card').getConfigElement = function() {
-  return document.createElement('hui-stack-card-editor');
-}
+window.customElements.get("vertical-stack-in-card").getConfigElement =
+  function () {
+    return document.createElement("hui-stack-card-editor");
+  };

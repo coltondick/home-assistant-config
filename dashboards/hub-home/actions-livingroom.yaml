@@ -1,0 +1,125 @@
+type: vertical-stack
+cards:
+  - type: custom:stack-in-card
+    keep:
+      box_shadow: true
+      margin: true
+      border_radius: true
+      background: true
+      outer_padding: true
+    cards:
+      ## Actions ##
+      - type: custom:mushroom-title-card
+        title: Actions
+        subtitle: null
+        alignment: justify
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            entity: switch.white_noise_onoff
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            entity: script.bedtime_routine
+    card_mod:
+      style: |
+        ha-card {
+          background-color: var(--polar-river-gray);
+        }
+
+  - type: custom:stack-in-card
+    keep:
+      box_shadow: true
+      margin: true
+      border_radius: true
+      background: true
+      outer_padding: true
+    cards:
+      ## Living Room ##
+      - type: custom:mod-card
+        card:
+          type: custom:mushroom-title-card
+          title: Living Room
+          subtitle: >-
+            {% set total = 0 %}
+            {% if is_state('light.living_room_ceiling', 'on') %}
+              {% set total = total + 1 %}
+            {% endif %}
+            {% if is_state('switch.side_table_lamp', 'on') %}
+              {% set total = total + 1 %}
+            {% endif %}
+            {% if is_state('switch.cage', 'on') %}
+              {% set total = total + 1 %}
+            {% endif %}
+            {% if is_state('switch.scentsy_side_table', 'on') %}
+              {% set total = total + 1 %}
+            {% endif %}
+            {% if is_state('remote.tv', 'on') %}
+              {% set total = total + 1 %}
+            {% endif %}
+            {% if is_state('light.living_room_tv_backlight', 'on') %}
+              {% set total = total + 1 %}
+            {% endif %}
+            {% if total == 0 %}
+              Everything is turned off.
+            {% elif total == 1 %}
+              There is currently {{total}} device on.
+            {% else %}
+              There are currently {{total}} devices on.
+            {% endif %}
+        # card_mod:
+        #   style:
+        #     mushroom-title-card:
+        #       $: |
+        #         .header {
+        #           border-radius: 6px;
+        #         }
+      - type: custom:mushroom-chips-card
+        chips:
+          - type: menu
+          - type: entity
+            entity: sensor.living_room_temperature
+            icon_color: orange
+        alignment: start
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.living_room_ceiling
+            icon: mdi:ceiling-light
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            icon: ""
+            entity: switch.side_table_lamp
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            entity: remote.tv
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            entity: light.living_room_tv_backlight
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            entity: switch.cage
+          - type: custom:mushroom-entity-card
+            tap_action:
+              action: toggle
+            entity: switch.scentsy_side_table
+            icon: mdi:heat-wave
+      - type: custom:mushroom-climate-card
+        collapsible_controls: true
+        show_temperature_control: true
+        entity: climate.living_room_thermostat
+    card_mod:
+      style: |
+        ha-card {
+          background-color: var(--polar-river-gray);
+        }

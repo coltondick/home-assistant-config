@@ -46,6 +46,7 @@ frontend:
     - /hacsfiles/lovelace-flower-card/flower-card.js
     - /local/kiosk-mode.js?v=1.2.1
     - /hacsfiles/ha-catt-fix/ha-catt-fix.js
+    - /local/seasonal-card.js
 
 history:
   include:
@@ -69,14 +70,18 @@ homeassistant:
   customize_domain: !include customize_domain.yaml
   packages: !include_dir_named packages
   auth_providers:
-    - type: homeassistant
     - type: trusted_networks
       trusted_networks:
         - 192.168.0.0/24
         - 10.0.0.0/8
-        - 192.168.1.182
-      allow_bypass_login: true
+        - 192.168.1.182/32
+        - 192.168.1.210/32
+      trusted_users:
+        192.168.1.182: 5f9c83b3da214e789c2d43748f4c07f4
+        192.168.1.210: 5f9c83b3da214e789c2d43748f4c07f4
 
+      allow_bypass_login: true
+    - type: homeassistant
 http:
   use_x_forwarded_for: true
   trusted_proxies:
@@ -131,22 +136,20 @@ input_number:
     step: 1
     mode: slider
 
+lovelace:
+  mode: storage
+  dashboards:
+    ui-nord:
+      mode: yaml
+      filename: ui_lovelace_nord/dashboard/ui-lovelace.yaml
+      title: Nord
+      icon: mdi:image-filter-hdr
+      show_in_sidebar: true
+      require_admin: true
 logger:
-  default: info
   logs:
-    custom_components.bchydro: debug
-    homeassistant.components.recorder.migration: info
-
-# lovelace:
-#   mode: storage
-#   dashboards:
-#     test-bed:
-#       mode: yaml
-#       filename: ui_lovelace_minimalist/dashboard/testing.yaml
-#       title: Testing
-#       icon: mdi:test-tube
-#       show_in_sidebar: true
-#       require_admin: true
+    pychromecast.socket_client: fatal
+  default: warning
 
 media_player:
   - platform: denon #denonavr
@@ -250,8 +253,18 @@ telegram_bot:
 tplink:
   discovery: true
   switch:
-    - host: !secret kasa_cage_ip
+    # - host: !secret kasa_cage_ip
     - host: !secret kasa_sidetable_livingroom_ip
     - host: !secret kasa_tvlamp_livingroom_ip
     - host: !secret kasa_scentsy_diningroom_ip
     - host: !secret kasa_vanity_master_ip
+
+continuously_casting_dashboards:
+  logging_level: warning #Required: Set the logging level - debug/info/warning (default is 'warning' - try 'debug' for debugging)
+  cast_delay: 18000 #Required: Time (in seconds) for casting checks between each device.
+  start_time: "07:00" #Optional: Global start time of the casting window (format: "HH:MM") - Default is set to "07.00" and can be individually overwritten per device below.
+  end_time: "06:59" #Optional: Global end time of the casting window (format: "HH:MM") and must be after "00:00". Default is set to "01.00" and can be individually overwritten per device below.
+  devices:
+    "Living Room display": #Required: Display name of your device. Find this on the actual device's settings or inside the Google Home app.
+      dashboard_url: "https://ha.colton.sh/ui-nord/hub-home?kiosk" #Required: Dashboard URL to be casted (This must be the local IP address of your HA instance, not homeassistant.local)
+      volume: 10 #Optional: Volume to set the display. (Default is 5)

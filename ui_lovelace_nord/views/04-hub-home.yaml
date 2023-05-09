@@ -1,0 +1,138 @@
+title: Hub Home
+path: hub-home
+icon: mdi:monitor-dashboard
+theme: Nordic Mushroom
+subview: false
+type: panel
+badges: []
+cards:
+  - type: custom:stack-in-card
+    keep:
+      box_shadow: true
+      margin: true
+      border_radius: true
+      background: true
+      outer_padding: true
+    cards:
+      - type: custom:mushroom-title-card
+        title: Hub Dashboard
+        subtitle: This device allows you to control devices in this room.
+        alignment: justify
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: vertical-stack
+                cards:
+                  - type: custom:mushroom-media-player-card
+                    name: TV
+                    entity: media_player.nvidia_shield
+                    use_media_info: false
+                    show_volume_level: false
+                    media_controls:
+                      - play_pause_stop
+                      - next
+                      - previous
+                  - type: custom:my-slider
+                    entity: input_number.denon_volume
+                    radius: 14px
+                    height: 50px
+                    step: "1"
+                    minSet: "0"
+                    maxSet: "45"
+                    mainSliderColor: rgba(var(--aurora-rgb-green),1)
+                    secondarySliderColor: rgba(var(--aurora-rgb-green),0.2)
+                    mainSliderColorOff: rgba(var(--aurora-rgb-red),0.05)
+                    secondarySliderColorOff: rgba(var(--aurora-rgb-red),0.05)
+                    thumbHorizontalPadding: 0px
+                    thumbVerticalPadding: 0px
+                    thumbWidth: 1px
+                    card_mod: null
+                    style: |
+                      ha-card {
+                        # background-color: transparent;
+                        # box-shadow: none;
+                      }
+                  - type: custom:simple-clock-card
+                    use_military: false
+                    hide_seconds: true
+                    paddingLeft_size: 32px
+                    paddingRight_size: 32px
+                    paddingTop_size: 32px
+                    paddingBottom_size: 32px
+              - type: vertical-stack
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:config-template-card
+                        entities:
+                          - light.living_room_ceiling
+                        card:
+                          type: button
+                          show_state: true
+                          tap_action:
+                            action: toggle
+                          hold_action:
+                            action: toggle
+                          name: Living Room
+                          entity: light.living_room_ceiling
+                          icon: >-
+                            ${ states['light.living_room_ceiling'].state  === 'on' ? 'mdi:ceiling-light' :
+                            'mdi:ceiling-light-outline' }
+                      - type: custom:config-template-card
+                        entities:
+                          - light.kitchen_ceiling
+                        card:
+                          type: button
+                          show_state: true
+                          tap_action:
+                            action: toggle
+                          hold_action:
+                            action: toggle
+                          name: Kitchen
+                          entity: light.kitchen_ceiling
+                          icon: >-
+                            ${ states['light.kitchen_ceiling'].state  === 'on' ? 'mdi:ceiling-light' :
+                            'mdi:ceiling-light-outline' }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:config-template-card
+                        entities:
+                          - remote.tv
+                        card:
+                          type: button
+                          show_state: true
+                          tap_action:
+                            action: toggle
+                          hold_action:
+                            action: toggle
+                          name: TV
+                          entity: remote.tv
+                          icon: >-
+                            ${ states['remote.tv'].state  === 'on' ? 'mdi:television-classic' :
+                            'mdi:television-classic-off' }
+                      - type: custom:config-template-card
+                        entities:
+                          - switch.side_table_lamp
+                        card:
+                          type: button
+                          show_state: true
+                          tap_action:
+                            action: toggle
+                          hold_action:
+                            action: toggle
+                          name: Lamp
+                          entity: switch.side_table_lamp
+                          icon: >-
+                            ${ states['switch.side_table_lamp'].state  === 'on' ? 'mdi:lamp' :
+                            'mdi:lamp-outline' }
+          - type: weather-forecast
+            entity: weather.pirateweather
+            name: Kamloops
+            show_current: false
+            show_forecast: true
+    card_mod:
+      style: |
+        ha-card {
+          background-color: var(--polar-bright-gray);
+        }

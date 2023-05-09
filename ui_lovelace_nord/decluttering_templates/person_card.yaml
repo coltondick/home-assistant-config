@@ -1,0 +1,191 @@
+person_card_new:
+  default:
+    - color: auto
+    - background_color: var(--primary-background-color)
+    - variable: spin
+    - spin: false
+    - show_name: true
+    - show_state: true
+    - show_label: false
+    - show_icon: true
+    - show_last_changed: false
+    - show_entity_picture: false
+    - tap_action:
+        action: more-info
+        haptic: light
+    - aspect_ratio: 1/1
+    - margin-right: 20px
+    - label: "&nbsp;"
+    - off_icon_color: gray
+    - off_name_color: gray
+    - off_state_color: gray
+  card:
+    type: custom:button-card
+    battery: "[[battery]]"
+    wifi: "[[wifi]]"
+    home_sensor: "[[home_sensor]]"
+    work_sensor: "[[work_sensor]]"
+    work_icon: "[[work_icon]]"
+    name: "[[name]]"
+    icon: mdi:[[icon]]
+    size: "[[size]]"
+    color: "[[color]]"
+    aspect_ratio: "[[aspect_ratio]]"
+    entity: "[[entity]]"
+    label: "[[label]]"
+    show_name: "[[show_name]]"
+    show_icon: "[[show_icon]]"
+    show_state: "[[show_state]]"
+    show_label: "[[show_label]]"
+    show_last_changed: "[[show_last_changed]]"
+    tap_action: "[[tap_action]]"
+    hold_action: "[[hold_action]]"
+    entity_picture: "[[entity_picture]]"
+    show_entity_picture: "[[show_entity_picture]]"
+    styles:
+      card:
+        - border-radius: var(--border-radius)
+        - "--card-background-color": "[[background_color]]"
+      icon:
+        - grid-column: 1
+        - grid-row: 1 / 3
+      label:
+        - color: gray
+        - font-size: 11px
+        - padding: 0px 10px
+        - justify-self: start
+      state:
+        - font-size: 12px
+        - padding: 0px 10px
+        - justify-self: start
+        - text-transform: capitalize
+        - font-weight: bold
+        - padding-left: 10px
+        - color: var(--primary-text-color)
+      grid:
+        - grid-template-areas: '"i i i" "status wifi battery"'
+        - grid-template-columns: auto
+        - grid-template-rows: 9fr 1fr
+      img_cell:
+        - align-self: start
+        - text-align: start
+      name:
+        - justify-self: start
+        - padding-left: 10px
+        - font-weight: bold
+        - font-size: 13px
+      entity_picture:
+        - height: 135px
+        - width: 135px
+        - border-radius: 100%
+      custom_fields:
+        blank:
+          card:
+            type: custom:button-card
+            color_type: blank-card
+        status:
+          - align-self: start
+          - justify-self: start
+          - font-size: 12px
+          - color: var(--secondary-text-color)
+        wifi:
+          - align-self: start
+          - justify-self: start
+          - font-size: 12px
+          - color: var(--secondary-text-color)
+        battery:
+          - align-self: start
+          - justify-self: start
+          - font-size: 12px
+          - color: var(--secondary-text-color)
+    custom_fields:
+      battery: |
+        [[[
+          if (states["[[battery]]"].attributes.battery_level >= 75) {
+          if (states["[[battery]]"].attributes.battery_charging === false) {
+            return `<ha-icon
+                        icon="mdi:battery"
+                        style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--aurora-green); position: relative; bottom: 1px;">
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
+          } else {
+            return `<ha-icon
+                      icon="mdi:battery-charging"
+                      style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--aurora-green); position: relative; bottom: 1px;">
+                      </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
+          }
+        } else if (states["[[battery]]"].attributes.battery <= 35) {
+          if (states["[[battery]]"].attributes.battery_charging === false) {
+            return `<ha-icon
+                        icon="mdi:battery"
+                        style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--aurora-red); position: relative; bottom: 1px;">
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
+          } else {
+            return `<ha-icon
+                      icon="mdi:battery-charging"
+                      style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--aurora-red); position: relative; bottom: 1px;">
+                      </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
+          }
+        } else {
+          if (states["[[battery]]"].attributes.battery_charging === false) {
+            return `<ha-icon
+                        icon="mdi:battery"
+                        style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+                        </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
+          } else {
+            return `<ha-icon
+                      icon="mdi:battery-charging"
+                      style="; --mdc-icon-size: 14px; padding-left: 5px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+                      </ha-icon><span>${states["[[battery]]"].attributes.battery_level}%</span>`
+          }
+        }
+        ]]]
+      wifi: |
+        [[[
+          if (states['[[wifi]]'].state =='<not connected>') { 
+            return `<ha-icon
+            icon="mdi:wifi-off"
+            style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+            </ha-icon> <span>N/A</span>`; 
+          } else {
+            return `<ha-icon
+            icon="mdi:wifi"
+            style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+            </ha-icon><span>${states['[[wifi]]'].state}</span>`;
+          }
+        ]]]
+      status: |
+        [[[
+          if (states['[[entity]]'].state =='not_home') { 
+          return `<ha-icon icon="mdi:home-export-outline"
+            style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+            </ha-icon><span>Away</span>`;
+          } 
+          if (states['[[entity]]'].state =='home') { 
+          return `<ha-icon 
+            icon="mdi:home"
+            style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+            </ha-icon><span>Home</span>`;
+          } else {
+          return `<ha-icon 
+            icon="mdi:map-marker-radius"
+            style="; --mdc-icon-size: 14px; padding-left: 6px; padding-right: 2px; color: var(--primary-color); position: relative; bottom: 1px;">
+            </ha-icon><span>${entity.state}</span>`;
+          }
+        ]]]
+    state:
+      - value: not_home
+        styles:
+          card:
+            - opacity: 0.6
+          entity_picture:
+            - border: 3px solid var(--aurora-red)
+      - value: Work
+        styles:
+          card:
+            - opacity: 0.6
+          entity_picture:
+            - border: 3px solid var(--aurora-blue)
+      - value: home
+        styles:
+          entity_picture:
+            - border: 3px solid var(--aurora-green)
